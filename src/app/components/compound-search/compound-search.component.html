@@ -1,0 +1,348 @@
+<div class="container">
+  <h2 class="title pt-90">
+    <span>Compound</span>
+  </h2>
+  <div class="mb-2">
+    <div class="row">
+      <div id="searchDiv" style="padding: 0 0 20px 10px; color: #444">
+        <div style="
+            float: left;
+            font-size: 20px;
+            padding: 10px 10px 10px 5px;
+            font-weight: bold;
+          ">
+          Search for a different compound:
+        </div>
+        <div style="float: left">
+          <form class="example-form">
+            <mat-form-field class="example-full-width search-custom" appearance="fill">
+              <input type="text" placeholder="Search Compounds" matInput [formControl]="searchControl"
+                [matAutocomplete]="auto" [(ngModel)]="searchTerm" (ngModelChange)="getCompoundAlias()"
+                (keyup.enter)="searchCompound()" />
+              <mat-icon matSuffix mat-icon-button class="search-autocomplete-icon"
+                (click)="searchCompounds.length = 0; searchCompound()">search</mat-icon>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="filter.CompoundName = $event.option.value">
+                <mat-option *ngFor="let option of searchCompounds" [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div class="row" *ngIf="errorMessage">
+              <div class="col-md-12 text-left text-danger error-message-compound">
+                <h6>{{ errorMessage }}</h6>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="filterObj?.CompoundDetails">
+      <div class="row">
+        <div class="col-md-4">
+          <div id="draw" class="JSDraw" style="
+              width: 350px;
+              height: 300px;
+              border: 1px solid gray;
+              float: left;
+            " viewonly dataformat="molfile" data=""></div>
+        </div>
+        <div class="col-md-8" style="font-size: 15px">
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              Alias Name<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{ filter.CompoundName }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              Compound Name<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{
+                  filterObj?.CompoundDetails?.AnalyteName }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              Compound Name (CAS)<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{filterObj?.CompoundDetails?.IupacCasName }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              Compound Name (IUPAC)<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{filterObj?.CompoundDetails?.IupacName }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              CID<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{ filterObj?.CompoundDetails?.Cid}}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              Molecular Formula<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{
+                  filterObj?.CompoundDetails?.MolecularFormula }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              Molecular Weight<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{
+                  filterObj?.CompoundDetails?.MolecularWeight }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              No. Chiral Centers<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{
+                  filterObj?.CompoundDetails?.AtomUdefStereoCount }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              No. Hydrogen Bond Acceptor<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{
+                  filterObj?.CompoundDetails?.CactvsHbondAcceptor }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              No. Hydrogen Bond Donors<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{
+                  filterObj?.CompoundDetails?.CactvsHbondDonor }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              Total Formal Charge<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{
+                  filterObj?.CompoundDetails?.TotalCharge }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              Log P (Calculated)<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{
+                  filterObj?.CompoundDetails?.Xlogp3 }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="font-weight: bold">
+              Log P-AA<span class="float-right">:</span>
+            </div>
+            <div class="col-md-8 pl-0">
+              <span>
+                <span>{{
+                  filterObj?.CompoundDetails?.Xlogp3Aa }}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="clearAll"></div>
+        <div id="dropdownSection" style="padding-top: 20px; margin: 0px 0px 5px 15px">
+          <span style="font-weight: bold; vertical-align: 55%">Filter Results:</span>
+          <div class="filters-mat">
+            <mat-form-field appearance="fill">
+              <mat-label>--Select Technique--</mat-label>
+              <mat-select name="TechniqueSL" (selectionChange)="getCompound()" [(ngModel)]="filter.Technique">
+                <ng-container *ngFor="let listItem of filterObj?.LegacySearchFilter?.Technique">
+                  <mat-option *ngIf="listItem" [value]="listItem">
+                    {{ listItem }}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>--Select Separation Mode--</mat-label>
+              <mat-select name="SeparationModeSL" (selectionChange)="getCompound()" [(ngModel)]="filter.SeparationMode">
+                <ng-container *ngFor="
+                    let listItem of filterObj?.LegacySearchFilter?.SeparationMode
+                  ">
+                  <mat-option *ngIf="listItem" [value]="listItem">
+                    {{ listItem }}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>--Select Phase--</mat-label>
+              <mat-select name="PhaseSL" (selectionChange)="getCompound()" [(ngModel)]="filter.ColumnPhase">
+                <ng-container *ngFor="let listItem of filterObj?.LegacySearchFilter?.ColumnPhase">
+                  <mat-option *ngIf="listItem" [value]="listItem">
+                    {{ listItem }}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+            <p class="clear-ctrl" (click)="clearFilter()">Clear All</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="app-list">
+          <div style="float: left; width: 100%; padding: 0 0 0 10px">
+            <h4>
+              {{ filterObj.Count }} Applications that contain "{{
+              filter.CompoundName
+              }}"
+            </h4>
+          </div>
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>Separation Mode</th>
+                <th>Title</th>
+                <th>Column</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let app of applicationListObj; let i = index" class="pointer"
+                routerLink="/applications/single" [queryParams]="{ appid: app.ApplicationId }">
+                <td>{{ app.SeparationMode }}</td>
+                <td>{{ app.Title }}</td>
+                <td>{{ app.PartDescription }}</td>
+              </tr>
+              <tr class="nodata-container" *ngIf="applicationListObj === null">
+                <td colspan="3" class="border nodata">No Data</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row">
+            <div class="col-md-12 text-center" *ngIf="
+              filterObj.Limit < filterObj.Count &&
+                applicationListObj.length != filterObj.Count
+              ">
+              <a href="javascript:void(0);" (click)="showMore()"
+                class="d-flex align-content-center justify-content-center text-decoration-none">
+                <span>Show More</span>
+                <i class="material-icons material-icons-rounded font-20">keyboard_arrow_down</i>
+              </a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8" style="font-size: 15px">
+              <div class="row">
+                <div class="col-md-4" style="font-weight: bold">
+                  Technique<span class="float-right">:</span>
+                </div>
+                <div class="col-md-8 pl-0">
+                  <span>
+                    <span>{{
+                      filterObj?.LegacySearchFilter?.Technique.join(",") }}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4" style="font-weight: bold">
+                  Separation Mode<span class="float-right">:</span>
+                </div>
+                <div class="col-md-8 pl-0">
+                  <span>
+                    <span>{{
+                      filterObj?.LegacySearchFilter?.SeparationMode.join(",")
+                      }}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4" style="font-weight: bold">
+                  Compound Category<span class="float-right">:</span>
+                </div>
+                <div class="col-md-8 pl-0">
+                  <span>
+                    <span>{{
+                      filterObj?.LegacySearchFilter?.CompoundCategory.join(",")
+                      }}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4" style="font-weight: bold">
+                  Compound Class<span class="float-right">:</span>
+                </div>
+                <div class="col-md-8 pl-0">
+                  <span>
+                    <span>{{
+                      filterObj?.LegacySearchFilter?.CompoundClass.join(",")
+                      }}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4" style="font-weight: bold">
+                  Pharmacologic Effect<span class="float-right">:</span>
+                </div>
+                <div class="col-md-8 pl-0">
+                  <span>
+                    <span>{{
+                      filterObj?.LegacySearchFilter?.PharmacologicalEffect.join(",")
+                      }}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4" style="font-weight: bold">
+                  Methods<span class="float-right">:</span>
+                </div>
+                <div class="col-md-8 pl-0">
+                  <span>{{ filterObj?.LegacySearchFilter?.Method.join(",") }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

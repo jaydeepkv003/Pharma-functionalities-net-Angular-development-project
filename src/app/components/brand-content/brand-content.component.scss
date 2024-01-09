@@ -1,0 +1,31 @@
+// Brand Info
+.brand{
+  padding:20px 0;
+}
+.line{
+  border-image: linear-gradient(to left, #fff, #707070);
+  border-image-slice: 1;
+  border-bottom: 1px solid #333;
+}
+.heading{
+  .title{
+    display: inline-block;
+    
+    font-weight: 500;
+    font-style: normal;
+    font-size:36px;
+    color:#57585A;
+    padding-top: 10px;
+  }
+  .brandlogo{
+    float:right;
+  }
+}
+.eight{
+  padding: 20px 0;
+  
+  font-style: normal;
+}
+.four{
+  padding: 20px 0;
+}

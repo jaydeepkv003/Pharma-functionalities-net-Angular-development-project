@@ -1,0 +1,46 @@
+<!--
+  When we're editing the tabs we stack each tab vertically,
+  which means there's no regular tab titles rendered.
+  So we conditionally render the tab title here, when editing.
+-->
+<div>
+  <ng-container *ngIf="isOthersTab">
+    <div *scRichText="rendering.fields.content"></div>
+  </ng-container>
+</div>
+
+<div>
+
+  <ng-container *ngIf="TabListName === TABS.TAB_HOW_IT_WORKS">
+    <sc-placeholder name="jss-sections" [rendering]="rendering"></sc-placeholder>
+  </ng-container>
+
+  <ng-container *ngIf="TabListName === TABS.TAB_PHASES">
+    <app-phase-tab id="phase" [rendering]="rendering"></app-phase-tab>
+  </ng-container>
+
+  <ng-container *ngIf="TabListName === TABS.TAB_FAQ">
+    <app-faq-tab id="FAQ" [rendering]="rendering"></app-faq-tab>
+  </ng-container>
+
+  <ng-container *ngIf="TabListName === TABS.TAB_DOCUMENT">
+    <app-document-tab [rendering]="rendering"></app-document-tab>
+  </ng-container>
+
+  <ng-container *ngIf="TabListName === TABS.TAB_WEBINARS">
+    <app-webinar-tab [rendering]="rendering"></app-webinar-tab>
+  </ng-container>
+
+  <ng-container *ngIf="TabListName === TABS.TAB_PRODUCT_PICKER">
+    <app-order-tab [rendering]="rendering"></app-order-tab>
+  </ng-container>
+
+  <ng-container *ngIf="TabListName === TABS.TAB_PRODUCT_FINDER">
+    <app-product-finder-tab [rendering]="rendering"></app-product-finder-tab>
+  </ng-container>
+
+  <ng-container *ngIf="TabListName === TABS.TAB_WORKFLOW">
+    <app-workflow-tab [rendering]="rendering"></app-workflow-tab>
+  </ng-container>
+  
+ </div>

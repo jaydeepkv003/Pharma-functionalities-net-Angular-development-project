@@ -1,0 +1,156 @@
+<button type="button" class="float-right btn" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <i class="material-icons material-icons-outlined">close</i>
+</button>
+<div class="modal-body p-0" *ngIf="cartDetail.length > 0">
+  <div class="title mb-2 with-icon p-2">
+    <i class="material-icons material-icons-outlined text-success">done</i>
+    {{quantity ? quantity : 0}} Item(s) added to Cart. Great Choice!
+  </div>
+
+  <div class="cart-content">
+
+    <div class="mx-3 alert alert-warning alert-dismissible fade show" role="alert" *ngIf="sharedService.showOutsideNAMWarning">
+      Thank you for visiting pharma.com. Due to geographic restrictions, we cannot process credit cards from your
+      country of origin. To order please call pharma at (310) 212-0555 or contact us directly at
+      https://www.pharma.com/Contact-Us.
+
+      <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="showOutsideNAMWarning=false">
+        <span aria-hidden="true">&times;</span>
+      </button> -->
+    </div>
+
+    <div class="bg-white">
+      <!-- MOCK CARD -->
+      <ng-container>
+        <div class="row m-0" *ngFor="let item of cartDetail; let i = index">
+          <div class="col-sm-3 col-4 text-center">
+            <img class="item-img" src="{{item.Part.Attributes | cartImg}}">
+          </div>
+          <div class="col-sm-6 col-8">
+            <div>{{item.Part.PartNumber}}</div>
+            <div class="item-desc">{{item.Part.Description}}</div>
+            <div class="mb-2">
+              <span class="mr-1" [class.strike-through]="sharedService.feature.Promotions && item?.DiscountedPrice">
+                {{item.Part.Price | currency : 'USD'}}
+                <span *ngIf="!sharedService.feature.Promotions || !item?.DiscountedPrice">({{item.Part.UOM}})</span>
+              </span>
+              <span class="mr-1" *ngIf="sharedService.feature.Promotions && item?.PromotionID" placement="top"
+                triggers="mouseenter:mouseleave" [ngbPopover]="popContent">
+                <img class="promotion-icon align-text-top"
+                  src="/-/jssmedia/phrjss/data/media/images/promotion/offer_icon" />
+              </span>
+              <ng-template #popContent>
+                <div class="clearfix">
+                  <div class="text-left">
+                    <div>{{item?.Promotion?.Description}}</div>
+                    <div *ngIf="item?.Promotion?.MaxQuantity">Limit {{item?.Promotion?.MaxQuantity}}</div>
+                    <div *ngIf="item?.Promotion?.EndDate">Expires: {{item?.Promotion?.EndDate | date: 'MMM dd, yyyy'}}
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <a href="javascript:void(0)" class="text-decoration-none"
+                *ngIf="sharedService.feature.Promotions && item.DiscountedPrice">
+                {{item.DiscountedPrice | currency : 'USD'}} ({{item.Part.UOM}})
+              </a>
+            </div>
+            <div class="qty">Qty: {{item.Quantity}}</div>
+            <div class="sub-total">
+              Subtotal:
+              <span class="sub-total-amt">{{item.TotalAmount | currency : 'USD'}}</span>
+              ({{item.Part.UOM}})
+            </div>
+            <!-- End Cross Sell Section -->
+          </div>
+          <div class="col-sm-3 col-12" *ngIf="i === 0">
+            <button class="btn btn-blue btn-sm float-right mb-3 ml-2" (click)="activeModal.dismiss('Continue Shopping')"
+              routerLink="/Cart">Go To Cart</button>
+            <button class="btn btn-primary btn-sm px-2 float-right"
+              (click)="activeModal.dismiss('Continue Shopping')">Continue Shopping</button>
+          </div>
+        </div>
+
+        <div class="bg-gray" *ngIf="cartDetail && cartDetail[0].RecommendedParts?.length > 0">
+          <div class="row p-2 m-0">
+            <div class="col-md-12 font-bold text-uppercase">We thought you might like to add these to your order:
+            </div>
+          </div>
+          <div class="row font-xxs collapsed mx-2" [ngClass]="{'expand': showAll}">
+            <div class="col-md-6 mb-3" *ngFor="let rp of cartDetail[0].RecommendedParts;let i = index"
+              [ngClass]="{'opacity-3': (!showAll && i > 1)}">
+              <div class="row box-shadow m-0 bg-white h-100 p-2">
+                <div class="col-md-3 px-1 col-3">
+                  <img class="img-fluid" src="{{rp.Attributes | cartImg}}">
+                </div>
+                <div class="col-md-9 px-1 col-9">
+                  <div class="">
+                    <div>{{rp?.PartNumber}}</div>
+                    <div class="font-bold line-h-md">{{rp?.Description}}</div>
+                    <div>
+
+                      <span
+                        [class.strike-through]="sharedService.feature.Promotions && rp?.PromotionalPricing?.DiscountedPrice">
+                        {{rp?.Price | currency}}
+                        <span
+                          *ngIf="!sharedService.feature.Promotions || !rp?.PromotionalPricing?.DiscountedPrice">({{rp.UOM}})</span>
+                      </span>
+                      <span *ngIf="sharedService.feature.Promotions && rp?.PromotionalPricing" placement="top"
+                        triggers="mouseenter:mouseleave" [ngbPopover]="popContent" container="body">
+                        <img class="promotion-icon-sm align-text-top"
+                          src="/-/jssmedia/phrjss/data/media/images/promotion/offer_icon" />
+                      </span>
+                      <ng-template #popContent>
+                        <div class="clearfix">
+                          <div class="text-left">
+                            <ng-container *ngIf="rp.PromotionalPricing.RequiresQualification; else elseTemplate">
+                              <div>Add item to cart to see promotional discount</div>
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                              <div>{{rp.PromotionalPricing.Promotion.Description}}</div>
+                              <div *ngIf="rp.PromotionalPricing.Promotion.MaxQuantity">Limit
+                                {{rp.PromotionalPricing.Promotion.MaxQuantity}}</div>
+                              <div *ngIf="rp.PromotionalPricing.Promotion.EndDate">Expires:
+                                {{rp.PromotionalPricing.Promotion.EndDate | date: 'MMM dd, yyyy'}}</div>
+                            </ng-template>
+                          </div>
+                        </div>
+                      </ng-template>
+                      <a href="javascript:void(0)" class="text-decoration-none"
+                        *ngIf="sharedService.feature.Promotions && rp?.PromotionalPricing?.DiscountedPrice">
+                        {{rp?.PromotionalPricing?.DiscountedPrice | currency : 'USD'}} ({{rp.UOM}})
+                      </a>
+                    </div>
+
+                    <button class="btn btn-primary btn-xs position-relative"
+                      [disabled]="addRecommendedParts.includes(rp.PartID)" (click)="AddPartToCart(rp)">
+                      <ngx-ui-loader [loaderId]="'loader-' + rp.PartID" [fgsSize]="15" [hasProgressBar]="false"
+                        [text]="''" [overlayBorderRadius]="'18px'" [logoSize]="10"></ngx-ui-loader>
+                      <span *ngIf="!addRecommendedParts.includes(rp.PartID)">Add to Cart</span>
+                      <span *ngIf="addRecommendedParts.includes(rp.PartID)">Added to Cart</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center" *ngIf="cartDetail[0].RecommendedParts?.length > 2">
+            <button class="btn btn-link" (click)="toggle()">
+              <div class="with-icon" *ngIf="!showAll">
+                <i class="material-icons material-icons-outlined">arrow_downward</i>
+                <span class="font-sm">SHOW ALL</span>
+              </div>
+              <div class="with-icon" *ngIf="showAll">
+                <i class="material-icons material-icons-outlined">arrow_upward</i>
+                <span class="font-sm">SHOW LESS</span>
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- END MOCK CARD -->
+      </ng-container>
+    </div>
+  </div>
+</div>
+<!-- <div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div> -->

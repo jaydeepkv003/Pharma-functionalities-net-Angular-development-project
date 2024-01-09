@@ -1,0 +1,127 @@
+<div class="container container-fluid p-4">
+  <div class='title'>
+    <div>Explore the Document Library
+      <div class="float-right">
+        <div class="search-container input-group">
+          <input id="search-document" type="text" class="form-control" [(ngModel)]="searchKeyword" name="search"
+            placeholder="Search Documents" (keyup.enter)="filterTable()">
+          <span class="input-group-addon pointer" (click)="filterTable()">
+            <i class="material-icons material-icons-outlined">search</i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filters">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Industry</mat-label>
+      <mat-select [(ngModel)]="selectedIndustry" placeholder="Industry" (selectionChange)="filterTable()" [disabled]="masterCollection._industriesCollection.length === 0">
+        <ng-container *ngFor="let listItem of masterCollection._industriesCollection | orderBy:'item.DisplayName.value'">
+          <mat-option *ngIf="listItem.item"
+            [value]="listItem.item.id.toLowerCase()">
+            {{listItem.item.DisplayName.value}}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Techniques</mat-label>
+      <mat-select [(ngModel)]="selectedTechnique" placeholder="Techniques" (selectionChange)="filterTable()" [disabled]="masterCollection._techniquesCollection.length === 0">
+        <ng-container  *ngFor="let listItem of masterCollection._techniquesCollection | orderBy:'item.DisplayName.value'">
+          <mat-option *ngIf="listItem.item"
+            [value]="listItem.item.id.toLowerCase()">
+            {{listItem.item.DisplayName.value}}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Separation Mode</mat-label>
+      <mat-select [(ngModel)]="selectedSeparationMode" placeholder="Separation Mode" (selectionChange)="filterTable()" [disabled]="masterCollection._separationModesCollection.length === 0">
+        <ng-container *ngFor="let listItem of masterCollection._separationModesCollection | orderBy:'title.value'">
+          <mat-option *ngIf="listItem.title"
+            [value]="listItem.id.toLowerCase()">
+            {{listItem.title.value}}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Brand</mat-label>
+      <mat-select [(ngModel)]="selectedBrand" placeholder="Brand" (selectionChange)="filterTable()" [disabled]="masterCollection._brandsCollection.length === 0">
+        <ng-container *ngFor="let listItem of masterCollection._brandsCollection | orderBy:'item.DisplayName.value'">
+          <mat-option *ngIf="listItem.item" [value]="listItem.item.id.toLowerCase()">
+            {{listItem.item.DisplayName.value}}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Document Type</mat-label>
+      <mat-select [(ngModel)]="selectedDocumentType" placeholder="Document Type" (selectionChange)="filterTable()" [disabled]="masterCollection._documentTypesCollection.length === 0">
+        <ng-container *ngFor="let listItem of masterCollection._documentTypesCollection | orderBy:'title.value'">
+          <mat-option *ngIf="listItem.title" [value]="listItem.id.toLowerCase()">
+            {{listItem.title.value}}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Sort By</mat-label>
+      <mat-select [(ngModel)]="selectedOrder" placeholder="Sort By" (selectionChange)="filterTable()">
+        <mat-option [value]="'Ascending'"> Ascending </mat-option>
+        <mat-option [value]="'Descending'"> Descending </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <div class="pt-3 col-md-12 clearfix">
+    <a href="javascript:void(0);" class="float-left" (click)="resetFilters()">
+      <div class="with-icon">
+        <i class="material-icons material-icons-outlined">backspace</i>
+        Clear Filter
+      </div>
+    </a>
+    <div class="float-right" *ngIf="docsCollection.length > 0">
+      Showing 1-{{paginatorConfig.recordsPerPage >= docsCollection.length ? docsCollection.length : paginatorConfig.recordsPerPage}} of
+      {{docsCollection.length}} results
+    </div>
+  </div>
+
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Documents</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let listItem of docsCollection | slice:0:paginatorConfig.recordsPerPage; let i = index">
+        <td *ngIf="listItem.item">
+          <a [routerLink]="listItem?.item?.url">
+            {{listItem?.item?.title?.value}}
+          </a>
+        </td>
+      </tr>
+      <tr *ngIf="docsCollection.length == 0 && isLoaded">
+        <td class="text-center">
+          No Data
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center my-4" *ngIf="docsCollection.length > paginatorConfig.recordsPerPage">
+    <a href="javascript:void(0);" (click)="showMore()"
+      class="d-flex align-content-center justify-content-center text-decoration-none">
+      <span>Show More</span>
+      <i class="material-icons material-icons-rounded font-20">keyboard_arrow_down</i>
+    </a>
+  </div>
+</div>

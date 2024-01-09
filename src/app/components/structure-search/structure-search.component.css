@@ -1,0 +1,96 @@
+.floatLeft,
+float-left {
+  float: left;
+}
+
+.structureSearchStep {
+  margin: 0 10px 0 0;
+}
+
+.steps {
+  width: 52px;
+  font-size: 16px;
+  margin: 5px 0px 0px 15px;
+}
+
+.searchOptions {
+  width: 160px;
+  margin: 50px 0 0 50px;
+}
+
+.searchOptions .optionLabel {
+  font-size: 14px;
+}
+
+.bold-text,
+.boldText,
+.BoldText {
+  font-weight: bold;
+}
+
+.clear-all,
+.ClearAll,
+.clearAll {
+  clear: both;
+  position: relative;
+}
+
+.structureSearchStep img {
+  margin-right: 10px;
+}
+
+.app-list {
+  width: 100%;
+  padding: 15px 0px 0px 5px;
+}
+
+.widgetOffer {
+  padding: 10px 0 10px 20px;
+  margin: 0px;
+}
+
+.filters-mat mat-form-field {
+  width: 360px !important;
+  margin-right: 5px;
+}
+
+.clear-ctrl {
+  font-family: proxima-nova, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #587dff;
+  text-align: right;
+}
+
+.clear-ctrl:hover {
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.appStructContent{
+  float: left; margin-left: 10px; font-size: 10px
+}
+
+.appStructSpan{
+  color: Red; padding: 0px 0px 0px 4px
+}
+
+.appStructOutEditor{
+  padding: 0 0 5px; float: left
+}
+.appStructEditorDiv{
+  width: 800px; height: 400px; border-bottom: 1px solid gray
+}
+.appStructMolData{
+  width: 280px;
+            height: 280px;
+            border: 1px solid gray;
+            float: left;
+            margin-top: 15px;
+}
+.appStructTableTitle{
+  float: left; color: #444; font-size: 18px
+}
+.appStructtableOutdiv{
+  float: left; width: 100%; padding: 0 0 0 10px
+}

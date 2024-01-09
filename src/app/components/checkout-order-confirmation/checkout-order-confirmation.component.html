@@ -1,0 +1,330 @@
+<div class="container cart-content">
+  <h1 class="title m-0">Thank you, Your order has been placed successfully</h1>
+  <h6 class="my-3">Order Date: {{orderHeaderViewModel?.OrderDate | date: 'MMM dd, yyyy'}}</h6>
+
+  <div class="row">
+    <div class="col-md-9">
+      <h2 class="mt-2 mb-4">
+        Your Reference Number: {{orderHeaderViewModel?.ReferenceNumber}}
+      </h2>
+      <app-checkout-order-confirmation-content *ngIf="orderHeaderViewModel" [OrderHeader]="orderHeaderViewModel">
+      </app-checkout-order-confirmation-content>
+
+      <div class="mb-3">
+        <button class="btn btn-primary" printSectionId="print-section" [useExistingCss]="true" ngxPrint>
+          <div class="with-icon">
+            <i class="material-icons material-icons-outlined">print</i>
+            PRINT THIS
+          </div>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="col-md-3">
+      <div class="mb-3">
+        <div class="clearfix mb-1 font-bold">
+          <div class="float-left">Subtotal: </div>
+          <div class="float-right">{{orderHeaderViewModel?.SubTotal | currency}} </div>
+        </div>
+        <div class="clearfix mb-1 font-bold">
+          <div class="float-left">Shipping: </div>
+          <div class="float-right">TBD </div>
+        </div>
+        <div class="clearfix mb-1 font-bold border-bottom">
+          <div class="float-left">Tax: </div>
+          <div class="float-right">TBD </div>
+        </div>
+        <div class="clearfix mb-1 font-bold font-lg">
+          <div class="float-left">Total</div>
+          <div class="float-right">{{orderHeaderViewModel?.Total | currency}}</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="border-bottom font-bold py-1">Billing Address </div>
+        <div class="clearfix py-1">
+          <!-- <div>{{orderHeaderViewModel?.BillTo?.Attention}}</div> -->
+          <div>{{orderHeaderViewModel?.BillTo?.Company}}</div>
+          <div>{{orderHeaderViewModel?.BillTo?.Address1}}</div>
+          <div>{{orderHeaderViewModel?.BillTo?.Address2}}</div>
+          <div>{{orderHeaderViewModel?.BillTo?.City}}, {{orderHeaderViewModel?.BillTo?.State}}
+            {{orderHeaderViewModel?.BillTo?.Zip}}</div>
+          <div>{{orderHeaderViewModel?.BillTo?.Country}} </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="border-bottom font-bold py-1">Shipping Address </div>
+        <div class="clearfix py-1">
+          <div>{{orderHeaderViewModel?.ShipTo?.Attention}}</div>
+          <div>{{orderHeaderViewModel?.ShipTo?.Company}}</div>
+          <div>{{orderHeaderViewModel?.ShipTo?.Address1}}</div>
+          <div>{{orderHeaderViewModel?.ShipTo?.Address2}}</div>
+          <div>{{orderHeaderViewModel?.ShipTo?.City}}, {{orderHeaderViewModel?.ShipTo?.State}}
+            {{orderHeaderViewModel?.ShipTo?.Zip}}</div>
+          <div>{{orderHeaderViewModel?.ShipTo?.Country}} </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="border-bottom font-bold py-1">Your Contact Information</div>
+        <div class="py-1">
+          <div class="mb-1" *ngFor="let email of orderHeaderViewModel?.ContactEmails">
+            Email: {{email}}
+          </div>
+          <div class="mb-1">
+            Billing Phone: {{orderHeaderViewModel?.BillTo?.Phone}}
+          </div>
+          <div class="mb-1">
+            Shipping Phone: {{orderHeaderViewModel?.ShipTo?.Phone}}
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="border-bottom font-bold py-1">Delivery Time</div>
+        <div class="py-1">
+          {{orderHeaderViewModel?.DeliveryTime}}
+        </div>
+      </div>
+
+      <div class="mb-3" *ngIf="orderHeaderViewModel?.CarrierNumber">
+        <div class="border-bottom font-bold py-1">Carrier Number</div>
+        <div class="py-1">
+          {{orderHeaderViewModel?.CarrierNumber}}
+        </div>
+      </div>
+
+      <div class="mb-3" *ngIf="orderHeaderViewModel?.ShippingInstructions">
+        <div class="border-bottom font-bold py-1">Shipping Instructions</div>
+        <div class="py-1">
+          {{orderHeaderViewModel?.ShippingInstructions}}
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="border-bottom font-bold py-1">Payment Method</div>
+        <div class="py-1">
+          <div class="mb-1" *ngIf="orderHeaderViewModel?.PaymentInfo?.CreditCardID">
+            Credit Card
+          </div>
+          <div class="mb-1" *ngIf="orderHeaderViewModel?.PaymentInfo?.PONumber">
+            P.O. {{orderHeaderViewModel?.PaymentInfo?.PONumber}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- print section -->
+<div id="print-section" class="container col-md-12" style="display: none;">
+  <div class="page-header title">
+    <div class="row">
+      <div class="col-md-12">
+        <a routerLink="/" class="pull-left img-logo">
+          <img _ngcontent-c1="" class="main-logo" alt="pharma logo" width="200" height="50"
+            src="https://phrsitecoredev93-388310-single.azurewebsites.net/-/jssmedia/phrjss/data/media/images/common-control-content/logo.png">
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="m-0 text-right order-text pull-right" [hidden]="!orderHeaderViewModel?.OrderNumber">Order No.:
+          {{orderHeaderViewModel?.OrderNumber}} </h1>
+        <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <hr>
+    <div class="row">
+      <div class="col-md-12 footer-text">
+        <span class="pull-left">pharma products are available worldwide. </span>
+        <span class="pull-right">For more information contact your pharma Representative at
+          <a href="#">info@pharma.com</a></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class=" text-left web-text"><a [routerLink]="['/']" target="_blank">www.pharma.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-md-12">
+        <div class=" text-left right-reserve">©2020 pharma Inc. All rights reserved.</div>
+      </div>
+    </div>
+  </div>
+  <table width="95%">
+    <thead>
+      <tr>
+        <td>
+          <!--place holder for the fixed-position header-->
+          <div class="page-header-space"></div>
+        </td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          <!--*** CONTENT GOES HERE ***-->
+          <div class="page ">
+            <h6 class="my-3">Order Date: {{orderHeaderViewModel?.OrderDate | date: 'MMM dd, yyyy'}}</h6>
+            <div class="row">
+              <h2 class="col-md-9-print pr-4 pl-3">
+                Thank you, Your order has been placed successfully
+              </h2>
+            </div>
+            <div class="row">
+              <div class="col-md-9-print pr-4 pl-3">
+                <h2 class="mt-2 mb-4">
+                  Your Reference Number: {{orderHeaderViewModel?.ReferenceNumber}}
+                </h2>
+                <div class="cart-content">
+                  <div class="p-5 mb-5 box-shadow bg-white rounded-lg" *ngFor="let c of orderHeaderViewModel?.Details">
+                    <!-- MOCK CARD -->
+                    <div class="row">
+                      <div class="col-md-2-print img-center-container-print">
+                        <img class="img-fluid" src="{{c?.Part?.Attributes | cartImg}}">
+                      </div>
+                      <div class="col-md-7-print">
+                        <div [hidden]="!c?.QuoteNumber">Quote Number: {{c?.QuoteNumber}}</div>
+                        <div class="mb-2">{{c?.Part?.PartNumber}}</div>
+                        <p class="font-bold mb-4">{{c?.Part?.Description}}</p>
+                      </div>
+                      <div class="col-md-3-print price-container">
+                        <div class="text-right">
+                          <div class="each-price">{{c?.Part?.Price | currency}} ({{c?.Part?.UOM}})</div>
+                          <div class="qty">Qty: {{c?.Quantity}}</div>
+                          <div class="sub-total">
+                            Subtotal:
+                            <span class="sub-total-amt">{{c?.Total | currency}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END MOCK CARD -->
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-md-3-print">
+                <div class="mb-3">
+                  <div class="clearfix mb-1 font-bold">
+                    <div class="float-left">Subtotal: </div>
+                    <div class="float-right">{{orderHeaderViewModel?.SubTotal | currency}} </div>
+                  </div>
+                  <div class="clearfix mb-1 font-bold">
+                    <div class="float-left">Shipping: </div>
+                    <div class="float-right">TBD </div>
+                  </div>
+                  <div class="clearfix mb-1 font-bold border-bottom">
+                    <div class="float-left">Tax: </div>
+                    <div class="float-right">TBD </div>
+                  </div>
+                  <div class="clearfix mb-1 font-bold font-lg">
+                    <div class="float-left">Total</div>
+                    <div class="float-right">{{orderHeaderViewModel?.Total | currency}}</div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class="border-bottom font-bold py-1">Billing Address </div>
+                  <div class="clearfix py-1">
+                    <!-- <div>{{orderHeaderViewModel?.BillTo?.Attention}}</div> -->
+                    <div>{{orderHeaderViewModel?.BillTo?.Company}}</div>
+                    <div>{{orderHeaderViewModel?.BillTo?.Address1}}</div>
+                    <div>{{orderHeaderViewModel?.BillTo?.Address2}}</div>
+                    <div>{{orderHeaderViewModel?.BillTo?.City}}, {{orderHeaderViewModel?.BillTo?.State}}
+                      {{orderHeaderViewModel?.BillTo?.Zip}}</div>
+                    <div>{{orderHeaderViewModel?.BillTo?.Country}} </div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class="border-bottom font-bold py-1">Shipping Address </div>
+                  <div class="clearfix py-1">
+                    <div>{{orderHeaderViewModel?.ShipTo?.Attention}}</div>
+                    <div>{{orderHeaderViewModel?.ShipTo?.Company}}</div>
+                    <div>{{orderHeaderViewModel?.ShipTo?.Address1}}</div>
+                    <div>{{orderHeaderViewModel?.ShipTo?.Address2}}</div>
+                    <div>{{orderHeaderViewModel?.ShipTo?.City}}, {{orderHeaderViewModel?.ShipTo?.State}}
+                      {{orderHeaderViewModel?.ShipTo?.Zip}}</div>
+                    <div>{{orderHeaderViewModel?.ShipTo?.Country}} </div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class="border-bottom font-bold py-1">Your Contact Information</div>
+                  <div class="py-1">
+                    <div class="mb-1" *ngFor="let email of orderHeaderViewModel?.ContactEmails">
+                      Email: {{email}}
+                    </div>
+                    <div class="mb-1">
+                      Billing Phone: {{orderHeaderViewModel?.BillTo?.Phone}}
+                    </div>
+                    <div class="mb-1">
+                      Shipping Phone: {{orderHeaderViewModel?.ShipTo?.Phone}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class="border-bottom font-bold py-1">Delivery Time</div>
+                  <div class="py-1">
+                    {{orderHeaderViewModel?.DeliveryTime}}
+                  </div>
+                </div>
+
+                <div class="mb-3" *ngIf="orderHeaderViewModel?.CarrierNumber">
+                  <div class="border-bottom font-bold py-1">Carrier Number</div>
+                  <div class="py-1">
+                    {{orderHeaderViewModel?.CarrierNumber}}
+                  </div>
+                </div>
+
+                <div class="mb-3" *ngIf="orderHeaderViewModel?.ShippingInstructions">
+                  <div class="border-bottom font-bold py-1">Shipping Instructions</div>
+                  <div class="py-1">
+                    {{orderHeaderViewModel?.ShippingInstructions}}
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class="border-bottom font-bold py-1">Payment Method</div>
+                  <div class="py-1">
+                    <div class="mb-1">
+                      P.O. {{orderHeaderViewModel?.PaymentInfo?.PONumber}}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+            <div class="row pl-5 pt-5">
+              <div class="col-md-12-print img-center-container-print ">
+                <img class="img-fluid print-img" src="/-/jssmedia/phrjss/data/media/images/print/print-chat.png">
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td>
+          <!--place holder for the fixed-position footer-->
+          <div class="page-footer-space"></div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

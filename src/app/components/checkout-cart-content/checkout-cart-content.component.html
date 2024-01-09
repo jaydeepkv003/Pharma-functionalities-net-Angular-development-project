@@ -1,0 +1,177 @@
+<div class="cart-content" *ngIf="cartContent && (cartContent.Parts.length > 0 || cartContent.Quotes.length > 0)">
+  <div class="mb-5 box-shadow bg-white rounded-lg" *ngFor="let c of cartContent.Parts">
+    <!-- MOCK CARD -->
+    <div class="m-0 py-3 pr-4 row position-relative">
+      <div class="col-md-3 col-12 text-center">
+        <img class="item-img" src="{{c?.Part?.Attributes | cartImg}}">
+      </div>
+      <div class="col-md-6 col-12 pt-4">
+        <div class="mb-1 text-light-gray">{{c?.Part?.PartNumber}}</div>
+        <p class="item-desc">{{c?.Part?.Description}}</p>
+      </div>
+      <div class="col-md-3 col-12 price-container pt-4">
+        <div class="text-right">
+          <div class="each-price" [ngClass]="{'strike-through': sharedService.feature.Promotions && c.DiscountedPrice}">{{c?.Part?.Price | currency}}
+            ({{c?.Part?.UOM}})</div>
+          <ng-container *ngIf="sharedService.feature.Promotions">
+            <div class="each-price" *ngIf="c.DiscountedPrice" placement="top" [ngbPopover]="promoDetail"
+              triggers="mouseenter:mouseleave">
+              <a href="javascript:void(0)" class="text-decoration-none">
+                <img class="promotion-icon align-text-top" src="/-/jssmedia/phrjss/data/media/images/promotion/offer_icon" />
+                {{c.DiscountedPrice | currency}} ({{c?.Part?.UOM}})
+              </a>
+            </div>
+
+            <ng-template #promoDetail>
+              <ng-container *ngFor="let item of appliedItemLevelPromo">
+                <div class="text-left" *ngIf="item.PromotionID == c.PromotionID">
+                  <div class="font-semibold">{{item.Name}}</div>
+                  <div>Limit: {{item.MaxQuantity}}</div>
+                  <div>Expire: {{item.EndDate | date}}</div>
+                </div>
+              </ng-container>
+            </ng-template>
+          </ng-container>
+
+          <div class="qty clearfix">
+            Qty: <input type="text" maxLen="4" isNumericOnly="true" class="form-control pull-right ml-2"
+              [(ngModel)]="c.Quantity" (change)="qtyChange(c)">
+          </div>
+          <div class="sub-total">
+            Subtotal:
+            <span class="sub-total-amt">{{c?.TotalAmount | currency}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="delete-icon" (click)="removeCartDetail(c.CartDetailID, c.Part.PartNumber, true)">
+        <i class="material-icons">delete</i>
+      </div>
+    </div>
+    <div class="recommanded-parts bg-gray rounded-lg" *ngIf="c.RecommendedParts.length > 0">
+      <!-- Cross Sell Section -->
+      <div class="intro font-xxs text-uppercase">Add these popular accessories to your cart!</div>
+      <div class="row font-xxs m-0 collapsed" [ngClass]="{'expand': c.showAllParts}">
+        <div class="col-md-6 mb-2" *ngFor="let rp of c.RecommendedParts">
+          <div class="row mx-0 p-1 h-100 bg-white box-shadow">
+            <div class="col-md-3 px-1">
+              <img class="part-img" src="{{rp.Attributes | cartImg}}">
+            </div>
+            <div class="col-md-9 px-1">
+              <div class="">
+                <div class="part-no">{{rp.PartNumber}}</div>
+                <div class="font-bold mb-1 line-h-md">{{rp.Description}}</div>
+                <div>{{rp.Price | currency}} ({{rp.UOM}})</div>
+                <button class="btn btn-primary btn-xs position-relative" (click)="AddRecommandedPartToCart(rp)"> Add
+                  to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center" *ngIf="c.RecommendedParts.length > 2">
+        <button class="btn btn-link" (click)="toggle(c)">
+          <div class="with-icon" *ngIf="!c.showAllParts">
+            <i class="material-icons material-icons-outlined">arrow_downward</i>
+            SHOW ALL
+          </div>
+          <div class="with-icon" *ngIf="c.showAllParts">
+            <i class="material-icons material-icons-outlined">arrow_upward</i>
+            SHOW LESS
+          </div>
+        </button>
+      </div>
+    </div>
+    <!-- End Cross Sell Section -->
+
+    <!-- END MOCK CARD -->
+  </div>
+
+  <!-- Gifts Listing -->
+  <ng-container *ngIf="sharedService.feature.Promotions">
+    <div class="mb-5 box-shadow bg-white rounded-lg" *ngFor="let c of cartContent.Gifts">
+      <!-- MOCK CARD -->
+      <div class="m-0 py-3 pr-4 row position-relative">
+        <div class="col-md-3 col-12 text-center">
+          <img class="item-img" src="{{c?.Part?.Attributes | cartImg}}">
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="mb-1 text-light-gray">{{c?.Part?.PartNumber}}</div>
+          <p class="item-desc">{{c?.Part?.Description}}</p>
+        </div>
+        <div class="col-md-3 col-12 price-container">
+          <div class="text-right">
+            <div class="each-price">{{c?.Part?.Price | currency}} ({{c?.Part?.UOM}})</div>
+            <div class="each-price">
+              <a href="javascript:void(0)" class="text-decoration-none">
+                <img class="promotion-icon align-text-top" src="/-/jssmedia/phrjss/data/media/images/promotion/offer_icon" />
+                {{c.TotalDiscountAmount | currency}} ({{c?.Part?.UOM}})
+              </a>
+            </div>
+            <div class="sub-total">
+              Subtotal:
+              <span class="sub-total-amt">{{c?.SubtotalAmount | currency}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="delete-icon">
+          <i class="material-icons">delete</i>
+        </div>
+      </div>
+      <!-- END MOCK CARD -->
+    </div>
+  </ng-container>
+
+
+  <!-- Quotes Listing -->
+  <div class="p-1 pr-4 mb-5 bg-cyan rounded-lg position-relative" *ngFor="let quote of cartContent.Quotes">
+    <div class="row m-2">
+      <div class="col-md-6">
+        <div><span class="font-bold">Quote ID: </span>{{ quote?.QuoteHeader?.QuoteNumber }}</div>
+        <div><span class="font-bold">Expires: </span>{{ quote?.QuoteHeader?.ExpirationDate | date }}</div>
+        <div><span class="font-bold">{{ quote?.QuoteHeader?.AccountName}}</span></div>
+      </div>
+      <div class="col-md-6 text-right">
+        <div><span class="font-bold">Total:</span> {{ quote?.QuoteHeader?.TotalAmount | currency }}</div>
+        <div class="discount"><span class="font-bold">Total Discount:</span>
+          {{ quote?.QuoteHeader?.TotalDiscountAmount | currency }}
+        </div>
+        <div>Note: Discounts are based on quote pricing.</div>
+      </div>
+    </div>
+
+    <div class="delete-icon" (click)="removeCartDetail(quote.CartDetailID, quote.QuoteHeader.QuoteNumber, false)">
+      <i class="material-icons">delete</i>
+    </div>
+
+    <div class="p-3 m-3 box-shadow bg-white rounded-lg" *ngFor="let c of quote?.QuoteHeader?.Details">
+      <div class="row">
+        <div class="col-sm-2 col-12 img-center-container">
+          <img class="img-fluid" src="{{c?.Part?.Attributes | cartImg}}">
+        </div>
+        <div class="col-sm-7 col-12">
+          <div class="mb-2">{{c?.Part?.PartNumber}}</div>
+          <p class="font-bold mb-4">{{c?.Part?.Description}}</p>
+        </div>
+        <div class="col-sm-3 col-12 price-container">
+          <div class="text-right">
+            <div class="qty">Qty: {{c?.Quantity}}</div>
+            <div class="each-price">Price: {{c?.Part?.Price | currency}} ({{c?.Part?.UOM}})</div>
+            <div class="discount">Discount: {{c?.TotalDiscountAmount | currency}}</div>
+            <div class="sub-total">
+              Total: <span class="sub-total-amt">{{c?.TotalAmount | currency}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cart-content" *ngIf="cartContent && cartContent.Parts.length == 0 && cartContent.Quotes.length == 0">
+  <div class="mb-5 box-shadow bg-white rounded-lg">
+    <div class="empty-cart">
+      <div>Your cart is empty</div>
+      <div>Continue shopping or <a routerLink="/quick-order">Quick Order</a></div>
+    </div>
+  </div>
+</div>

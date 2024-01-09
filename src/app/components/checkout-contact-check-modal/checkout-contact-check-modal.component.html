@@ -1,0 +1,17 @@
+<button type="button" class="float-right btn btn-close p-2" aria-label="Close" (click)="activeModal.dismiss('close')">
+  <i class="material-icons material-icons-outlined">close</i>
+</button>
+<div class="modal-body">
+  <div class="d-flex title p-0 mb-3">Error in Cart</div>
+  <div class="bg-white">
+    <div>
+      OOPS we cant find you in our database. Please contact your sales representative or customer service
+      to ensure that your order is placed properly. Thank you for trying to place your order on pharma.com.
+      <a href="www.pharma.com/Contact-Us" target="_blank">www.pharma.com/Contact-Us</a>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary btn-sm" (click)="activeModal.dismiss()"> CLOSE
+  </button>
+</div>

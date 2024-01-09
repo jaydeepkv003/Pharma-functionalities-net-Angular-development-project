@@ -1,0 +1,11 @@
+<div class="container container-fluid p-4">
+  <h3 class='line'>
+    <div *scText="rendering.fields.heading"></div>
+  </h3>
+
+  <div class="pt-3" *scRichText="rendering.fields.description"></div>
+
+  <div class="tools-container">
+    <sc-placeholder name="jss-options" [rendering]="rendering" class="row"></sc-placeholder>
+  </div>
+</div>

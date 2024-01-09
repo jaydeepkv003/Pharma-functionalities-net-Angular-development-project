@@ -1,0 +1,11 @@
+::ng-deep .change-pop-up-size .modal-dialog {
+  width: 650px ;
+  border: 1px solid #707070;
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px #00000029;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) !important;
+}

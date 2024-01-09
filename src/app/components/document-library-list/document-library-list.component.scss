@@ -1,0 +1,36 @@
+.card-deck {
+  select {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 0%;
+    flex: 1 0 0%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    // -ms-flex-direction: column;
+    // flex-direction: column;
+    margin-right: 15px;
+    margin-bottom: 0;
+    margin-left: 15px;
+    -moz-appearance:none;
+    -webkit-appearance: none;
+    appearance:none;
+    background-image: url("../../../assets/images/brand/expand_arrow.png");
+    background-repeat: no-repeat;
+    background-size:15px;
+    background-position: right center;
+    max-width: 160px;
+  }
+}
+
+.pdf-thumb-container {
+  .pdf-thumb {
+    background-color: rgba(0, 0, 0, 0.03);
+    &:hover {
+      background-color: white;
+      border: 1px solid #587dff !important;
+    }
+  }
+}
+

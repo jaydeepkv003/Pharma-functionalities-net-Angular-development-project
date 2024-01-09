@@ -1,0 +1,200 @@
+<div class="wrapper">
+  <div class="container">
+    <br>
+    <div class="title brand">
+      <span>Search By Structure</span>
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="padding-left: 0px;">
+        <div class="boldText floatLeft steps">Steps:</div>
+        <div class="floatLeft">
+          <div class="floatLeft structureSearchStep">
+            <img class="floatLeft" src="https://pharma.blob.core.windows.net/cdn/Content/Images/draw_structure.png"
+              width="19" height="24" alt="" />
+            <h2 class="floatLeft">Draw Structure,</h2>
+          </div>
+          <div class="floatLeft structureSearchStep">
+            <img class="floatLeft" src="https://pharma.blob.core.windows.net/cdn/Content/Images/match_compound.png"
+              width="19" height="24" alt="" />
+            <h2 class="floatLeft">Match Compounds,</h2>
+          </div>
+          <div class="floatLeft structureSearchStep">
+            <img class="floatLeft"
+              src="https://pharma.blob.core.windows.net/cdn/Content/Images/view_application.png" width="19"
+              height="24" alt="" />
+            <h2 class="floatLeft">View Application</h2>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="floatLeft widgetOffer">
+            <button class="btn btn-blue" style="height: 60px">
+              Like this tool?<br />
+              Use this tool on your website.
+            </button>
+          </div>
+          <div class="clearAll"></div> -->
+      <div class="col-md-12" style="padding-left: 10px;">
+        <p style="font-size: 14px;">
+          <span class="appStructSpan">Confidentiality Notice:</span>
+          No structure related data you enter into this tool is ever saved. All
+          data is permanently deleted upon exiting this page.
+        </p>
+      </div>
+      <div class="row" style="padding-left: 30px;">
+        <div id="editor" class="JSDraw appStructEditorDiv">
+        </div>
+        <div class="floatLeft searchOptions">
+          <div style="float: left; color: #444">
+            <p class="boldText optionLabel" style="margin-bottom: 0rem">
+              Molecular Weight:
+            </p>
+            <p>
+              <label id="mweight" style="margin-bottom: 0rem">{{
+                currentMolWeight
+                }}</label>
+            </p>
+            <p class="boldText optionLabel" style="margin-bottom: 0rem">
+              Formula:
+            </p>
+            <p>
+              <label id="formula" style="margin-bottom: 0rem" [innerHtml]="currentMolFormula"></label>
+            </p>
+          </div>
+          <br class="clear" />
+          <h3 style="float: left; padding: 15px 0 0 0">
+            <img class="floatLeft" src="https://pharma.blob.core.windows.net/cdn/Content/Images/match_compound.png"
+              width="19" height="24" alt="" />
+            <span style="
+                      display: inline-block;
+                      padding: 7px 0 0 5px;
+                      font-size: 16px;
+                    ">Match Compounds</span>
+          </h3>
+          <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+            <div style="float: left">
+              <input type="radio" value="sub" formControlName="MatchType" />
+              Sub-Structure<br />
+              <input type="radio" value="exact" formControlName="MatchType" />
+              Exact Match<br />
+              <input type="radio" value="similar" formControlName="MatchType" />
+              Similar
+            </div>
+            <div class="clearAll"></div>
+            <div class="button">
+              <button type="submit" class="btn btn-blue">
+                <span>Search</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row" style="padding-left: 15px;">
+        <div id="dropdownSection" style="padding-top: 20px; margin: 0px 0px 5px 15px">
+          <span style="font-weight: bold; vertical-align: 55%">Filter Results:</span>
+          <div class="filters-mat">
+            <mat-form-field appearance="fill">
+              <mat-label>--Select Technique--</mat-label>
+              <mat-select name="Technique" (selectionChange)="onSubmit()" [(ngModel)]="filter.Technique">
+                <ng-container *ngFor="let listItem of filterObj?.Technique">
+                  <mat-option *ngIf="listItem" [value]="listItem">
+                    {{ listItem }}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>--Select Separation Mode--</mat-label>
+              <mat-select name="SeparationMode" (selectionChange)="onSubmit()" [(ngModel)]="filter.SeparationMode">
+                <ng-container *ngFor="let listItem of filterObj?.SeparationMode">
+                  <mat-option *ngIf="listItem" [value]="listItem">
+                    {{ listItem }}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>--Select Phase--</mat-label>
+              <mat-select name="Phase" (selectionChange)="onSubmit()" [(ngModel)]="filter.ColumnPhase">
+                <ng-container *ngFor="let listItem of filterObj?.Phase">
+                  <mat-option *ngIf="listItem" [value]="listItem">
+                    {{ listItem }}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+            <p class="clear-ctrl" (click)="clearFilter()">Clear All</p>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-left: 15px;">
+        <div class="col-md-3">
+          <div id="draw" class="JSDraw appStructMolData" viewonly dataformat="molfile"
+            [innerHtml]="currentMolFormula3d">
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="app-list">
+            <div class="appStructtableOutdiv">
+              <div class="appStructTableTitle">
+                {{ filterObj?.Total }} Matching Compound Results
+              </div>
+              <div style="float: right; font-size: 14px">
+                (Click <img width="24" height="20" alt=""
+                  src="https://pharma.blob.core.windows.net/cdn/Content/Images/chromoIcon.png" />
+                button to view Applications containing that compound)
+              </div>
+              <br class="clear" />
+            </div>
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>CID</th>
+                  <th>Name</th>
+                  <th>Formula</th>
+                  <th>Mol. Weight</th>
+                  <th>View Application</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let app of applicationListObj; let i = index" (click)="onUpdate(app)" class="pointer">
+                  <td>{{ app.CID }}</td>
+                  <td>{{ app.Name }}</td>
+                  <td>{{ app.MOLECULAR_FORMULA }}</td>
+                  <td>{{ app.MOLECULAR_WEIGHT }}</td>
+                  <td>
+                    <div style="
+                          display: inline-block;
+                          margin-left: auto;
+                          margin-right: auto;
+                        ">
+                      <div style="margin: 0">
+                        <button class="btn btn-blue" routerLink="/application-compound-search" [queryParams]="{
+                            compoundName: app?.Name
+                          }"><span>{{ app.AppCount }}
+                            <img width="24" height="20" alt=""
+                              src="https://pharma.blob.core.windows.net/cdn/Content/Images/chromoIcon.png" /></span></button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="nodata-container" *ngIf="applicationListObj?.length === 0">
+                  <td colspan="4" class="border nodata">No Data</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="row">
+              <div class="col-md-12 text-center" *ngIf="filter.Limit <= appCount">
+                <a href="javascript:void(0);" (click)="showMore()"
+                  class="d-flex align-content-center justify-content-center text-decoration-none">
+                  <span>Show More</span>
+                  <i class="material-icons material-icons-rounded font-20">keyboard_arrow_down</i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>

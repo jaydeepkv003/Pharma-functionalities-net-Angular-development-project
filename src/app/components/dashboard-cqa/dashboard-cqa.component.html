@@ -1,0 +1,35 @@
+<div class="dashboard-container pt-60">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 side-nav">
+        <app-dashboard-nav></app-dashboard-nav>
+      </div>
+      <div class="col-md-9 quote-container">
+        <div class="container">
+          <div class="title">
+            <span>CQA / CofA</span>
+          </div>
+          <div class="tabs-control">
+            <div class="container">
+              <ul class="tabs-section">
+                <li *ngFor="let tab of tabs">
+                  <a class="pointer" [ngClass]="{'nav-link': true, 'active': tab === activeTab }" (click)="onTabChange(tab);">
+                    <span> {{tab}} </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content-section position-relative">
+              <ng-container *ngIf="activeTab === 'LC/SPE'">
+                <app-dashboard-cqa-hplc-tab></app-dashboard-cqa-hplc-tab>
+              </ng-container>
+              <ng-container *ngIf="activeTab === 'ROQ QUECHERS'">
+                <app-dashboard-cqa-roq-tab></app-dashboard-cqa-roq-tab>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

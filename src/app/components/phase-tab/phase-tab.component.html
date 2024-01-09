@@ -1,0 +1,52 @@
+<div class="container container-fluid">
+  <h2 class="title pt-90" *scRichText="rendering.fields.title"></h2>
+  <div class="pb-1">
+    <div class="custom-accordion">
+      <mat-accordion multi>
+        <mat-expansion-panel class="expansion-panel" expanded *ngFor="let mode of phaseObject">
+          <mat-expansion-panel-header class="expansion-header" [collapsedHeight]="'34px'" [expandedHeight]="'34px'">
+            <mat-panel-title class="expansion-title pl-1">
+              {{ mode.SeparationMode }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-6 phase-card-space" [ngClass]="(i % 2 != 0) ? 'pl-0' : 'pr-0'" *ngFor="let detail of mode.Phases; let i = index">
+              <div class="phase-card" (click)="gotoPhase(detail.phaseURL)" [ngClass]="(i % 2 != 0) ? 'right' : 'left'">
+                <div class="phase-title">
+                  <div class="heading-text line-height">{{detail.PhaseName}}</div>
+                  <div class="phase-img">
+                    <div class="cell-image" *ngIf="detail.ImageURL"><img [src]="detail.ImageURL"></div>
+                    <div class="cell-image" *ngIf="!detail.ImageURL"><img [src]="noImageUrl"></div>
+                  </div>
+                </div>
+                <div class="phase-content">
+                  <div class="pb-2 px-10 content-border font-medium">{{(detail.Description ? detail.Description : '-') | translate}}</div>
+                  <div class="py-2 px-10 content-border">
+                    <div class="font-medium">Recommended Use</div>
+                    <div class="font-xs line-height">{{ (detail.RecommendedUse ? detail.RecommendedUse : '-' )  | translate }}</div>
+                  </div>
+                  <div class="pt-2 px-10 d-flex">
+                    <div class="w-50">
+                      <div class="font-medium">Official Method</div>
+                      <div class="font-xs">{{getAttributeValue(detail.Attributes, 65)}}</div>
+                    </div>
+                    <div class="w-50">
+                      <div class="font-medium">Particle Size</div>
+                      <div class="font-xs">{{getAttributeValue(detail.Attributes, 279)}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div class="nodata-container" *ngIf="phaseObject?.length === 0 && !isLoading">
+      <div class="border nodata">
+        No Data
+      </div>
+    </div>
+  </div>
+</div>

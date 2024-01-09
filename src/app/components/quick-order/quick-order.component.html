@@ -1,0 +1,48 @@
+<ng-container *ngIf="sharedService.feature?.QuickOrder">
+  <div class="container container-fluid px-3 pt-3 document-detail">
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="title mb-0">Quick Order</div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <div class="font-bold mb-1">Already know what you need?</div>
+            <div class="font-sm mb-1">
+              Simply search by part number, brand name, or description to quickly place an order!
+            </div>
+            <div class="font-sm">
+              For multiple items, use the <span class="font-bold">Upload Order</span> tab.
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="font-bold mb-1">Looking to reorder products?</div>
+            <div class="font-sm mb-11 pr-5">
+              Previously ordered products can be quickly and easily reordered by visiting your <a [routerLink]="['/dashboard/order-history']" >My Orders</a> page and clicking “Reorder”.
+            </div>
+            <div class="font-sm mt-2">
+              Check your <a href="/dashboard/favorites">Favorites</a> for saved items and <a href="/Tools">Web Tools</a> for a guided search.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tabs-control">
+    <div class="container">
+      <ul class="tabs-section">
+        <li *ngFor="let tab of tabs">
+          <a class="pointer" [ngClass]="{'nav-link': true, 'active': tab === activeTab }" (click)="onTabChange(tab);">
+            <span> {{tab}} </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content-section position-relative">
+      <ng-container *ngIf="activeTab === 'search'">
+        <app-quick-order-search-tab></app-quick-order-search-tab>
+      </ng-container>
+      <ng-container *ngIf="activeTab === 'upload order'">
+        <app-quick-order-upload-tab></app-quick-order-upload-tab>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

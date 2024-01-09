@@ -1,0 +1,24 @@
+<!-- Brand Info -->
+<div class="brand">
+  <div class="container">
+    <div class="row line">
+      <div class="col">
+        <div class="heading">
+          <div class="title" *scRichText="rendering.fields.header"></div>
+          <img *scImage="rendering.fields.logo" class="brandlogo img-fluid" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="eight">
+          <h5 *scRichText="rendering.fields.subHeader"></h5>
+          <p *scRichText="rendering.fields.content"></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <img class="four img-fluid" *scImage="rendering.fields.broductPhoto" />
+      </div>
+    </div>
+  </div>
+</div>

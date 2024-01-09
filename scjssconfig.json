@@ -1,0 +1,9 @@
+{
+  "sitecore": {
+    "instancePath": "",
+    "apiKey": "{5220EDAD-834E-47D1-9795-5D3289A19221}",
+    "deploySecret": "csyh9lirdmfoteoeuiyxua1b17brlr46ptjvjkxxpufh",
+    "deployUrl": "https://phrsitecoredev93-388310-single.azurewebsites.net/sitecore/api/jss/import",
+    "layoutServiceHost": "https://phrsitecoredev93-388310-single.azurewebsites.net"
+  }
+}

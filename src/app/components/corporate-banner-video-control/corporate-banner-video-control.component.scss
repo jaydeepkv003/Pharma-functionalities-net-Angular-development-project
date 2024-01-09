@@ -1,0 +1,195 @@
+// .no-padding{
+//     padding:0;
+//   }
+//   #main-image{
+//     text-align:center;
+//   }
+
+//   .background-grey{
+//     background-color:#F0F0F0;
+//   }
+
+//   // Intro
+//   .main{
+//     padding-top:120px;
+//     padding-bottom:120px;
+//     h1{
+//       text-align: center;
+//       
+//       font-weight: 500;
+//       font-style: normal;
+//       font-size: 3.1rem;
+//       color:#444444;
+//     }
+//     p{
+//       text-align: center;
+//       
+//       font-weight: 500;
+//       font-style: normal;
+//       color:#9F9F9F;
+//     }
+//   }
+
+//   //Eight
+//   .eight{
+//     padding:0px 0px 50px 0;
+//     .content{
+//       text-align:center;
+//       background-color: #ffffff;
+//       
+//       font-weight: 500;
+//       padding: 0px 0px 20px 0px;
+//       img{
+//         padding: 15px;
+
+//       }
+//       h1{
+//         width: 80%;
+//         text-align: center;
+//         font-size: 43px;
+//         margin: 0px auto;
+//       }
+//       p{
+//         font-size: 17px;
+//         width: 80%;
+//         text-align: center;
+//         color: #9F9F9F;
+//         margin: 0px auto 0px auto;
+//       }
+
+//     }
+//   }
+
+
+
+.no-padding{
+  padding:0;
+}
+#main-image{
+  text-align:center;
+}
+
+.background-grey{
+  background-color:#F0F0F0;
+}
+
+
+
+.over-f {
+  overflow: hidden!important;
+}
+
+
+// Intro
+.main{
+  padding-top:120px;
+  padding-bottom:120px;
+  h1{
+    text-align: center;
+    
+    font-weight: 500;
+    font-style: normal;
+    font-size: 3.1rem;
+    color:#444444;
+  }
+  p{
+    text-align: center;
+    
+    font-weight: 500;
+    font-style: normal;
+    color:#9F9F9F;
+  }
+}
+
+//Eight
+.eight{
+  padding:0px 0px 50px 0;
+  .content{
+    text-align:center;
+    background-color: #ffffff;
+    
+    font-weight: 500;
+    padding: 0px 0px 20px 0px;
+    img{
+      padding: 15px;
+
+    }
+    h1{
+      width: 80%;
+      text-align: center;
+      font-size: 43px;
+      margin: 0px auto;
+    }
+    p{
+      font-size: 17px;
+      width: 80%;
+      text-align: center;
+      color: #9F9F9F;
+      margin: 0px auto 0px auto;
+    }
+
+  }
+}
+
+
+//mg Additions for header and Nav
+
+.pos-r {
+  position: relative;
+ }
+
+
+.small-text {
+color: rgba(255,255,255,0.90);
+text-transform: uppercase;
+text-align: center;
+font-size: 2222;
+font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1600 - 320)));
+}
+
+.text-line-break {
+display: block;
+}
+
+.big-text {
+color: rgba(255,255,255,0.90);
+text-align: center;
+font-size: calc(16px + (75 - 16) * ((100vw - 320px) / (1600 - 320)));
+line-height: calc(16px + (75 - 16) * ((100vw - 320px) / (1600 - 320)));
+}
+
+/*mg edits for video background*/
+/*video contatimer*/
+
+.about-us-video-header {
+  position: relative;
+  background-color:#fff;
+  height: 100vh;
+  min-height: 25rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.about-us-video-header video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+
+.about-us-header-video-text-container {
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+}
+
+
+//small nav and hamburger menu
+

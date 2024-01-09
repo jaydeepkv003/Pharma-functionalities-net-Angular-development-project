@@ -1,0 +1,47 @@
+<div class="container">
+  <h2 class="title pt-90">
+    <span>{{heading}} Applications</span>
+    <div class="sub-title float-right">
+      <a [routerLink]="['/applications']">
+        <i class="material-icons search-all-icon">search</i>
+        Search All Applications
+      </a>
+    </div>
+  </h2>
+
+  <div class="mb-2">
+
+    <div class="mb-3 clearfix" *ngIf="applications?.length > 0">
+      <div class="float-right">Showing 1-{{pageSize}} of {{applications.length}} results</div>
+    </div>
+
+    <div class="pb-1">
+      <div class="text-center my-4">
+        <div class="row array-container">
+
+          <div class="array-item col-md-4" *ngFor="let application of applications | slice:0:pageSize; let i = index"
+            [routerLink]="['/applications/single']" [queryParams]="{appid: application?.ApplicationID}">
+            <div class="text-center pointer border p-1 h-100">
+              <div class="img-center-container min-180">
+                <img [src]="application?.ChromatogramUrl" class="img-fluid img-center">
+              </div>
+              <div class="img-label py-1">{{application?.Title}}</div>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="btn btn-default" (click)="showMore()" *ngIf="applications.length > pageSize">
+          Show More
+        </button>
+
+        <div class="nodata-container" *ngIf="applications?.length === 0 && !isLoading">
+          <div class="border nodata">
+            No Data
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

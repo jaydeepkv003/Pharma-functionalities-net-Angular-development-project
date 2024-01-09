@@ -1,0 +1,50 @@
+h1 {
+  font-weight: 400;
+  font-style: normal;
+}
+p {
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+}
+a {
+  border: 1px solid #57585a;
+  line-height: 3;
+  padding: 10px;
+}
+
+.tools-container {
+  .tool {
+    width: 100%;
+    margin-top: 10px;
+    min-height: 215px;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    .abs {
+      width: 100%;
+      position: absolute;
+      min-height: 210px;
+      .hover {
+        display: none;
+      }
+      @media screen and (max-width: 768px) {
+        position: relative;
+      }
+    }
+    &:hover {
+      img {
+        width: 30%;
+      }
+      .abs {
+        z-index: 1;
+        transition: all 0.5s ease;
+        .hover {
+          display: block;
+          transition: all 0.5s ease;
+        }
+      }
+    }
+  }
+}

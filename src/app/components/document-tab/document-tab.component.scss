@@ -1,0 +1,14 @@
+.pdf-thumb-container {
+  margin-bottom: 30px;
+  .pdf-thumb {
+    background-color: rgba(0, 0, 0, 0.03);
+     &:hover {
+      background-color: white;
+      border: 1px solid #587dff !important;
+    }
+    .pdf-height{
+      height: 250px; 
+      overflow: hidden;
+    }
+  }
+}

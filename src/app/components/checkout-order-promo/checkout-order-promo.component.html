@@ -1,0 +1,62 @@
+<div class="promo-container">
+  <div class="d-flex justify-content-center justify-content-center py-2">
+  <button class="promotions-btn d-flex justify-content-center justify-content-center py-2 px-3" (click)="toggleShowDiv()">
+    PROMOTIONS
+    <span class="material-icons material-icons-rounded icon-font-lg c-pointer pl-2"
+      [ngClass]="animationState === 'in' ? 'expanded' : 'collapsed'">
+      {{animationState === 'in' ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+    </span>
+  </button>
+  </div>
+
+  <div class="container" [@slideInOut]="animationState">
+    <div class="row mb-4">
+      <div class="col-8 offset-2">
+        <div class="d-flex justify-content-center mb-3">The promotion with the highest value has been pre-selected. Promotional offers cannot be combined.</div>
+        <div class="row">
+          <div class="col-12 p-0">
+            <ng-container *ngIf="cartContentDetails.Promotions && cartContentDetails.Promotions.length">
+              <div class="promotion" *ngFor="let item of cartContentDetails.Promotions"
+                [ngClass]="{'selected': item.Active, 'disabled': (!item.Active && item.SpendToQualifyAmount)}">
+                <div class="row p-3">
+                  <div class="col-lg-9">
+                    <div class="d-flex flex-column">
+                      <div class="promo-title line-wrap">{{item.Name}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 text-right promo-qua coupon-applied" *ngIf="item.Active"><i class="material-icons check-icon d-block">check</i> Applied</div>
+                  <div class="col-lg-3 text-right promo-qua" *ngIf="!item.Active">
+                    <span class="red-text" *ngIf="item.SpendToQualifyAmount">Spend ${{item.SpendToQualifyAmount}} more to qualify!</span>
+                    <span *ngIf="!item.SpendToQualifyAmount">Better offer has been applied above</span>
+                  </div>
+                </div>
+                <div class="" *ngIf="!item.Active"  [ngClass]="{'even': 0 === i % 2, 'opened': item.opened}" (click)="item.opened=!item.opened">
+                  <div class="w-100">
+                    <div class="details-with-icon w-100 px-3 py-2">
+                      <div class="question">
+                        <div class="que-title font-sm">DETAILS</div>
+                      </div>
+                      <i class="material-icons material-icons-outlined">
+                        <span *ngIf="!item.opened">expand_more</span>
+                        <span class="expanded" *ngIf="item.opened">expand_less</span>
+                      </i>
+                    </div>
+                    <div class="pointer item-body px-3 py-2" [hidden]="!item.opened">
+                      <div class="line-wrap">{{item.Description}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="col-11 offset-1 p-0 mt-2" *ngIf="activePromo && activePromo.MaxQuantity">
+            Individual item level discounts totaling {{cartContentDetails.TotalDiscountAmount | currency}} have been applied in your
+            cart. - Please check the items in your cart to see your discount(s) applied to each.
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

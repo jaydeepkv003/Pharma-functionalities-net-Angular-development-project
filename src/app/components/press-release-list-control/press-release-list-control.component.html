@@ -1,0 +1,24 @@
+<div class="wrapper grey-background">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 press-grid my-3" *ngFor="let pressRelease of pressReleaseList; let i = index">
+        <div class="item">
+          <div class="item__content">
+            <img src="{{currentHostName}}{{pressRelease?.item?.imageOne?.src}}">
+            <div class="text">
+              <p class="date">{{pressRelease?.item?.articlePublishedDate?.formattedDateValue}}</p>
+              <a class="press-title" (click)="gotoLink(pressRelease?.item?.pageLink)"
+                [routerLink]="pressRelease?.item?.pageLink?.url">
+                <span *scText="pressRelease.item.heading"></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nodata-container my-3" *ngIf="pressReleaseList?.length === 0 && !isLoaded">
+      <div class="border nodata">
+        No Data
+      </div>
+    </div>
+  </div>
+</div>

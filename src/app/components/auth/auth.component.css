@@ -1,0 +1,18 @@
+button{
+  font-family: roboto, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  background-color: #587DFF;
+  padding: 5px 20px;
+  color: white;
+  border: none;
+}
+
+h1{
+  padding:20px 0;
+}
+.padding{
+  padding-top:40px;
+  padding-bottom:40px;
+}

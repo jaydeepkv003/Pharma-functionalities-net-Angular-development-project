@@ -1,0 +1,25 @@
+
+<div class="container padding">
+  <div class="row">
+    <div class="col">
+
+      <!-- User Not Logged In -->
+      <div *ngIf="!userName">
+        <h4>Hello Guest!</h4>
+        <div>
+          <p style="margin:0;">Already have an account?</p>
+          <button (click)="login()">Login</button>
+        </div>
+      </div>
+
+      <!-- User Is Logged In -->
+      <div *ngIf="userName">
+        <h4>Hello, {{userName}}</h4>
+        <button (click)="logoff()">
+          Logout
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

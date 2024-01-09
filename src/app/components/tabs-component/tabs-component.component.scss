@@ -1,0 +1,91 @@
+@import "../../../style-variables";
+
+.tabs-control {
+  background-color: #ffffff;
+  &::before {
+    top: 30px;
+    box-shadow: 0px 6px 6px #00000029;
+    content: "";
+    display: block;
+    height: 6px;
+    position: sticky;
+    z-index: 10;
+  }
+  &::after {
+    background: linear-gradient(white 10%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.4) 70%, transparent);
+    top: 0;
+    content: "";
+    display: block;
+    position: sticky;
+  }
+  .tab-wrapper {
+    position: sticky;
+    top: 0px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #aaaaaa;
+    z-index: 10;
+
+    .tabs-section {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: left;
+      font-style: normal;
+      li {
+        padding: 0px 15px 0 0;
+        display: table;
+
+        a {
+          border-bottom: 3px solid transparent;
+          padding: 10px;
+          font-size: 13px;
+          font-weight: 500;
+          text-transform: uppercase;
+          color: $color-highlight;
+          line-height: 1.1;
+          display: table-cell;
+          vertical-align: bottom;
+          &:hover {
+            border-bottom: 3px solid $color-highlight;
+          }
+          &.active {
+            border-bottom: 3px solid $color-highlight;
+          }
+        }
+      }
+    }
+
+    &.event {
+      background-color: #e6e9ec;
+      .tabs-section {
+        li {
+          padding: 0px;
+        }
+        a {
+          padding: 10px 15px;
+          font-size: 14px;
+          font-weight: 400;
+          border-bottom: 0px solid transparent;
+          color: $font-color;
+          &:hover {
+            background-color: #002948;
+            color: #ffffff;
+            border-bottom: 0px solid $color-highlight;
+          }
+          &.active {
+            background-color: #002948;
+            color: #ffffff;
+            border-bottom: 0px solid $color-highlight;
+          }
+        }
+      }
+    }
+  }
+
+  .tab-content-section {
+    // border-top: 1px solid #aaaaaa;
+    background-color: #f2f5f9;
+  }
+}

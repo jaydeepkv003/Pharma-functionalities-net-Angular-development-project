@@ -1,0 +1,15 @@
+.title {
+    .sub-text {
+        font-size: 22px;
+        color: greenyellow;
+        transition: all 10s ease;
+        &.success-transition {
+            transition: all 10s ease;
+            color: #999;
+        }
+    }
+    .no-items {
+      font-size: 22px;
+      color: #9D9D9D;
+    }
+}

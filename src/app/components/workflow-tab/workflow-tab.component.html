@@ -1,0 +1,32 @@
+<div class="container pt-30">
+  <div class="title pt-60" *ngIf="rendering.fields.tabTitle && rendering.fields.tabTitle['value']">
+    <span *scText="rendering.fields.tabTitle"></span>
+  </div>
+  <p class="font-weight-bold" *ngIf="rendering.fields.description && rendering.fields.description['value']">
+    <span *scText="rendering.fields.description"></span>
+  </p>
+</div>
+
+<div class="workflow-tab container">
+  <div class="tabs-control">
+    <ul class="tabs-section">
+      <li *ngFor="let tab of tabs; let index = index" [ngClass]="{'active': tab === activeTab }"
+        (click)="selectTab(index)">
+        <a class="nav-link">
+          {{getNameFromTab(tab)}}
+        </a>
+      </li>
+    </ul>
+    <ng-container *ngIf="isEditing">
+      <sc-placeholder name="jss-sub-tabs" [rendering]="rendering"></sc-placeholder>
+    </ng-container>
+    <ng-container *ngIf="!isEditing">
+      <div *ngFor="let tab of tabs; let i = index" class="tab-content-section"
+        [class.position-relative]="tab === activeTab && selectedIndex === cindex" [ngClass]="tab.state">
+        <div *ngFor="let section of tab.placeholders['jss-sections']; let j = index">
+          <sc-render-component [rendering]="section"></sc-render-component>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24.037" height="21.77" viewBox="0 0 24.037 21.77">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_604" data-name="Path 604" d="M8.905-2.372A1.446,1.446,0,0,1,7.466-.919a1.446,1.446,0,0,1-1.44-1.452,1.446,1.446,0,0,1,1.44-1.452,1.446,1.446,0,0,1,1.44,1.452" fill="none" clip-rule="evenodd"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <path id="Path_603" data-name="Path 603" d="M-953,2444H71V-94H-953Z" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <path id="Path_607" data-name="Path 607" d="M18.465-2.372A1.446,1.446,0,0,0,19.9-.919a1.446,1.446,0,0,0,1.44-1.452A1.446,1.446,0,0,0,19.9-3.824a1.446,1.446,0,0,0-1.44,1.452" fill="none" clip-rule="evenodd"/>
+    </clipPath>
+    <clipPath id="clip-path-5">
+      <path id="Path_610" data-name="Path 610" d="M6.829-8.773H21.555a.481.481,0,0,0,.464-.359l2.5-9.394a.487.487,0,0,0-.083-.42.476.476,0,0,0-.38-.19H5.771a5.9,5.9,0,0,0-.748-1.75,3.987,3.987,0,0,0-3.586-1.8.966.966,0,0,0-.944.985.964.964,0,0,0,.976.952h.065c1.695,0,2.24,1.148,2.568,3,.006.036,1.131,7.831,1.131,7.831C4.494-8.261,3.986-6.6,4.723-5.433A2.345,2.345,0,0,0,6.87-4.415H21.795a.963.963,0,0,0,.96-.968.964.964,0,0,0-.96-.968H6.87c-.31,0-.49-.062-.527-.12-.017-.027-.157-.285.076-1.147a9.473,9.473,0,0,1,.41-1.154" fill="none" clip-rule="evenodd"/>
+    </clipPath>
+  </defs>
+  <g id="Group_169" data-name="Group 169" transform="translate(-0.495 22.689)">
+    <g id="Group_164" data-name="Group 164" clip-path="url(#clip-path)">
+      <g id="Group_163" data-name="Group 163" clip-path="url(#clip-path-2)">
+        <path id="Path_602" data-name="Path 602" d="M1.026,4.081H13.905v-12.9H1.026Z" fill="#221f1f"/>
+      </g>
+    </g>
+    <g id="Group_166" data-name="Group 166" clip-path="url(#clip-path-3)">
+      <g id="Group_165" data-name="Group 165" clip-path="url(#clip-path-2)">
+        <path id="Path_605" data-name="Path 605" d="M13.465,4.081H26.344v-12.9H13.465Z" fill="#221f1f"/>
+      </g>
+    </g>
+    <g id="Group_168" data-name="Group 168" clip-path="url(#clip-path-5)">
+      <g id="Group_167" data-name="Group 167" clip-path="url(#clip-path-2)">
+        <path id="Path_608" data-name="Path 608" d="M-4.506.585H29.531V-27.689H-4.506Z" fill="#221f1f"/>
+      </g>
+    </g>
+  </g>
+</svg>

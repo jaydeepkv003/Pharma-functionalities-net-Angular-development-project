@@ -1,0 +1,23 @@
+<button type="button" class="float-right btn btn-close" aria-label="Close" (click)="activeModal.dismiss('close')">
+  <i class="material-icons material-icons-outlined">close</i>
+</button>
+<div class="modal-body">
+  <div class="title p-0 mb-2">
+    Download file
+  </div>
+  <p>
+    Below is a link to download your CQA/Cof A documents. If you have any trouble accessing that download, please
+    <a href="javascript:void(0)" routerLink="/contact-us" (click)="activeModal.close()">Contact us.</a>
+  </p>
+  <div class="row">
+    <div class="col-md-12 text-ellipsis">
+      <a [href]="zipUrl" target="_blank" class="with-icon nounderline" title="{{zipFileName}}">
+        <i class="material-icons material-icons">download</i>
+        {{zipFileName}}</a>
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer d-block clearfix">
+  <button type="button" class="btn btn-primary btn-sm pull-right" (click)="activeModal.close()">Close</button>
+</div>

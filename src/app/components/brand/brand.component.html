@@ -1,0 +1,48 @@
+<!-- Brand Info -->
+<div class="d-none">
+  <div data-elastic-name="page_type" data-swiftype-name="PAGE_TYPE" data-swiftype-type="string">{{PAGE_TYPE.CMS_PAGES}}</div>
+  <div data-elastic-name="type" data-swiftype-name="TYPE" data-swiftype-type="string">{{templateName}}</div>
+  <div data-elastic-name="page_title" data-swiftype-name="page_title" data-swiftype-type="string" *scText="contextFields?.header"></div>
+  <div data-elastic-name="description" data-swiftype-name="description" data-swiftype-type="text" *scRichText="contextFields?.pageDescription"></div>
+</div>
+<div class="brand">
+
+  <div class="container-fluid px-0" *ngIf="contextFields?.topBannerImg['value']['src']">
+    <div class="position-relative">
+      <div class="w-100">
+        <img class="top-banner" *scImage="contextFields.topBannerImg" />
+      </div>
+      <div class="container wrapper">
+        <h1 class="title-left">
+          <div *scRichText="contextFields.header"></div>
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="title pt-55" *ngIf="!contextFields?.topBannerImg['value']['src']">
+      <div class="header" *scRichText="contextFields.header"></div>
+    </h1>
+
+    <div class="row">
+      <div class="col-md-8 pt-55">
+        <h5 *scRichText="contextFields.subHeader"></h5>
+        <p *scRichText="contextFields.content"></p>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="brand-logo-container" *ngIf="contextFields.logo && contextFields.logo.value">
+          <img class="img-fluid" *scImage="contextFields.logo" />
+        </div>
+        <div class="product-photo-container" *ngIf="contextFields.productPhoto && contextFields.productPhoto.value">
+          <img class="product-photo" *scImage="contextFields.productPhoto" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p *scRichText="bannerImg" class="img-fluid"></p>
+      </div>
+    </div>
+  </div>
+</div>

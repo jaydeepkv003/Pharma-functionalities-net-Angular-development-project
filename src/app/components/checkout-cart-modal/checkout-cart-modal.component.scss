@@ -1,0 +1,38 @@
+.modal-body{
+    padding: 1.5rem;
+    position: unset;
+
+    .btn-add-to-cart {
+        background: none;
+        border: 1px solid #587dff;
+        color: #587dff;
+        margin: 4px 0px;
+        cursor: pointer;
+        &:hover {
+            background-color: #587dff;
+            color: #ffffff;
+        }
+    }
+    .collapsed {
+        max-height: 130px;
+        overflow: hidden;
+        -webkit-transition: max-height .5s ease-out;
+        -moz-transition: max-height .5s ease-out;
+        -o-transition: max-height .5s ease-out;
+        transition: max-height .5s ease-out;
+    }
+    .expand{
+        max-height: 100% !important;
+    }
+    .item-img {
+        min-width: 110px;
+        height: auto;
+        max-width: 100%;
+    }
+    .item-desc{
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 15px;
+        line-height: 1.2;
+    }
+}

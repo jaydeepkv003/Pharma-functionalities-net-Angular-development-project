@@ -1,0 +1,59 @@
+//
+.wrapper{
+  background-color:#F5F5F5;
+}
+.load-btn{
+  padding: 5px 36px;
+  border: 1px solid #587DFF;
+  margin: 0 auto 10px auto;
+  display: block;
+  background-color: whitesmoke;
+  font-family: roboto, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  color: #587DFF;
+}
+.press-grid{
+
+  .item{
+    background-color:#FFFFFF;
+    align-self: center;
+    height:100%;
+    &__content{
+      display:grid;
+      grid-template-columns:1fr 5fr;
+      grid-column-gap: 10px;
+      padding: 20px;
+
+      img{
+        padding: 10px;
+        border: 0.3px solid black;
+        max-width: 100px;
+      }
+      .text{
+        a{
+          text-decoration:none;
+          color:#57585A;
+        }
+        p{
+          margin:0;
+        }
+        .date{
+          
+          font-weight: 400;
+          font-style: normal;
+          font-size:16px;
+          margin-bottom: 5px;
+        }
+        .press-title{
+          
+          font-weight: 500;
+          font-style: normal;
+          font-size:22px;
+          line-height: 1.2;
+        }
+      }
+    }
+  }
+}

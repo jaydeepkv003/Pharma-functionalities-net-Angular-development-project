@@ -1,0 +1,54 @@
+  <!-- FAQ -->
+  <div class="faq-background">
+    <div class="faq-container">
+      <h5 class='title-questions'>Luna Questions <a id="searchQuestionsLink" href="#">Search All Questions ></a></h5>
+      <div class="faq-ctrls">
+        <div class="faq-ctrls__sort">Sort By: <span class="faq-ctrls__sort__filter">New Questions V</span></div>
+        <div class="faq-ctrls__search">
+          <input type="text" class="faq-ctrls__search__input" placeholder="Search Luna Questions">
+          <img class="faq-ctrls__search__icon" *scImage="rendering.fields.searchicon">
+        </div>
+        <button class="faq-ctrls__ask">Ask Question</button>
+      </div>
+      <div class="faq-body">
+        <div *ngFor="let listItem of contextFields.questionList; index as i" class="item">
+          <div (click)="toggleQuestion(key.featured, i)" class="item__question">
+            <div class="item__question__one">
+              <div class="item__question__one__toggle" *ngIf="featuredState[i].open == false">
+                <img class="item__question__one__toggle--image" *scImage="rendering.fields.minus"/>
+              </div>
+              <div class="item__question__one__toggle" *ngIf="featuredState[i].open">
+                <img class="item__question__one__toggle--image" *scImage="rendering.fields.plus">
+              </div>
+              <div class="item__question__one__text">
+                <p *scRichText="listItem.fields.questionstatement"></p>
+                <p class="item__question__one__text--date" *scDate="listItem.fields.askeddate"></p>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="featuredState[i].open" >
+              <div class="item__answer" *scRichText="listItem.fields.answer"></div>
+          </div>
+        </div>
+        <div *ngFor="let listItem of quesCollection ; index as i" class="item">
+          <div (click)="toggleQuestion(key.query, i)" class="item__question">
+            <div class="item__question__one">
+              <div class="item__question__one__toggle" *ngIf="queryState[i].open == false">
+                <img class="item__question__one__toggle--image" *scImage="rendering.fields.minus"/>
+              </div>
+              <div class="item__question__one__toggle" *ngIf="queryState[i].open">
+                <img *scImage="rendering.fields.plus">
+              </div>
+              <div class="item__question__one__text">
+                <p *scRichText="listItem.item.questionstatement"></p>
+                <p class="item__question__one__text--date" *scDate="listItem.item.askeddate"> </p>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="queryState[i].open" >
+              <div class="item__answer" *scRichText="listItem.item.answer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

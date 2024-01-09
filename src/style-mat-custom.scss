@@ -1,0 +1,190 @@
+@import "style-variables";
+
+.mat-radio-button,
+.mat-checkbox,
+.mat-select,
+.mat-expansion-panel-header, .mat-expansion-panel-content {
+  font-family: $font-family;
+  font: inherit;
+}
+.mat-select {
+  &.form-control-lg {
+    padding-top: 0.7em;
+  }
+}
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: $color-highlight;
+}
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: $color-highlight;
+}
+.mat-form-field.mat-focused .mat-form-field-ripple,
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  background-color: $color-highlight !important;
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: $color-highlight !important;
+}
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0.25em 0.5em 0 0.5em !important;
+  .mat-form-field-infix {
+    padding: 0.25em 0 0.5em 0;
+  }
+}
+.mat-checkbox-label {
+  white-space: normal !important;
+}
+
+.mat-custom {
+  top: -5px;
+  margin-left: 10px;
+  &.w-100p {
+    width: 100px;
+  }
+  &.w-140p {
+    width: 140px;
+  }
+  .mat-form-field-wrapper {
+    padding-bottom: 10px;
+  }
+  .mat-form-field-underline {
+    bottom: 10px;
+  }
+  &.mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 0.25em 0.5em 0 0.5em !important;
+    .mat-form-field-infix {
+      padding: 0.1em 0 0.1em 0;
+    }
+  }
+}
+
+.mat-accordion {
+  .mat-expansion-panel {
+    box-shadow: none;
+    &:last-of-type,
+    &:first-of-type {
+      border-radius: 0 !important;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+    &.mat-expanded {
+      .mat-expansion-indicator::after {
+        color: $color-highlight !important;
+      }
+    }
+  }
+}
+
+.custom-accordion {
+  .mat-expansion-panel {
+    background: #f2f5f9;
+    color: $font-color;
+    &:last-of-type,
+    &:first-of-type {
+      border-radius: 0 !important;
+      border-top: none;
+      border-bottom: none;
+    }
+    &.mat-expanded {
+      .mat-expansion-indicator::after {
+        color: $color-highlight !important;
+      }
+    }
+  }
+  &.rounded-bottom-lg {
+    .mat-expansion-panel {
+      background: #f6f8ff;
+      &:last-of-type {
+        border-radius: 0 !important;
+        border-bottom-left-radius: 0.75rem !important;
+        border-bottom-right-radius: 0.75rem !important;
+        border-top: none;
+        border-bottom: none;
+      }
+    }
+  }
+  .mat-expansion-panel-header {
+    padding: 0 10px;
+    .mat-expansion-panel-header-description,
+    .mat-expansion-panel-header-title {
+      margin-right: 0px;
+      color: $font-color;
+    }
+    .panel-title {
+      width: 100%;
+    }
+    &.mat-expanded:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+  }
+  .panel-card-container {
+    .panel-card {
+      padding: 15px;
+      margin: 0 15px 15px 15px;
+    }
+  }
+}
+
+.custom-accordion-2 {
+  padding-bottom: 20px;
+  .mat-expansion-panel {
+    background: #f2f5f9;
+    color: $font-color;
+    &:last-of-type,
+    &:first-of-type {
+      border-radius: 0 !important;
+      border-top: none;
+      border-bottom: none;
+    }
+    &.mat-expanded {
+      .mat-expansion-indicator::after {
+        color: $color-highlight !important;
+      }
+    }
+  }
+  &.rounded-bottom-lg {
+    .mat-expansion-panel {
+      background: #f6f8ff;
+      &:last-of-type {
+        border-radius: 0 !important;
+        border-bottom-left-radius: 0.75rem !important;
+        border-bottom-right-radius: 0.75rem !important;
+        border-top: none;
+        border-bottom: none;
+      }
+    }
+  }
+  .mat-expansion-panel-header {
+    padding: 0 10px;
+    border-bottom: 1px solid #aaaaaa;
+    font-weight: 700;
+    .mat-expansion-panel-header-description,
+    .mat-expansion-panel-header-title {
+      margin-right: 0px;
+      color: $font-color;
+    }
+    .panel-title {
+      width: 100%;
+    }
+    &.mat-expanded:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+  }
+  .panel-card-container {
+    .panel-card {
+      padding: 15px;
+      margin: 0 15px 15px 15px;
+    }
+  }
+}
+
+.mat-option {
+  line-height: initial !important;
+  white-space: initial !important;
+}

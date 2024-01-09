@@ -1,0 +1,36 @@
+
+  // //Links at bottom of page
+  // .link{
+  //   border-bottom: 1px solid #D0D1D3;
+  // }
+  // .link-title{
+  //   
+  //   font-weight: 500;
+  //   font-style: normal;
+  //   font-size: 40px;
+  //   padding: 40px 0;
+  // }
+
+  //Links at bottom of page
+  .link{
+    border-bottom: 1px solid #D0D1D3;
+  }
+
+  .link-title{
+    
+    font-weight: 500;
+    font-style: normal;
+    font-size: 40px;
+    padding: 40px 0;
+
+  a:link, a:visited {
+    text-decoration:none;
+    color:#000;
+    transition: all .2s linear;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color:#808080
+  }
+  }

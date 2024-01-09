@@ -1,0 +1,66 @@
+<div class="mb-3">
+  <ng-container *ngIf="sharedService.feature?.Quotes">
+    <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Enter Quote ID</mat-label>
+        <input matInput placeholder="Enter Quote ID" formControlName="QuoteNumber"
+               [ngClass]="{ 'is-invalid': quoteIdSubmitted && f.QuoteNumber.errors }">
+      </mat-form-field>
+      <button type="submit" class="btn btn-primary min-75 my-2 pull-right">ADD</button>
+      <div class="text-success" *ngIf="quoteSuccess === true">{{quoteNumberAdded}} has been added!</div>
+      <div class="with-icon text-danger" *ngIf="quoteSuccess === false">
+        <div class="mr-2">{{quoteError}}</div>
+        <i class="material-icons material-icons-outlined">warning</i>
+      </div>
+      <a routerLink="/dashboard/quotes" class="d-block" *ngIf="quoteSuccess === false || cartContent && cartContent.Parts.length == 0 && cartContent.Quotes.length == 0">View your quotes</a>
+    </form>
+  </ng-container>
+</div>
+
+
+<ng-container *ngIf="cartContent && (cartContent.Parts.length > 0 || cartContent.Quotes.length > 0)">
+  <div class="mb-3" >
+    <div class="clearfix mb-1 font-bold">
+      <div class="float-left">Subtotal: </div>
+      <div class="float-right" [ngClass]="{'strike-through': cartContent.TotalDiscountAmount && sharedService.feature.Promotions}"> {{cartContent.SubtotalAmount | currency}} </div>
+    </div>
+
+    <ng-container *ngIf="sharedService.feature.Promotions">
+      <ng-template #popContent>
+        <div class="text-left" *ngIf="activePromo">
+          <div class="font-semibold">{{activePromo.Name}}</div>
+          <div>Limit: {{activePromo.MaxQuantity}}</div>
+          <div>Expires: {{activePromo.EndDate | date}}</div>
+        </div>
+      </ng-template>
+
+      <div class="clearfix mb-1 font-bold" *ngIf="cartContent.TotalDiscountAmount">
+        <div class="float-right" placement="top"
+        [ngbPopover]="popContent"
+        triggers="mouseenter:mouseleave">
+          <a href="javascript:void(0)" class="text-decoration-none" >
+            <img class="promotion-icon align-text-top" src="/-/jssmedia/phrjss/data/media/images/promotion/offer_icon" />
+            {{cartContent.SubtotalAmount - cartContent.TotalDiscountAmount | currency}}
+          </a>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="clearfix mb-1 font-bold">
+      <div class="float-left">Shipping: </div>
+      <div class="float-right">TBD </div>
+    </div>
+    <div class="clearfix mb-1 font-bold border-bottom">
+      <div class="float-left">Tax: </div>
+      <div class="float-right">TBD </div>
+    </div>
+    <div class="clearfix mb-1 font-bold font-lg">
+      <div class="float-left">Total</div>
+      <div class="float-right">{{cartContent.TotalAmount | currency}}</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <button class="btn btn-blue w-100" routerLink="/checkout/orderdetails">Check Out</button>
+  </div>
+</ng-container>

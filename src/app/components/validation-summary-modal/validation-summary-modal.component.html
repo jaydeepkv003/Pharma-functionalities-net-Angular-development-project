@@ -1,0 +1,21 @@
+<button type="button" class="float-right btn btn-close p-2" aria-label="Close" (click)="activeModal.dismiss('close')">
+  <i class="material-icons material-icons-outlined">close</i>
+</button>
+<div class="modal-body">
+  <div class="d-flex title p-0 mb-3">{{header}}</div>
+  <div class="bg-white">
+    <h5>{{subHeader}}</h5>
+    <div class="my-3" *ngFor="let item of data">
+      <div class="font-weight-bold mb-1">{{item.groupName}}</div>
+      <ng-container *ngFor="let error of item.validations">
+        <ul class="mb-0">
+          <li class="error-message">{{error}}</li>
+        </ul>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary btn-sm" (click)="activeModal.dismiss()"> CLOSE
+  </button>
+</div>

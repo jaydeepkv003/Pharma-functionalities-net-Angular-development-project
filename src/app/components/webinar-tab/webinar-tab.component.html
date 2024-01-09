@@ -1,0 +1,98 @@
+<div class="container">
+  <h2 class="title pt-90">
+    <span>{{heading}} Webinars</span>
+    <div class="sub-title float-right">
+      <a [routerLink]="['/Webinars']">
+        <i class="material-icons search-all-icon">search</i>
+        Search All Webinars
+      </a>
+    </div>
+  </h2>
+
+  <div class="row pdf-thumb-container mt-3" *ngIf="featuredWebinars.length > 0">
+    <div *ngFor="let listItem of featuredWebinars; let i = index" class="col-md-4 text-center pointer"
+      [routerLink]="[listItem?.url]">
+      <div *ngIf="i < 3" class="border pl-3 pr-3 pb-3  pdf-thumb h-100">
+        <div class="" *ngIf="listItem?.coverphoto">
+          <img class="cover img-fluid mt-3" [src]="listItem?.coverphoto" />
+        </div>
+        <div class="font-bold-semi font-lg">{{listItem?.webinartitle}}</div>
+        <div class="font-xs"> {{listItem?.summary}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <div class="filters">
+      <mat-form-field appearance="fill" *ngIf="templateName !== TEMPLATE_NAME.Industry">
+        <mat-label>Industry</mat-label>
+        <mat-select [(ngModel)]="selectedIndustry" placeholder="Industry" (selectionChange)="filterTable()" [disabled]="masterCollection?._industriesCollection.length === 0">
+          <mat-option *ngFor="let listItem of masterCollection?._industriesCollection | orderBy:'item.DisplayName.value'"
+            [value]="listItem?.item?.id?.toLowerCase()">
+            {{listItem?.item?.DisplayName?.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" *ngIf="templateName !== TEMPLATE_NAME.Technique">
+        <mat-label>Techniques</mat-label>
+        <mat-select [(ngModel)]="selectedTechnique" placeholder="Techniques" (selectionChange)="filterTable()" [disabled]="masterCollection?._techniquesCollection.length === 0">
+          <mat-option *ngFor="let listItem of masterCollection?._techniquesCollection | orderBy:'item.DisplayName.value'"
+            [value]="listItem?.item?.id?.toLowerCase()">
+            {{listItem?.item?.DisplayName?.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" *ngIf="templateName !== TEMPLATE_NAME.Brand">
+        <mat-label>Brand</mat-label>
+        <mat-select [(ngModel)]="selectedBrand" placeholder="Brand" (selectionChange)="filterTable()" [disabled]="masterCollection?._brandsCollection.length === 0">
+          <mat-option *ngFor="let listItem of masterCollection?._brandsCollection | orderBy:'item.DisplayName.value'"
+            [value]="listItem?.item?.id?.toLowerCase()">
+            {{listItem?.item?.DisplayName?.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <div class="mb-3 clearfix">
+      <a class="clear-filter float-left" href="javascript:void(0);" (click)="clearFilter()">
+        <div class="with-icon">
+          <i class="material-icons material-icons-outlined">backspace</i>
+          Clear Filter
+        </div>
+      </a>
+      <div class="float-right" *ngIf="webinarsCollection?.length > 0">Showing 1-{{pageSize >= webinarsCollection.length ? webinarsCollection.length : pageSize}} of
+        {{webinarsCollection.length}} results</div>
+    </div>
+
+    <div class="pb-1">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th width="80%">Webinars Title<app-table-sort [sortArray]="webinarsCollection" [isreload]="isTitleReload"
+                [field]="'item.webinartitle.value'" (click)="ChangeIcon('')"></app-table-sort>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let listItem of webinarsCollection | slice:0:pageSize;">
+            <td><a [routerLink]="[listItem?.item?.url]" class="webinar-title">{{listItem?.item?.webinartitle?.value}}</a>
+            </td>
+          </tr>
+          <tr *ngIf="webinarsCollection.length === 0 && !isLoading">
+            <td colspan="2" class="text-center">No Data</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center my-4" *ngIf="webinarsCollection.length > pageSize">
+        <a href="javascript:void(0);" (click)="showMore()"
+          class="d-flex align-content-center justify-content-center text-decoration-none">
+          <span>Show More</span>
+          <i class="material-icons material-icons-rounded font-20">keyboard_arrow_down</i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

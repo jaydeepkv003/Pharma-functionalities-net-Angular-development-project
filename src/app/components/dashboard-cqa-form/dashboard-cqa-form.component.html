@@ -1,0 +1,44 @@
+<form class="w-100" [formGroup]="cqaForm" #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <div class="row position-relative">
+    <div class="col-4 mb-4"
+      [ngClass]="{'pr-7': i % 3 == 0, 'pl-7': (i+1) % 3 == 0, 'px-8': (i % 3 != 0 && (i+1) % 3 != 0)}"
+      formArrayName="parts" *ngFor="let f of partsForm; let i = index">
+      <div class="form-card" [formGroupName]="i" [ngClass]="{'invalid-request': alreadyExist.includes(i)}">
+        <mat-form-field appearance="outline" class="w-100 no-pad">
+          <mat-label>Part No.</mat-label>
+          <input matInput formControlName="PartNumber">
+        </mat-form-field>
+        <mat-error *ngIf="submitted && f.get('PartNumber')?.errors && f.get('PartNumber')?.errors?.required"
+          class="invalid-feedback">
+          Please enter Part No
+        </mat-error>
+        <mat-error *ngIf="wrongPart.includes(i)" class="invalid-feedback">
+          Not Valid
+        </mat-error>
+
+        <mat-form-field appearance="outline" class="w-100 no-pad mt-10">
+          <mat-label>{{type === 'LC/SPE' ? 'Serial No / Lot No.': 'Sorbent Lot No.'}}</mat-label>
+          <input matInput formControlName="Pointer">
+        </mat-form-field>
+        <mat-error *ngIf="submitted && f.get('Pointer')?.errors && f.get('Pointer')?.errors?.required"
+          class="invalid-feedback">
+          Please enter {{type === 'LC/SPE' ? 'Serial No / Lot No': 'Sorbent Lot No'}}
+        </mat-error>
+        <mat-error *ngIf="wrongPointer.includes(i)" class="invalid-feedback">
+          Not Valid
+        </mat-error>
+      </div>
+      <p class="error-msg" *ngIf="alreadyExist.includes(i)">Already Requested</p>
+    </div>
+    <div class="col-4">
+      <div class="add-another">
+        <button type="button" (click)="addItem()" class="btn btn-link d-flex p-0" *ngIf="!parts || parts.length < 6"
+          [disabled]="!cqaForm.valid">
+          <i class="material-icons material-icons-outlined mr-1">add</i>
+          Add Another
+        </button>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-blue access-btn">ACCESS NOW</button>
+  </div>
+</form>

@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="description">Access your product's <span class="text-bottom-border" placement="top"
+      ngbPopover="Certificate of Quality Assurance shows your column performance results"
+      triggers="mouseenter:mouseleave">CQA</span>
+    and batch <span class="text-bottom-border" placement="top"
+      ngbPopover="Certificate of Analysis shows your batch performance results"
+      triggers="mouseenter:mouseleave">CofA</span>
+    <span *ngIf="authService.hasValidToken()"> and all <span class="text-bottom-border" placement="top"
+        ngbPopover="HPLC Column Care and Use Guides" triggers="mouseenter:mouseleave">supporting documents</span>
+    </span>
+    by entering serial number below:
+  </div>
+  <app-dashboard-cqa-form [type]="'LC/SPE'" *ngIf="!sharedService.feature.CQA_CofA"></app-dashboard-cqa-form>
+  <app-dashboard-cqa-request-form [type]="'LC/SPE'" *ngIf="sharedService.feature.CQA_CofA">
+  </app-dashboard-cqa-request-form>
+</div>
+
+<div class="container history-container"
+  *ngIf="cqaService?.certificateHistory?.Results && cqaService?.certificateHistory?.Results?.length">
+  <div class="row">
+    <div class="col-md-8 py-2 font-semibold">
+      Download History
+    </div>
+    <div class="col-md-4">
+      <div class="pull-right with-icon">
+        <a href="javascript:(0)" (click)="cqaService.getCertificateHistory(true)" class="py-2 font-sm">
+          <i class="material-icons">autorenew</i>REFRESH</a>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngFor="let item of cqaService.certificateHistory.Results">
+    <div class="bg-white mb-3 rounded-top-lg rounded-bottom-lg">
+      <div class="row p-3 font-sm">
+        <div class="col-md-12 mb-1">
+          <div>Requested: {{item?.CertificateRequest?.RequestedDate | date: 'longDate'}}</div>
+        </div>
+        <div class="col-md-9">
+          <div>
+            <span class="font-semibold mr-40">
+              Part No.: <a href="javascript:void(0)" *ngIf="item?.Part?.PartNumber"
+                (click)="cqaService.gotoPart(item?.Part?.PartNumber)">{{item?.Part?.PartNumber}}</a>
+              <i *ngIf="!item?.Part?.PartNumber">N/A</i>
+            </span>
+            <span class="font-semibold">
+              <span *ngIf="!item?.CertificateRequest?.COfASorbent">Serial No.:</span>
+              <span *ngIf="item?.CertificateRequest?.COfASorbent">Sorbent lot No.: </span>
+              {{item?.CertificateRequest?.Pointer}}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-3" *ngIf="item.CertificateRequest?.CofA?.DocumentUrl">
+          <a [href]="item?.CertificateRequest?.CofA?.DocumentUrl" target="_blank" class="with-icon">
+            <span class="material-icons">
+              file_download
+            </span>Batch CofA</a>
+        </div>
+        <div class="col-md-9">
+          <div>
+            {{item?.Part?.Description}}
+          </div>
+        </div>
+        <div class="col-md-3" *ngIf="item?.CertificateRequest?.CQA?.DocumentUrl">
+          <a [href]="item?.CertificateRequest?.CQA?.DocumentUrl" target="_blank" class="with-icon">
+            <span class="material-icons">
+              file_download
+            </span>Column CQA</a>
+        </div>
+        <div class="col-md-12" *ngIf="!item?.Part?.PartNumber || item?.CertificateRequest?.Status === 'Failed'">
+          <span *ngIf="item?.CertificateRequest?.Status === 'Failed'">Failed to process the request. <a
+              href="javascript:void(0)" OpenChat> Click here </a> to contact customer support.</span>
+          <span *ngIf="item?.CertificateRequest?.Status !== 'Failed' && !item?.Part?.PartNumber">The associated Part
+            Number cannot be identified.
+            For additional supporting documentation please go to the
+            <a href="javascript:void(0)" [routerLink]="['/Documents/Library']"> Document Library </a>.</span>
+        </div>
+      </div>
+
+      <div class="custom-accordion rounded-bottom-lg" *ngIf="item?.Part?.PartNumber">
+        <!-- Accordion for supporting documents -->
+        <mat-accordion [multi]="false">
+          <mat-expansion-panel (opened)="cqaService.getSupptingDocs(item);">
+            <mat-expansion-panel-header class="px-15" [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
+              <mat-panel-title>
+                <div class="panel-title">
+                  <span class="supportingDoc">Supporting Documents</span>
+                </div>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-container *ngIf="item?.IsLoaded">
+              <mat-accordion multi *ngIf="item?.DocCollection.length > 0">
+                <mat-expansion-panel class="bg-transparent docBorder my-0" *ngFor="let doc of item?.DocCollection"
+                  hideToggle="true" (opened)="doc.isExpanded = true" (closed)="doc.isExpanded = false">
+                  <mat-expansion-panel-header class="p-0" [expandedHeight]="'48px'">
+                    <mat-panel-title class="m-0">
+                      <div class="panel-title w-100">
+                        <div class="col-11 p-0 with-icon">
+                          <span class="material-icons material-icons-rounded icon-font-lg"
+                            [ngClass]="doc?.isExpanded ? 'expanded' : 'collapsed'">
+                            {{doc?.isExpanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+                          </span>
+                          <a [href]="doc?.url" target="_blank" class="with-icon nounderline">{{doc?.title}}</a>
+                        </div>
+                        <div class="col-1 p-0 float-right mt-1">
+                          <a href="javascript:void(0)" (click)="cqaService.addToFavorite(doc)"
+                            class="float-right with-icon nounderline" title="Add to favorites">
+                            <span class="material-icons pointer font-20">favorite_border</span>
+                          </a>
+                        </div>
+                      </div>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="docDesc">{{doc?.description}}</div>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <div class="text-center" *ngIf="!item?.DocCollection?.length">
+                <div class="border nodata">
+                  The associated Part Number cannot be identified.
+                  For additional supporting documentation please go to the
+                  <a href="javascript:void(0)" [routerLink]="['/Documents/Library']"> Document Library </a>.
+                </div>
+              </div>
+            </ng-container>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+    </div>
+
+  </ng-container>
+
+  <div class="m-4 font-sm" *ngIf="cqaService.certificateHistory?.Count > cqaService.pageSize">
+    <a href="javascript:void(0);" (click)="cqaService.showMoreSimilarApplication()"
+      class="d-flex align-content-center justify-content-center text-decoration-none">
+      <span>Show More</span>
+      <i class="material-icons material-icons-rounded font-20">keyboard_arrow_down</i>
+    </a>
+  </div>
+</div>

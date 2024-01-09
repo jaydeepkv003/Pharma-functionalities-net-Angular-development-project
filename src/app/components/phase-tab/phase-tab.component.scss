@@ -1,0 +1,105 @@
+@import "../../../style-variables";
+
+.expand-control{
+  .heading{
+    padding:5px 0 5px 0;
+    .heading-text{
+      font-family: roboto, sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      display:inline-block;
+      margin:0;
+      padding: 0px 0 0 5px;
+      vertical-align: middle;
+    }
+  }
+}
+
+.cell-image{
+  img{
+    max-height: 50px;
+  }
+}
+
+.line-height {
+  line-height: 1.4;
+}
+
+.expansion-panel {
+  background-color: transparent;
+  border-bottom: none !important;
+  border-top: 1px solid #70707078 !important;
+
+  .expansion-header {
+    padding:0px 12px 0px 0px;
+    &:hover {
+      background: #0000000D !important;
+
+    }
+    .expansion-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #57585A;
+    }
+  }
+  .phase-card {
+    display: flex;
+    background-color: white;
+    font-family: $font-family;
+    border: 1px solid #70707080;
+    margin-bottom: 0px;
+    height: 100%;
+    &.left {
+      margin-right: 20px;
+      box-shadow: 0px 3px 6px #00000029;
+    }
+    &.right {
+      margin-left: 20px;
+    }
+
+    &:hover {
+      border: 2px solid $color-highlight !important;
+      box-shadow: 0px 6px 12px #0000004D;
+
+      cursor: pointer;
+    }
+    .phase-title {
+      width: 35%;
+      .heading-text {
+        font-size: 16px;
+        padding: 10px 8px;
+        font-weight: 600;
+        color: #3A4355;
+        background: #00294814;
+      }
+      .phase-img {
+        display: flex;
+        align-items: center;
+        height: calc(100% - 40px);
+      }
+    }
+    .phase-content {
+      width: 65%;
+      padding: 10px 0px 8px 0px;
+      .px-10 {
+        padding-left: 10px;
+        padding-right: 8px;
+      }
+      .font-xs {
+        font-size: 12px;
+      }
+      .content-border {
+        border-bottom: 1px solid #70707078;
+      }
+    }
+  }
+
+  .phase-card-space {
+    margin-bottom: 40px;
+  }
+}
+
+:host ::ng-deep .mat-expansion-panel-body {
+  padding: 18px 8px 0px 4px;
+}

@@ -1,0 +1,39 @@
+<!-- <div class="backdrop" *ngIf="showSearchPop"></div> -->
+
+<div class="search-container input-group">
+  <div (click)="showSearch()" class="w-100">
+    <span class="input-group-addon">
+      <i class="material-icons material-icons-outlined pointer" (click)="search()">search</i>
+    </span>
+    <input class="form-control" placeholder="Search by Part No., Product, Application, or Keyword" type="text"
+      [(ngModel)]="searchStr" (keydown.enter)="onKeydown($event)" (keyup.enter)="search()">
+  </div>
+
+  <div class="search-pop-container" *ngIf="showSearchPop">
+    <div class="pop-header">
+      <textarea class="form-control w-100 px-3 pr-5" placeholder="Search by Part No., Product, Application, or Keyword"
+        [(ngModel)]="searchStr" (keydown.enter)="onKeydown($event)" (keyup.enter)="search()"
+        oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' #searchElement></textarea>
+      <span class="input-group-addon left pointer" (click)="search()">
+        <i class="material-icons material-icons-outlined">search</i>
+      </span>
+      <span class="input-group-addon right pointer" *ngIf="searchStr" (click)="clearSearch()">
+        <i class="material-icons material-icons-outlined">close</i>
+      </span>
+    </div>
+    <div class="pop-body" *ngIf="searchStr.trim()">
+      <ul class="list-group">
+        <li class="list-group-item" [routerLink]="['/applications']" [queryParams]="{search: searchStr}">
+          <b>{{searchStr}}</b> in
+          Application Search
+        </li>
+      </ul>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let item of topLevelFacets" (click)="search(item)"><b>{{searchStr}}</b> in
+          {{item.displayLabel}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="backdrop" *ngIf="showSearchPop" (click)="hideSearch()">
+</div>

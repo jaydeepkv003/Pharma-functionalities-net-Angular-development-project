@@ -1,0 +1,59 @@
+<!-- Application Finder Widget -->
+<div class="apps-wrapper">
+    <div class="apps-container">
+      <h5 class="title-apps">Luna Applications <a id="searchAppsLink" href="#">Search All Applications ></a></h5>
+      <div class="apps-ctrls">
+        <div class="apps-ctrls__sort">
+          <div class="apps-ctrls__sort__left">
+            <p class="apps-ctrls__sort__left--filter">Sort By</p>
+            <p class="apps-ctrls__sort__left--target">Analyte</p>
+          </div>
+          <div class="apps-ctrls__sort__right">
+            <img *scImage="rendering.fields.downarrow">
+          </div>
+        </div>
+        <div class="apps-ctrls__sort">
+          <div class="apps-ctrls__sort__left">
+            <p class="apps-ctrls__sort__left--filter">Sample Class</p>
+            <p class="apps-ctrls__sort__left--target">Opiates</p>
+          </div>
+          <div class="apps-ctrls__sort__right">
+            <img *scImage="rendering.fields.downarrow">
+          </div>
+        </div>
+        <div class="apps-ctrls__sort">
+          <div class="apps-ctrls__sort__left">
+            <p class="apps-ctrls__sort__left--filter">Sample Type</p>
+            <p class="apps-ctrls__sort__left--target">Plasma</p>
+          </div>
+          <div class="apps-ctrls__sort__right">
+            <img *scImage="rendering.fields.downarrow">
+          </div>
+        </div>
+        <div class="apps-ctrls__sort">
+          <div class="apps-ctrls__sort__left">
+            <p class="apps-ctrls__sort__left--filter">Technique</p>
+            <p class="apps-ctrls__sort__left--target">LC-MS</p>
+          </div>
+          <div class="apps-ctrls__sort__right">
+            <img *scImage="rendering.fields.downarrow">
+          </div>
+        </div>
+        <div class="apps-ctrls__search">
+          <input type="text" class="apps-ctrls__search__input" placeholder="Search Luna Documents">
+          <img class="apps-ctrls__search__icon" *scImage="rendering.fields.searchicon">
+        </div>
+      </div>
+      <div class="apps-grid">
+        <div class="apps-grid__item" *ngFor="let listItem of contextFields.applicationList">
+          <img class="apps-grid__item--thumbnail" *scImage="listItem.fields.graphimage" />
+          <p class="apps-grid__item--title" *scText="listItem.fields.heading"></p>
+          <div class="apps-grid__item__actions">
+            <button class="apps-grid__item__actions--save">Save</button>
+            <button class="apps-grid__item__actions--share">Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

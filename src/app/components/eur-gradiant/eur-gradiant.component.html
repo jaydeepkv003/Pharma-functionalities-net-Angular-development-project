@@ -1,0 +1,236 @@
+<div class="wrapper mt-5">
+  <div class="container">
+    <div>
+      <h3>Ph. Eur. 2.2.46. Allowable Adjustments of Chromatographic Conditions – Gradient Elution</h3>
+
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th width="25%" style="vertical-align: middle;">Component</th>
+            <th width="17%" style="vertical-align: middle;">As per Ph. Eur. monograph</th>
+            <th width="17%" style="vertical-align: middle;">Adjustable from</th>
+            <th width="16%" style="vertical-align: middle;">Adjustable to</th>
+            <th width="25%" style="vertical-align: middle;">Limit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle;">Composition of the Mobile Phase + Gradient</td>
+            <td colspan="4">
+              <p class="event_desc" align="left">Minor adjustments of the composition of the mobile phase and the
+                gradient are acceptable,
+                if the system suitability requirements are met, the principle peak(s) elute(s) within ± 15 % of the
+                indicated retention time(s) and the final elution power of the mobile phase is not weaker.</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle;">Mobile Phase pH</td>
+            <td colspan="4">
+              <p class="event_desc" align="center">No adjustment permitted</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle;">Buffer Concentration (mM)</td>
+            <td colspan="4">
+              <p class="event_desc" align="center">No adjustment permitted</p>
+            </td>
+          </tr>
+          <tr>
+            <td>Column Temperature (°C)</td>
+            <td>
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="columnTempA">
+              <span style="color: #f00;">{{columnTempAV()}}</span>
+            <td>{{getDecimalValue(columnTempAF().toFixed(2))}}</td>
+            <td>{{getDecimalValue(columnTempAT().toFixed(2))}}</td>
+            <td>±5°C</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle;">Flow Rate (mL/min)</td>
+            <td colspan="4">
+              <p class="event_desc" align="center">Adjustment is permitted to maintain linear velocity when changing
+                column dimensions</p>
+            </td>
+          </tr>
+          <tr>
+            <td>Column Length (mm)</td>
+            <td>
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="colLengthA">
+              <span style="color: #f00;">{{colLengthAV()}}</span>
+            </td>
+            <td>{{getDecimalValue(colLengthAF().toFixed(2))}}</td>
+            <td>{{getDecimalValue(colLengthAT().toFixed(2))}}</td>
+            <td>±70%</td>
+          </tr>
+          <tr>
+            <td>Column Inner Diameter (mm)</td>
+            <td>
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="ColInnerDiaA">
+              <span style="color: #f00;">{{ColInnerDiaAV()}}</span>
+            </td>
+            <td>{{getDecimalValue(ColInnerDiaAF().toFixed(2))}}</td>
+            <td>{{getDecimalValue(ColInnerDiaAT().toFixed(2))}}</td>
+            <td>±25%</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle;">Particle Size (µm)</td>
+            <td colspan="4">
+              <p class="event_desc" align="center">No change permitted.</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle;">Stationary Phase</td>
+            <td colspan="4">
+              <p class="event_desc" align="center">No change of the identity of the substituent permitted.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-striped table-bordered">
+        <tbody>
+          <tr>
+            <td width="29%"></td>
+            <td width="17%"><b>Column dimension as per EP</b></td>
+            <td width="17%"><b>Desired Column Dimensions</b></td>
+            <td width="41%" colspan="2"></td>
+          </tr>
+          <tr>
+            <td width="29%">Column Length (mm)</td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="columnLengthAF"
+                (ngModelChange)="checkDesiredLength()">
+              <span style="color: #f00;">{{columnLengthAFV()}}</span>
+            </td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="columnLengthAT"
+                (ngModelChange)="checkDesiredLength()">
+              <span style="color: #f00;">{{columnLengthATV()}}</span>
+            </td>
+            <td width="41%" colspan="2" id="tdcolumnLengthValidation" style="color: green; font-weight: bold;">Can be
+              used.</td>
+          </tr>
+          <tr>
+            <td width="29%">Column Inner Diameter (mm)</td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="columnDiameterAF"
+                (ngModelChange)="checkDesiredDiameter()">
+              <span style="color: #f00;">{{columnDiameterAFV()}}</span>
+            </td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="columnDiameterAT"
+                (ngModelChange)="checkDesiredDiameter()">
+              <span style="color: #f00;">{{columnDiameterATV()}}</span>
+            </td>
+            <td width="41%" colspan="2" id="tdcolumnDiameterValidation" style="color: green; font-weight: bold;">Can be
+              used.</td>
+          </tr>
+          <tr>
+            <td width="29%">Particle Size (µm)</td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="particleSizeAF">
+              <span style="color: #f00;">{{particleSizeAFV()}}</span>
+            </td>
+            <td width="17%">{{particleSizeAT().toFixed(2)}}</td>
+            <td width="41%" colspan="2">No Change in partcile size is recommended if there is a change in column length
+              and/or column inner diameter</td>
+
+          </tr>
+          <tr>
+            <td colspan="5"></td>
+          </tr>
+          <tr>
+            <td width="29%">Flow Rate As per Ph. Eur. Monograph (mL/min)</td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="pheurMonographAF">
+              <span style="color: #f00;">{{pheurMonographAFV()}}</span>
+            </td>
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td colspan="5"></td>
+          </tr>
+          <tr>
+            <td width="29%">Recommended Flow Rate To Maintain Linear Velocity (mL/min)</td>
+            <td width="17%">{{getDecimalValue(flowRateVelF().toFixed(2))}}</td>
+            <td colspan="3">
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <table class="table table-striped table-bordered">
+        <tbody>
+          <tr>
+            <td colspan="5">
+              <p class="event_desc" align="center"><b>Choose pharma columns for your analysis</b></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">Selection by :</td>
+            <td width="40%">
+              <div class="inline">
+                <input type="radio" name="RequirementsExist" value="Description" [(ngModel)]="RequirementsExist">
+                &nbsp;Description
+              </div>
+            </td>
+            <td width="40%" colspan="2">
+              <div class="inline">
+                <input type="radio" name="RequirementsExist" value="Number" [(ngModel)]="RequirementsExist">
+                &nbsp;Number
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td width="15%"></td>
+            <td width="40%">
+              Description according to Pharm. Eur. 10, 4.1.1 Reagents 2020
+            </td>
+            <td width="10%">Number</td>
+            <td width="35%" colspan="2">
+              Recommended pharma Column
+            </td>
+          </tr>
+          <tr>
+            <td width="15%">Choose Ph. Eur column listing</td>
+            <ng-container *ngIf="RequirementsExist == 'Description'">
+              <td width="40%">
+                <mat-select class="form-control" [(ngModel)]="selectedClass" style="width:90%">
+                  <mat-option value="">Choose...</mat-option>
+                  <mat-option *ngFor="let item of PhEurToolDescription" [value]="item">{{item.Description}}</mat-option>
+                </mat-select><br>
+                <p><b>Selected Value: </b> </p>
+                <span>{{selectedClass?.Description}}</span>
+              </td>
+              <td width="10%"> {{selectedClass?.Number}}</td>
+            </ng-container>
+            <ng-container *ngIf="RequirementsExist == 'Number'">
+              <td width="15%">{{selectedClass?.Description}}</td>
+              <td width="20%">
+                <mat-select class="form-control" [(ngModel)]="selectedClass" style="width:90%">
+                  <mat-option value="">Choose...</mat-option>
+                  <mat-option *ngFor="let item of PhEurToolNumber" [value]="item">{{item.Number}}</mat-option>
+                </mat-select>
+              </td>
+            </ng-container>
+            <td width="35%" colspan="2">
+              <ul *ngIf="selectedClass?.Recommendation">
+                <li *ngFor="let item of selectedClass?.Recommendation">
+                  <a [href]="item.Value" target="_blank">{{item.Key}}</a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+.create-link {
+  .material-icons {
+    font-size: 24px;
+  }
+}
+
+.border {
+  border-color: #969696 !important;
+}
+
+.attention {
+  border-width: 2px;
+  font-weight: bold;
+}
+
+.multiline-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+
+  .mat-radio-button {
+    margin: 5px;
+  }
+}
+
+.autocomplete-dropdown {
+  font-size: 23px;
+  position: absolute;
+  top: 12px;
+  right: 30px;
+  color: rgba(0,0,0,.54);
+  cursor: pointer;
+
+  &.err {
+    right: 48px !important;
+    color: #f55e53;
+  }
+}
+.alert-warning{
+  color: #fff;
+  background-color: #f2c94c;
+}
+
+@keyframes append-animate{
+  from{
+    transform: translateY(-50%);
+  }
+  to{
+    transform: translateY(0);
+  }
+}
+
+.contact-emails-container{
+  animation: append-animate 0.3s ease-out;
+}
+
+.delivery-type-card {
+  width: 230px !important;
+  color: #3E3E3E;
+  margin-right: 24px;
+  padding: 10px 16px;
+}
+
+.card-init {
+  border: 1px solid #C6C9D0;
+  border-radius: 10px;
+  &:hover {
+    border: 1px solid #587DFF;
+    cursor: pointer;
+  }
+}
+
+.card-selected {
+  box-shadow: 0px 3px 6px #00000029;
+  border: 2px solid #587DFF;
+  border-radius: 10px;
+  &:hover {
+    border: 2px solid #587DFF;
+    cursor: default;
+  }
+}
+
+.delivery-method-card {
+  padding: 14px 16px;
+  color: #3E3E3E;
+  width: 200px;
+}
+
+.payment-info-card {
+  padding: 14px 20px;
+  width: 436px;
+}
+
+.payment-card-field {
+  width: 345px;
+}
+
+.credit-card-form {
+  width: 790px;
+}

@@ -1,0 +1,58 @@
+<ng-container *ngIf="sharedService.feature.Promotions && cartItemCount != 0">
+  <app-checkout-order-promo *ngIf="cartContent && cartContent.Promotions && cartContent.Promotions.length"
+    [activePromo]="activePromo" [cartContent]="cartContent"></app-checkout-order-promo>
+</ng-container>
+<app-checkout-breadcrumb *ngIf="cartItemCount > 0"></app-checkout-breadcrumb>
+<div class="container" *ngIf="cartContent">
+  <h1 class="title">
+    Here&rsquo;s What&rsquo;s in Your Cart
+    <span class="sub-text" [class.success-transition]="loaded"
+      *ngIf="cartItemCount > 0 || cartContent.Quotes.length > 0">
+      ( <span *ngIf="cartItemCount > 0">{{cartItemCount}} items</span> <span *ngIf="cartContent.Quotes.length > 0">
+        {{cartContent.Quotes.length}} quotes</span> )
+    </span>
+    <span class="no-items" [class.success-transition]="loaded"
+      *ngIf="cartItemCount == 0 && cartContent.Quotes.length == 0">
+      (0 items)
+    </span>
+  </h1>
+
+  <div class="row">
+
+    <div class="mx-3 alert alert-warning alert-dismissible fade show" role="alert"
+      *ngIf="sharedService.showOutsideNAMWarning">
+      Thank you for visiting pharma.com. Due to geographic restrictions, we cannot process credit cards from your
+      country of origin. To order please call pharma at (310) 212-0555 or contact us directly at
+      https://www.pharma.com/Contact-Us.
+      <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="showOutsideNAMWarning=false">
+        <span aria-hidden="true">&times;</span>
+      </button> -->
+    </div>
+
+    <div class="col-md-9">
+      <app-checkout-cart-content [cartContent]="cartContent" [appliedItemLevelPromo]="applieditemlevelPromo"
+        (updateQtyParams)="updateQuantity($event)" (addRecommandedPartToCart)="addRecommandedPartToCart($event)"
+        (removeItem)="removeItem($event)">
+      </app-checkout-cart-content>
+      <!-- <phr-buy-again></phr-buy-again>
+    <phr-quote-order></phr-quote-order>
+    <phr-virtual-stockroom-list></phr-virtual-stockroom-list> -->
+    </div>
+    <div class="col-md-3">
+      <!-- <div class="promo">
+        <input class="promo--input" type="text" placeholder="Enter Promo">
+        <button class="promo--button">Enter</button>
+      </div> -->
+
+      <app-checkout-cart-totals [cartContent]="cartContent" [activePromo]="activePromo" [quoteSuccess]="quoteSuccess"
+        [quoteError]="quoteError" (addQuoteToCart)="addQuoteToCart($event)"></app-checkout-cart-totals>
+      <!-- <phr-cart-actions></phr-cart-actions> -->
+    </div>
+  </div>
+
+
+  <div class="my-4">
+    <span class="mr-1">Need Help with your order?</span>
+    <a href="https://discover.pharma.com/chat" target="_blank">Chat with us</a>
+  </div>
+</div>

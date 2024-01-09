@@ -1,0 +1,73 @@
+{
+  item(path: "/sitecore/content/Sandbox/phrjss/Content/Primary Menu") {
+    children {
+      ... on PrimaryMenuReferenceTemplate {
+        id
+        title {
+          value
+        }
+        orderNumber {
+          value
+        }
+        children {
+          ... on PrimaryMenuReferenceTemplate {
+            id
+            title {
+              value
+            }
+            targetlink {
+              url
+              text
+              target
+              linkType
+            }
+            orderNumber {
+              value
+            }
+            children {
+              ... on PrimaryMenuReferenceTemplate {
+                id
+                title {
+                  value
+                }
+                targetlink {
+                  url
+                  text
+                  target
+                  linkType
+                }
+                orderNumber {
+                  value
+                }
+                children {
+                  ... on PrimaryMenuReferenceTemplate {
+                    id
+                    title {
+                      value
+                    }
+                    targetlink {
+                      url
+                      text
+                      target
+                      linkType
+                    }
+                    orderNumber {
+                      value
+                    }
+                    relatedImage {
+                      src
+                      alt
+                    }
+                    relatedImageText {
+                      value
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.pdf-thumb-container {
+  margin-bottom: 30px;
+  .pdf-thumb {
+    &:hover {
+      background-color: white;
+      border: 1px solid #587dff !important;
+    }
+    .pdf-height {
+      max-height: 300px;
+      overflow: hidden;
+    }
+  }
+}
+.webinar-title{
+  text-decoration: none;
+  font-weight: 400;
+}
+.font-bold-semi{
+  line-height: 1.2;
+  margin-top: 10px;
+}

@@ -1,0 +1,10 @@
+<div class="modal-body p-0">
+  <div class="banner-header">
+    <button type="button" class="btn" aria-label="Close" (click)="activeModal.dismiss('closeClick')">
+      <i class="material-icons material-icons-outlined text-white">close</i>
+    </button>
+  </div>
+
+  <div class="banner-content" *scRichText="rendering.fields.bannerContent"></div>
+
+</div>

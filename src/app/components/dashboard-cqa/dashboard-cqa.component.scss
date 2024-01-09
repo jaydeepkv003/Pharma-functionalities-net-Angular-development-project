@@ -1,0 +1,44 @@
+.tabs-control {
+  padding-top: 14px;
+
+  .tabs-section {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: left;
+
+    font-weight: 500;
+    font-style: normal;
+
+    li {
+      // float: left;
+      padding: 0px 20px 0 0;
+    }
+
+    a {
+      border-bottom: 3px solid transparent;
+      padding: 0 5px;
+      font-size: 13px;
+      text-transform: uppercase;
+      color: #587dff;
+    }
+
+    li a:hover {
+      color: #587dff;
+      border-bottom: 3px solid #587dff;
+    }
+
+    .active {
+      color: #587dff;
+      border-bottom: 3px solid #587dff;
+    }
+  }
+
+  .tab-content-section {
+    border-top: 1px solid #aaaaaa;
+    background-color: #f2f5f9;
+    min-height: 350px;
+  }
+}

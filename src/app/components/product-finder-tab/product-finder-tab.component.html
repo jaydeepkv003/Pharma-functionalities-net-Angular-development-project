@@ -1,0 +1,109 @@
+<div class="container">
+  <h2 class="title pt-90">
+    <span *scText="rendering.fields.title"></span>
+  </h2>
+  <p class="font-weight-bold">Select your ideal {{heading}} phase based on type of separation or workflow</p>
+</div>
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="tabs-control">
+      <ul class="tabs-section">
+        <li *ngFor="let tab of tabs; let index = index" [ngClass]="{'active': tab === activeTab }"
+          (click)="selectTab(index)">
+          <a class="nav-link">
+            <span *scText="tab.heading"></span>
+          </a>
+        </li>
+      </ul>
+      <div *ngFor="let tab of tabs; let i = index" class="tab-content-section"  [class.position-relative]="tab === activeTab && selectedIndex === cindex" [ngClass]="tab.state">
+        <ng-container *ngFor="let section of tab.children">
+          <div class="row mb-2" *ngIf="section.cardType.value !== 'V4'">
+            <ng-container *ngIf="section.cardType.value !== 'V3'">
+              <span class="col-12 mt-2 card-group-header" *scRichText="section.heading"></span>
+            </ng-container>
+            <div class="col-sm-6 mt-2" *ngFor="let c of section.children">
+              <div class="section-container">
+                <div class="section-header">
+                  <span *ngIf="!c.subSectionLink || !c.subSectionLink.url">{{c.subSectionText.value}}</span>
+                  <a href="javascript:void(0)" *ngIf="c.subSectionLink && c.subSectionLink.url"
+                    [genericLink]="c.subSectionLink">
+                    <span>{{c.subSectionText.value}}</span>
+                  </a>
+                  <span *ngIf="section.cardType.value === 'V3'">{{section.heading.value}}</span>
+                </div>
+                <div class="section-content line-v1">
+                  <div class="highlight-section"
+                    *ngIf="section.cardType.value === 'V1' || section.cardType.value === 'V3'">
+                    <a href="javascript:void(0)" [genericLink]="c.moduleLink1"> <span>{{c.moduleName1.value}}</span>
+                    </a><br>
+                    {{c.moduleDescription1.value}}
+                    <div class="mb-2" *ngIf="section.cardType.value === 'V3'"></div>
+                    <a href="javascript:void(0)" [genericLink]="c.moduleLink2"> <span>{{c.moduleName2.value}}</span>
+                    </a><br>
+                    {{c.moduleDescription2.value}}
+                    <hr>
+                  </div>
+                  <div class="document-section">
+                    <div class="header mb-3" [ngClass]="{'mt-1': section.cardType.value === 'V2'}">
+                      {{c.technicalDocumentHeading.value}}
+                    </div>
+                    <a href="javascript:void(0)" [genericLink]="c.techDoc1Link">
+                      <p>{{c.techDoc1Text.value}}</p>
+                    </a>
+                    <a href="javascript:void(0)" [genericLink]="c.techDoc2Link">
+                      <p> {{c.techDoc2Text.value}} </p>
+                    </a>
+                    <a href="javascript:void(0)" [genericLink]="c.techDoc3Link">
+                      <p>{{c.techDoc3Text.value}}</p>
+                    </a>
+                    <a href="javascript:void(0)" [genericLink]="c.techDoc4Link">
+                      <p>{{c.techDoc4Text.value}}</p>
+                    </a>
+                    <a href="javascript:void(0)" [genericLink]="c.techDoc5Link">
+                      <p>{{c.techDoc5Text.value}}</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="row">
+          <div *ngFor="let section of tab.children" class="col-lg-3 col-md-4 col-sm-6 mt-4">
+            <div class="section-container" *ngIf="section.cardType.value === 'V4'">
+              <div class="section-header">
+                <span class="text-label" *scRichText="section.heading"></span>
+              </div>
+              <div class="section-content">
+                <ul>
+                  <li *ngFor="let c of section.children">
+                    <a href="javascript:void(0)" [genericLink]="c.link">
+                      <span>{{c.link.text}}</span>
+                    </a>
+                    <a href="javascript:void(0)" [genericLink]="c.techDoc1Link">
+                      <span>{{c.techDoc1Text.value}}</span>
+                    </a>
+                    <a href="javascript:void(0)" [genericLink]="c.techDoc2Link">
+                      <span> {{c.techDoc2Text.value}} </span>
+                    </a>
+                    <a href="javascript:void(0)" [genericLink]="c.techDoc3Link">
+                      <span>{{c.techDoc3Text.value}}</span>
+                    </a>
+                    <a href="javascript:void(0)" [genericLink]="c.techDoc4Link">
+                      <span>{{c.techDoc4Text.value}}</span>
+                    </a>
+                    <a href="javascript:void(0)" [genericLink]="c.techDoc5Link">
+                      <span>{{c.techDoc5Text.value}}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

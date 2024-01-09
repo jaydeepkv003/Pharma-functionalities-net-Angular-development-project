@@ -1,0 +1,26 @@
+<div class="cart-content">
+  <div class="p-3 mb-5 box-shadow bg-white rounded-lg" *ngFor="let c of OrderHeader.Details">
+    <!-- MOCK CARD -->
+    <div class="row">
+      <div class="col-sm-2 col-12 img-center-container">
+        <img class="img-fluid" src="{{c?.Part?.Attributes | cartImg}}">
+      </div>
+      <div class="col-sm-7 col-12">
+        <div [hidden]="!c?.QuoteNumber">Quote Number: {{c?.QuoteNumber}}</div>
+        <div class="mb-2">{{c?.Part?.PartNumber}}</div>
+        <p class="font-bold mb-4">{{c?.Part?.Description}}</p>
+      </div>
+      <div class="col-sm-3 col-12 price-container">
+        <div class="text-right">
+          <div class="each-price">{{c?.Part?.Price | currency}} ({{c?.Part?.UOM}})</div>
+          <div class="qty">Qty: {{c?.Quantity}}</div>
+          <div class="sub-total">
+            Subtotal:
+            <span class="sub-total-amt">{{c?.Total | currency}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END MOCK CARD -->
+  </div>
+</div>

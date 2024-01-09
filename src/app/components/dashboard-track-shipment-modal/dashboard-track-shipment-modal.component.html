@@ -1,0 +1,41 @@
+<button type="button" class="float-right btn btn-close" aria-label="Close" (click)="activeModal.dismiss('close')">
+  <i class="material-icons material-icons-outlined">close</i>
+</button>
+<div class="modal-body order-tracking">
+  <div class="row">
+    <div class="col-md-12 track-shipment-container">
+      <div class="title pt-0">
+        <span>Tracking for order <b>#{{orderNumber}}</b></span>
+      </div>
+      <div class="order-list">
+        <div class="p-3 m-2 box-shadow bg-white rounded-lg" *ngFor="let trackShipmentDetails of trackShipmentRes">
+          <div class="row mb-4">
+            <div class="col-md-6 col-12">
+              <b>Shipped: </b> {{ trackShipmentDetails?.ShipmentDate | date :'MM-dd-yyyy'}}
+            </div>
+            <div class="col-md-6 col-12 price-container">
+              <b>Tracking #: </b> <span class="tracking-number" *ngIf="trackShipmentDetails.TrackingNumber">{{ trackShipmentDetails.TrackingNumber }}</span>
+              <span *ngIf="!trackShipmentDetails.TrackingNumber">Not Available</span>
+            </div>
+            <div class="col-6" *ngIf="trackShipmentDetails.Carrier">
+              <b>Carrier:</b> {{trackShipmentDetails.Carrier}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"><b>Part No:</b></div>
+            <div class="col-md-7"><b>Description:</b></div>
+            <div class="col-md-2 text-center"><b>Qty:</b></div>
+          </div>
+          <div class="row" *ngFor="let p of trackShipmentDetails?.Details">
+            <div class="col-md-3">{{ p?.Part?.PartNumber }}</div>
+            <div class="col-md-7">{{ p?.Part?.Description}}</div>
+            <div class="col-md-2 text-center">{{ p?.Quantity }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row pull-right m-2 pt-2">
+        <button class="btn btn-primary btn-sm px-2 " (click)="activeModal.dismiss('cancel')">CLOSE</button>
+      </div>
+    </div>
+  </div>
+</div>

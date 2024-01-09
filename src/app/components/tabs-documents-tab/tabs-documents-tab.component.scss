@@ -1,0 +1,62 @@
+.item{
+  background-color: white;
+  padding: 15px 0;
+  font-family: roboto, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  h5{
+    text-align:center;
+    padding: 15px 0;
+    color:#707070;
+  }
+  .cover{
+    display: block;
+    margin: auto;
+
+  }
+}
+.docs-table{
+  padding:20px 0;
+  &__results{
+    // display:block;
+    &--search{
+      font-family: roboto, sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      text-align: right;
+    }
+  }
+  &__table{
+    font-family: roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    width:100%;
+    margin: 10px 0 0 0;
+    tr:first-child{
+      background-color: rgba(0, 0, 0, 0.4);
+      color:white;
+      
+      font-weight: 500;
+      font-style: normal;
+    }
+    tr:nth-child(even){
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+    th:first-child{
+      width:25%;
+      padding: 10px 0 10px 20px;
+    }
+    th:nth-child(2){
+      width:75%;
+      padding: 10px 20px 10px 0;
+    }
+    td:first-child{
+      width:25%;
+      padding: 10px 0 10px 20px;
+    }
+    td:nth-child(2){
+      width:75%;
+      padding: 10px 20px 10px 0;
+    }
+  }
+}

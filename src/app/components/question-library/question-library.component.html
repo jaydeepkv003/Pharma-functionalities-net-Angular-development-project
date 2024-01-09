@@ -1,0 +1,108 @@
+<!-- FAQ -->
+<div class="container">
+  <div class="title">
+    <span>Frequently Asked Questions</span>
+    <button class="btn btn-blue float-right" OpenChat>Ask a Question</button>
+  </div>
+
+  <div>
+    <div class="filters">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Industry</mat-label>
+        <mat-select [(ngModel)]="selectedIndustry" placeholder="Industry" (selectionChange)="filterData()" [disabled]="masterCollection._industriesCollection.length === 0">
+          <ng-container *ngFor="let listItem of masterCollection._industriesCollection | orderBy:'item.DisplayName.value'">
+            <mat-option *ngIf="listItem.item" [value]="listItem.item.id.toLowerCase()">
+            {{listItem.item.DisplayName.value}}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Techniques</mat-label>
+        <mat-select [(ngModel)]="selectedTechnique" placeholder="Techniques" (selectionChange)="filterData()" [disabled]="masterCollection._techniquesCollection.length === 0">
+          <ng-container *ngFor="let listItem of masterCollection._techniquesCollection | orderBy:'item.DisplayName.value'">
+            <mat-option *ngIf="listItem.item" [value]="listItem.item.id.toLowerCase()">
+              {{listItem.item.DisplayName.value}}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Separation Mode</mat-label>
+        <mat-select [(ngModel)]="selectedSeparationMode" placeholder="Separation Mode" (selectionChange)="filterData()" [disabled]="masterCollection._separationModesCollection.length === 0">
+          <ng-container *ngFor="let listItem of masterCollection._separationModesCollection | orderBy:'title.value'">
+            <mat-option *ngIf="listItem.title" [value]="listItem.id.toLowerCase()">
+              {{listItem.title.value}}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Brand</mat-label>
+        <mat-select [(ngModel)]="selectedBrand" placeholder="Brand" (selectionChange)="filterData()" [disabled]="masterCollection._brandsCollection.length === 0">
+          <ng-container *ngFor="let listItem of masterCollection._brandsCollection | orderBy:'item.DisplayName.value'">
+            <mat-option *ngIf="listItem.item" [value]="listItem.item?.id.toLowerCase()">
+              {{listItem.item.DisplayName.value}}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="float-right">
+        <div class="search-container input-group">
+          <input type="text" class="form-control w-300" [(ngModel)]="searchKeyword" (keyup.enter)="search()"
+            placeholder="Search Questions">
+          <span class="input-group-addon">
+            <i class="material-icons material-icons-outlined">search</i>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="mb-2 clearfix">
+    <a class="clear-filter float-left" href="javascript:void(0);" (click)="clearFilter()">
+      <div class="with-icon">
+        <i class="material-icons material-icons-outlined">backspace</i>
+        Clear Filter
+      </div>
+    </a>
+    <div class="float-right"*ngIf="quesCollection.length > 0">Showing 1-{{paginatorConfig.recordsPerPage}} of {{quesCollection.length}} results</div>
+  </div>
+
+  <div class="pb-3 faq-accordion">
+    <div *ngFor="let listItem of quesCollection | slice:0:paginatorConfig.recordsPerPage; index as i">
+      <div *ngIf="listItem.item" class="pointer item-header" [ngClass]="{'even': 0 === i % 2, 'opened': listItem.opened}">
+        <div class="with-icon" (click)="listItem.opened=!listItem.opened">
+          <i class="material-icons material-icons-outlined">
+            <span *ngIf="!listItem.opened">add</span>
+            <span *ngIf="listItem.opened">remove</span>
+          </i>
+          <div class="question">
+            <div class="que-title" *scRichText="listItem.item.questionstatement"></div>
+            <div class="sub-title">Asked <span *scDate="listItem.item.askeddate"></span> </div>
+          </div>
+        </div>
+        <div class="pointer item-body" [hidden]="!listItem.opened">
+          <div *scRichText="listItem.item.answer"></div>
+        </div>
+      </div>
+    </div>
+    <div class="pointer item-header border" *ngIf="quesCollection.length === 0 && !isLoading">
+      <div class="text-center">No Data</div>
+    </div>
+
+    <div class="text-center my-4" *ngIf="quesCollection.length > paginatorConfig.recordsPerPage">
+      <a href="javascript:void(0);" (click)="showMore()"
+        class="d-flex align-content-center justify-content-center text-decoration-none">
+        <span>Show More</span>
+        <i class="material-icons material-icons-rounded font-20">keyboard_arrow_down</i>
+      </a>
+    </div>
+  </div>
+</div>

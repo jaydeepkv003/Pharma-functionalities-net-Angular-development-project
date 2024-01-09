@@ -1,0 +1,148 @@
+.no-padding{
+  padding:0;
+}
+#main-image{
+  text-align:center;
+}
+
+.navigation{
+  text-align: center;
+  
+  font-weight: 500;
+  font-style: normal;
+  font-size:1.8vh;
+  color:white;
+  margin: 0 0 10px 0;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    display: inline-block;
+  }
+
+  li {
+    float: left;
+    margin: 0 10px 0 10px;
+    border-bottom: 3px solid transparent;
+    display: block;
+  }
+
+  // li a {
+  //   display: block;
+  //   color: white;
+  //   text-align: center;
+  //   padding: 16px;
+  //   text-decoration: none;
+
+  // }
+
+  li:hover {
+    border-bottom:3px solid #FFFFFF;
+  }
+}
+
+// Intro
+.main{
+  padding-top:120px;
+  padding-bottom:120px;
+  h1{
+    text-align: center;
+    
+    font-weight: 500;
+    font-style: normal;
+    font-size: 3.1rem;
+    color:#444444;
+  }
+  p{
+    text-align: center;
+    
+    font-weight: 500;
+    font-style: normal;
+    color:#9F9F9F;
+  }
+}
+
+// First Component/Third Component
+.blurb-left{
+  background-color:#F5F5F5;
+  width:100%;
+  .content{
+    padding:100px 0;
+  }
+  .top{
+    padding-bottom: 25px;
+  }
+  h1{
+    
+    font-weight: 500;
+    font-style: normal;
+    text-align:left;
+    color:#444444;
+    font-size:25px;
+    margin-bottom:0;
+  }
+  p{
+    
+    font-weight: 500;
+    font-style: normal;
+    text-align:left;
+    color:#9F9F9F;
+  }
+  .imagee{
+    box-shadow:-15px -15px 0px 0px #0060A8;
+  }
+  .blurb-l-content{
+    @media screen and (max-width: 768px) {
+      padding:15px 0;
+    }
+  }
+}
+
+//Second Component
+.blurb-right{
+  .content{
+    padding:100px 0;
+  }
+  .top{
+    padding-bottom: 25px;
+  }
+  h1{
+    
+    font-weight: 500;
+    font-style: normal;
+    text-align:left;
+    color:#444444;
+    font-size:25px;
+    margin-bottom:0;
+  }
+  p{
+    
+    font-weight: 500;
+    font-style: normal;
+    text-align:left;
+    color:#9F9F9F;
+  }
+  .imagee{
+    box-shadow: 15px -15px 0px 0px #0060A8;
+  }
+  .blurb-r-content{
+    @media screen and (max-width: 768px) {
+      padding:15px 0;
+    }
+  }
+}
+.blurb-img{
+  // border:1px red solid;
+  padding-top:15px;
+}
+
+//Links at bottom of page
+.link{
+  border-bottom: 1px solid #D0D1D3;
+}
+.link-title{
+  
+  font-weight: 500;
+  font-style: normal;
+  font-size: 40px;
+  padding: 40px 0;
+}

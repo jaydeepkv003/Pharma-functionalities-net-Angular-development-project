@@ -1,0 +1,23 @@
+<button type="button" class="float-right btn btn-close" aria-label="Close" (click)="activeModal.dismiss('close')">
+  <i class="material-icons material-icons-outlined">close</i>
+</button>
+<div class="modal-body">
+  <div class="title p-0 mb-2">
+    Download file(s)
+  </div>
+  <p>
+    Below are link(s) to download your CQA/CofA documents. If you have any trouble accessing these files, please
+    <a href="javascript:void(0)" routerLink="/contact-us" (click)="activeModal.close()">Contact us.</a>
+  </p>
+  <div class="row">
+    <div class="col-md-4 text-ellipsis" *ngFor="let cert of certificateBlob; let i = index">
+      <a [href]="cert.Url" target="_blank" class="with-icon nounderline" title="{{cert.FileType}} - {{cert.BatchOrSerialNumber}}">
+        <i class="material-icons material-icons">download</i>
+        {{cert.FileType}} - {{cert.BatchOrSerialNumber}}</a>
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer d-block clearfix">
+  <button type="button" class="btn btn-primary btn-sm pull-right" (click)="activeModal.close()">Close</button>
+</div>

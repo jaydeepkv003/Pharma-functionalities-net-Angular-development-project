@@ -1,0 +1,24 @@
+<div class="container-fluid p-4" [ngClass]="{'bg-white': rendering.fields.isWhiteBg}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 *scText="rendering.fields.heading"></h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 img-center-container">
+        <img *scImage="rendering.fields.leftSectionImg" class="img-fluid">
+      </div>
+      <div class="col-md-4 img-center-container">
+        <img *scImage="rendering.fields.rightSectionImg" class="img-fluid">
+      </div>
+    </div>
+
+    <div class="row" *ngIf="rendering.fields.disclaimer">
+      <div class="col-md-12">
+        <div class="disclaimer" *scText="rendering.fields.disclaimer"></div>
+      </div>
+    </div>
+
+  </div>
+</div>

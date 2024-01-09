@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="title">pharma Site Map</h1>
+    </div>
+  </div>
+  <ng-container *ngIf="topMenus && topMenus.length">
+    <div class="site-map" *ngFor="let topMenu of topMenus; let i = index">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 [ngClass]="{'border-top pt-3 mt-4': i !== 0}" *scText="topMenu.title"></h1>
+        </div>
+      </div>
+      <div *ngIf="topMenu.children.length" class="row">
+        <div *ngFor="let menu of topMenu.children" class="col-sm-4">
+
+          <h3>
+            <ng-container *ngIf="!menu.title.value.includes('What')"
+              [ngTemplateOutlet]="menu.children && menu.children.length ? noRouting : menu.targetlink.url ? (menu.targetlink.linkType === 'external' ? externalLink : internalLink) : noRouting"
+              [ngTemplateOutletContext]="{data: menu}">
+            </ng-container>
+          </h3>
+
+          <ng-container *ngIf="menu.children && menu.children.length">
+            <div *ngFor="let subMenu of menu.children">
+              <h4>
+                <ng-container
+                [ngTemplateOutlet]="subMenu.targetlink.url ? (subMenu.targetlink.linkType === 'external' ? externalLink : internalLink) : noRouting"
+                [ngTemplateOutletContext]="{data: subMenu}">
+
+                </ng-container>
+              </h4>
+            </div>
+          </ng-container>
+
+          <ng-template #internalLink let-data='data'>
+            <a [routerLink]="data.targetlink.url" *scRichText="data.title"></a>
+          </ng-template>
+
+          <ng-template #externalLink let-data='data'>
+            <a [href]="data.targetlink.url" [target]="data.targetlink.target" *scRichText="data.title">
+            </a>
+          </ng-template>
+
+          <ng-template #noRouting let-data='data'>
+            <span *scRichText="data.title"></span>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 [ngClass]="{'border-top': i !== 0}" class="pt-3 mt-4"><a routerLink="/quick-order">Quick Order</a></h1>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-sm-12">
+        <h1 [ngClass]="{'border-top': i !== 0}" class="pt-3 mt-4"><a routerLink="/cart">Cart</a></h1>
+      </div>
+    </div>
+  </ng-container>
+</div>

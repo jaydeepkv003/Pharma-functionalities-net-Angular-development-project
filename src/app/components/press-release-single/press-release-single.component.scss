@@ -1,0 +1,101 @@
+//Navigation Tabs
+.tabs{
+  padding-top: 25px;
+  
+  font-weight: 500;
+  font-style: normal;
+  font-size:18px;
+  color:#ABABAB;
+  margin: 0 ;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin:0;
+    display: inline-block;
+  }
+
+  li {
+    float: left;
+    margin: 0 10px 0 10px;
+    border-bottom: 3px solid transparent;
+    display: block;
+  }
+  li:hover {
+    color:#587DFF;
+    border-bottom:3px solid #587DFF;
+  }
+  .active{
+    color:#587DFF;
+    border-bottom:3px solid #587DFF;
+  }
+}
+
+//Dates Navigation
+.dates-wrapper{
+  background-color:#F2F2F2;
+  border-top: 1px solid #A0A0A0;
+  border-bottom: 1px solid #A0A0A0;
+}
+.dates{
+  
+  font-weight: 500;
+  font-style: normal;
+  font-size:16px;
+  color:#57585A;
+  margin:10px 0 10px 0;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    display: inline-block;
+    margin:0;
+  }
+
+  li {
+    float: left;
+    margin: 0 10px 0 10px;
+    border-bottom: 3px solid transparent;
+    display: block;
+  }
+  li:hover {
+    color:#587DFF;
+    border-bottom:3px solid #587DFF;
+  }
+  .active{
+    color:#587DFF;
+    border-bottom:3px solid #587DFF;
+  }
+}
+
+.single{
+  padding:25px 0 0 0;
+}
+//Content
+.content{
+  
+  font-weight: 500;
+  font-style: normal;
+  p{
+    
+    font-weight: 500;
+    font-style: normal;
+    font-size:16px;
+  }
+  h1{
+    
+    font-weight: 500;
+    font-style: normal;
+    font-size:25px;
+  }
+}
+
+//Links at bottom of page
+.link{
+  border-bottom: 1px solid #D0D1D3;
+}
+.link-title{
+  
+  font-weight: 500;
+  font-style: normal;
+  font-size: 40px;
+  padding: 40px 0;
+}

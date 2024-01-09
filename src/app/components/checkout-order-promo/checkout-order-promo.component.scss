@@ -1,0 +1,90 @@
+@import "../../../style-variables.scss";
+
+.promo-container {
+  background-color: #f2f5f9;
+  border-bottom: 1px solid #aaa;
+
+  .promotions-btn {
+    border: none;
+    background-color: transparent;
+    border-radius: 100vw;
+    color: #767676;
+    font-weight: 400;
+  }
+  .promotions-btn:hover {
+    background-color: rgba(0,0,0,.05)
+  }
+  .w-77 {
+    width: 77%;
+  }
+
+  .w-23 {
+    width: 23%;
+    text-align: right;
+  }
+  .font-weight-500 {
+    width: 23%;
+  }
+
+  .promotion {
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    color: #767676;
+
+    &.selected {
+      border: 1px solid $color-highlight;
+      box-shadow: 0 3px 6px #00000029;
+    }
+
+    &.disabled {
+      .promo-qua {
+        .red-text {
+          color: #B92D00;
+        }
+      }
+      &:hover {
+        transition: all 0.3s ease-in-out;
+      }
+    }
+    .coupon-applied {
+      color: #008B1B;
+
+      font-size: 0.875em;
+      .check-icon {
+        font-size: 40px;
+        line-height: 30px;
+      }
+    }
+  }
+}
+
+.details-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 0 0 12px 12px;
+  }
+  .que-title {
+    font-weight: 600;
+    color: #3F3F3F;
+  }
+}
+// .details-with-icon.opened:hover {
+//   background-color: #ffff;
+// }
+.expanded {
+  color: $color-highlight;
+}
+
+.c-pointer {
+  cursor: pointer;
+}
+
+.line-wrap {
+  overflow-wrap: break-word;
+}

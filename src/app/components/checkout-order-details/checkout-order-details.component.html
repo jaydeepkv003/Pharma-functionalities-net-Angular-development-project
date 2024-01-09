@@ -1,0 +1,204 @@
+<app-checkout-breadcrumb (reviewOrder)="onSubmit()"></app-checkout-breadcrumb>
+<div class="container">
+  <div class="title">
+    Billing and Shipping
+    <span class="sub-title">
+      <button class="btn btn-back" routerLink="/Cart">
+        <i class="material-icons material-icons-outlined pointer font-lg">arrow_back_ios</i>
+        <a class="font-md align-text-bottom text-decoration-none" href="javascript:void(0)">BACK TO CART</a>
+      </button>
+    </span>
+  </div>
+
+  <div class="form-group font-xs">
+    * Indicates Field is required for submission
+  </div>
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" autocomplete="nope">
+    <div class="">
+      <ng-container formArrayName="ContactEmails">
+        <div class="row contact-emails-container" *ngFor="let _ of checkoutForm.get('ContactEmails')['controls']; index as i">
+          <div class="col-md-8 " id="ContactEmails-{{i}}">
+            <mat-form-field appearance="outline" class="w-100" *ngIf="i==0">
+              <mat-label>Email</mat-label>
+              <input matInput [formControlName]="i" [maxLength]="130" placeholder="Email" autocomplete="nope"
+                required>
+              <mat-error *ngIf="checkoutFormSubmitted && f.ContactEmails.controls[i].errors">
+                <div *ngIf="f.ContactEmails.controls[i].errors.required">Email is required</div>
+                <div *ngIf="f.ContactEmails.controls[i].errors.email">Email is invalid</div>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100" *ngIf="i>0">
+              <mat-label>Additional Email Address (optional)</mat-label>
+              <input matInput [formControlName]="i" [maxLength]="130" placeholder="Additional Email Address (optional)" autocomplete="nope">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4 my-2">
+            <button class="btn btn-back" *ngIf="i === checkoutForm.get('ContactEmails')['controls'].length-1" type="button">
+              <div class="with-icon" (click)="addContactEmail()">
+                <i class="material-icons material-icons-outlined">add</i>
+                ADD ADDITIONAL EMAIL ADDRESSES
+              </div>
+            </button>
+            <!-- <button class="btn btn-link" *ngIf="i > 0" type="button">
+              <div class="with-icon" (click)="deleteContactEmail(i)">
+                <i class="material-icons material-icons-outlined">delete</i>
+                Remove
+              </div>
+            </button> -->
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="font-20 font-semibold mb-2">Billing Address</div>
+          <ng-container *ngFor="let billTo of billToViewModel">
+            <div class="mb-1 font-md" *ngIf="selectedBillToId === billTo?.BillToID">
+              <div>{{billTo?.Company}}</div>
+              <div>{{billTo?.Address1}}</div>
+              <div>{{billTo?.Address2}}</div>
+              <div>{{billTo?.City}}, {{billTo?.State}}</div>
+              <div>{{billTo?.Country}} {{billTo?.Zip}}</div>
+            </div>
+          </ng-container>
+          <button type="button" class="btn btn-link" (click)="onChangeAddress('Billing')">
+            <div class="with-icon">
+              <i class="material-icons material-icons-outlined">create</i>
+              CHANGE
+            </div>
+          </button>
+        </div>
+        <div class="col-md-6">
+          <div class="font-20 font-semibold mb-2">Shipping Address</div>
+          <ng-container *ngFor="let shipTo of selectedBillingAddress?.ShipTos">
+            <div class="mb-1 font-md" *ngIf="selectedShipToId === shipTo?.ShipToID">
+              <div>{{shipTo?.Attention}}</div>
+              <div>{{shipTo?.Company}}</div>
+              <div>{{shipTo?.Address1}}</div>
+              <div>{{shipTo?.Address2}}</div>
+              <div>{{shipTo?.City}}, {{shipTo?.State}}</div>
+              <div>{{shipTo?.Country}} {{shipTo?.Zip}}</div>
+            </div>
+          </ng-container>
+          <button type="button" class="btn btn-link" (click)="onChangeAddress('Shipping')">
+            <div class="with-icon">
+              <i class="material-icons material-icons-outlined">create</i>
+              CHANGE
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="title">
+      Delivery
+    </div>
+    <h3 class="mt-1">How would like your order delivered?</h3>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="delivery-type-card card-init" (click)="onMultipleShipmentSelect()"
+        [ngClass]="{'card-selected': checkoutForm.value.PartialOK}">
+          <div class="font-md font-bold">Send Multiple Shipments</div>
+          <div class="font-md">Ship product as they become available</div>
+        </div>
+        <div class="delivery-type-card card-init" (click)="onOneShipmentSelect()"
+        [ngClass]="{'card-selected': !checkoutForm.value.PartialOK}">
+          <div class="font-md font-bold">Send One Shipment</div>
+          <div class="font-md">Ship only when order is complete</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mt-5 mb-0">Select a Delivery Method</h3>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="mt-3 mr-4 delivery-method-card card-init" *ngFor="let dt of deliveryTimeViewModel"
+          [ngClass]="{'card-selected': checkoutForm.value.DeliveryTimeID === dt.DeliveryTimeID}" (click)="onClickDeliveryTime(dt.DeliveryTimeID)">
+          <div class="font-md font-bold w-100">{{dt.Name}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group font-sm mt-2 mb-4">Pending availability of product. Delivery cost will be calculated on shipping.</div>
+
+    <div class="row">
+      <div class="col-md-8" id="CarrierNumber">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Carrier Number (optional)</mat-label>
+          <input matInput formControlName="CarrierNumber" placeholder="Enter Carrier #" autocomplete="nope">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8" id="ShippingInstructions" *ngIf="addShippingInstruction">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Shipping Instructions (optional)</mat-label>
+          <textarea matInput formControlName="ShippingInstructions" placeholder="Enter Shipping Instructions #"
+            autocomplete="nope"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="add-shipping-instructions" *ngIf="!addShippingInstruction">
+      <button class="btn btn-back add-shipping-instructions-btn p-0 btn-margin-top" type="button" >
+        <div class="with-icon" (click)="addShippingInstruction = true" >
+          <i class="material-icons material-icons-outlined">add</i>
+          ADD SHIPPING INSTRUCTIONS
+        </div>
+      </button>
+    </div>
+
+    <div class="title mt-3">Payment Information</div>
+
+    <form formGroupName="PaymentInfo" autocomplete="nope">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="payment-info-card card-init mr-4" *ngIf="!showCreditCardForm && !creditCardVerified" (click)="onSelectPurchaseOrder()"
+            [ngClass]="{'card-selected': isPurchaseOrderSelected}">
+            <h3>Purchase Order</h3>
+            <mat-form-field appearance="outline" class="payment-card-field">
+              <mat-label>Purchase Order Number</mat-label>
+              <input *ngIf="isPurchaseOrderSelected" matInput formControlName="PONumber" placeholder="Purchase Order Number" [maxLength]="100" autocomplete="nope">
+              <input *ngIf="!isPurchaseOrderSelected" matInput >
+              <mat-error *ngIf="checkoutFormSubmitted && f.PaymentInfo['controls'].PONumber.errors">
+                <div *ngIf="f.PaymentInfo['controls'].PONumber.errors.required">Purchase Order Number is required</div>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="payment-info-card card-init pr-5" [ngClass]="{'credit-card-form': showCreditCardForm && !creditCardVerified,'card-selected':!isPurchaseOrderSelected}" (click)="onSelectCreditCard()"
+            >
+            <h3 class="mb-1">Credit Card</h3>
+            <div class="font-md w-75">Use your Visa, MasterCard, or American Express card.</div>
+            <mat-form-field appearance="outline" class="payment-card-field no-pad mb-2 mt-2" [hidden]="isCcVerifyForm">
+              <mat-label>Reference Purchase Order No. (Optional)</mat-label>
+              <input *ngIf="!isPurchaseOrderSelected" matInput formControlName="PONumber" >
+              <input *ngIf="isPurchaseOrderSelected" matInput >
+            </mat-form-field>
+
+            <ng-container *ngIf="!showCreditCardForm && !creditCardVerified">
+              <button class="btn btn-default mb-2" (click)="onPayWithCreditCard()">
+                PAY ONLINE WITH CREDIT CARD
+              </button>
+              <mat-error *ngIf="checkoutFormSubmitted && !isPurchaseOrderSelected && f.PaymentInfo['controls'].CreditCardID">
+                <div class="font-sm">Credit Card is required</div>
+              </mat-error>
+            </ng-container>
+
+            <ng-container *ngIf="showCreditCardForm && !creditCardVerified">
+              <app-cc-info-form  [showPan]="showCreditCardForm" (refPurchaseFieldHidden)="isCcVerifyForm=true" (onCancel)="onCancelEditCreditCard($event)"
+                (onSuccess)="onSuccessCreditCardVerification($event)"></app-cc-info-form>
+            </ng-container>
+
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <button class="btn btn-blue mt-4" type="submit">REVIEW ORDER</button>
+
+    <div class="my-4">
+      <span class="mr-1">Need Help with your order?</span>
+      <a href="https://discover.pharma.com/chat" target="_blank">Chat with us</a>
+    </div>
+
+  </form>
+</div>

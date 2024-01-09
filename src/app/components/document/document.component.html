@@ -1,0 +1,172 @@
+<div class="d-none">
+  <div data-elastic-name="page_type" data-swiftype-name="PAGE_TYPE"  data-swiftype-type="string">{{PAGE_TYPE.DOCUMENT}}</div>
+  <div data-elastic-name="page_title" data-swiftype-name="page_title"  data-swiftype-type="string" *scText="documentDetail?.title"></div>
+  <div data-elastic-name="description" data-swiftype-name="description"  data-swiftype-type="text" *scRichText="documentDetail?.description"></div>
+</div>
+
+<div class="container container-fluid p-3 document-detail" *ngIf="documentDetail">
+  <div class="title" *scText="documentDetail?.title"></div>
+
+  <div class="row">
+    <div class="col-md-9">
+      <div class="doc-desc mb-3" *scText="documentDetail?.description"></div>
+
+      <div class="row" *ngIf="documentDetail?.documentTypeList?.targetItems?.length > 0">
+        <div class="col-md-3"> Document Type<span class="float-right">:</span></div>
+        <div class="col-md-9 pl-0">
+          <span *ngFor="let docType of documentDetail?.documentTypeList?.targetItems;let i = index">
+            <span data-elastic-name="document_type" data-swiftype-name="Document Type" data-swiftype-type="string">{{docType.name}}</span>
+            <span *ngIf="i < documentDetail.documentTypeList.targetItems.length-1">, </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="documentDetail?.industryList?.targetItems?.length > 0">
+        <div class="col-md-3"> Target Industries<span class="float-right">:</span></div>
+        <div class="col-md-9 pl-0">
+          <span *ngFor="let industry of documentDetail.industryList.targetItems;let i = index">
+            <a [routerLink]="[industry.url]" data-elastic-name="industry" data-swiftype-name="Industry"
+              data-swiftype-type="string">{{industry?.heading?.value}}</a>
+            <span *ngIf="i < documentDetail.industryList.targetItems.length-1">, </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="documentDetail?.techniquesList?.targetItems?.length > 0">
+        <div class="col-md-3"> Techniques<span class="float-right">:</span></div>
+        <div class="col-md-9 pl-0">
+          <span *ngFor="let technique of documentDetail.techniquesList.targetItems;let i = index">
+            <a [routerLink]="[technique.url]" data-elastic-name="technique" data-swiftype-name="Technique"
+              data-swiftype-type="string">{{technique?.heading?.value}}</a>
+            <span *ngIf="i < documentDetail.techniquesList.targetItems.length-1">, </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="documentDetail.brandsList && documentDetail.brandsList.targetItems?.length > 0">
+        <div class="col-md-3"> Brands<span class="float-right">:</span></div>
+        <div class="col-md-9 pl-0">
+          <span *ngFor="let brand of documentDetail.brandsList.targetItems;let i = index">
+            <a [routerLink]="[brand.url]" data-elastic-name="brand" data-swiftype-name="Brand"
+              data-swiftype-type="string">{{brand?.heading?.value}}</a>
+            <span *ngIf="i < documentDetail.brandsList.targetItems.length-1">, </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="row"
+        *ngIf="documentDetail.separationModeList && documentDetail.separationModeList.targetItems?.length > 0">
+        <div class="col-md-3"> Separation Modes<span class="float-right">:</span></div>
+        <div class="col-md-9 pl-0">
+          <span *ngFor="let brand of documentDetail.separationModeList.targetItems;let i = index">
+            <span data-elastic-name="separation_mode" data-swiftype-name="Separation Mode"  data-swiftype-type="string">{{brand.name}}</span>
+            <span *ngIf="i < documentDetail.separationModeList.targetItems.length-1">, </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="documentDetail.phaseList && documentDetail.phaseList.targetItems?.length > 0">
+        <div class="col-md-3"> Phases<span class="float-right">:</span></div>
+        <div class="col-md-9 pl-0">
+          <span *ngFor="let phase of documentDetail.phaseList.targetItems;let i = index">
+            <a [routerLink]="[phase.url]" data-elastic-name="phase" data-swiftype-name="Phase"
+              data-swiftype-type="string">{{phase?.heading?.value}}</a>
+            <span *ngIf="i < documentDetail.phaseList.targetItems.length-1">, </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="my-2">
+        <button class="btn btn-blue position-relative px-3" (click)="viewPdfFile(documentDetail.pdfFullUrl)"
+          [disabled]="!isPdfLoaded">
+          <ngx-ui-loader [loaderId]="'view-loader'" [overlayBorderRadius]="'18px'" [fgsSize]="15" [hasProgressBar]="false" [text]="''" [logoSize]="10">
+          </ngx-ui-loader>
+          <span>View</span>
+        </button>
+        <a href="{{documentDetail.pdfFullUrl}}" target="_open" class="btn btn-link">
+          <div class="with-icon">
+            <i class="material-icons material-icons-outlined">save_alt</i>
+            Download
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row mb-2">
+        <div class="col">
+          <a href="javascript:void(0)" title="Add to favorites"><span
+              class="material-icons pointer float-right icon-zoom" (click)="addToFavorite()">favorite_border</span></a>
+        </div>
+      </div>
+      <div class="img-fluid">
+        <pdf-viewer (after-load-complete)="onPdfLoaded()" [page]="1" [src]="documentDetail.pdfFullUrl"
+          [autoresize]="true" [original-size]='true' [fit-to-page]='true' [show-all]="false" [original-size]="false"
+          style="display: block;">
+        </pdf-viewer>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper container-fluid" *ngIf="productsUsed.length > 0">
+  <div class="container py-3">
+    <span>
+       <b>
+        Products used in this {{ getProdTitle(documentDetail?.documentTypeList?.targetItems)}}
+       </b>
+    </span>
+
+    <div class="row">
+      <div class="col-md-4 p-2 font-xxs" *ngFor="let rp of productsUsed;">
+        <div class="row box-shadow m-0 bg-white h-100 p-2">
+          <div class="col-md-3 px-1 col-3">
+            <img class="img-fluid" src="{{rp.Attributes | cartImg}}">
+          </div>
+          <div class="col-md-9 px-1 col-9">
+            <div>{{rp.PartNumber}}</div>
+            <div class="font-bold line-h-md">{{rp.Description}}</div>
+
+            <ng-template #promoDetail>
+              <div class="text-left" *ngIf="rp.PromotionalPricing" style="z-index: 100;">
+                <div class="font-semibold">{{rp.PromotionalPricing.Promotion.Name}}</div>
+                <div>Limit: {{rp.PromotionalPricing.Promotion.MaxQuantity}}</div>
+                <div>Expires: {{rp.PromotionalPricing.Promotion.EndDate | date}}</div>
+              </div>
+            </ng-template>
+
+            <ng-container *ngIf="sharedService.feature.Promotions; else noPrmoPrice">
+              <div *ngIf="!rp.PromotionalPricing">{{rp.Price | currency}} ({{rp.UOM}})</div>
+              <div *ngIf="rp.PromotionalPricing && rp.PromotionalPricing.RequiresQualification">
+                <a href="javascript:void(0)" class="text-decoration-none" placement="top"
+                  ngbPopover="Add item to cart to see promotional discount" triggers="mouseenter:mouseleave">
+                  <img class="promotion-icon-sm" src="/-/jssmedia/phrjss/data/media/images/promotion/offer_icon" />
+                  {{ rp.Price | currency }} ({{rp.UOM}})
+                </a>
+              </div>
+              <ng-container *ngIf="rp.PromotionalPricing && !rp.PromotionalPricing.RequiresQualification">
+                <div class="d-flex">
+                  <span class="strike-through mr-1">{{rp.Price | currency}} ({{rp.UOM}})</span>
+                  <a href="javascript:void(0)" class="text-decoration-none" placement="top"
+                    [ngbPopover]="promoDetail" container="body" triggers="mouseenter:mouseleave">
+                    <img class="promotion-icon-sm" src="/-/jssmedia/phrjss/data/media/images/promotion/offer_icon" />
+                    {{ rp.PromotionalPricing.DiscountedPrice | currency }}
+                    ({{rp.UOM}})
+                  </a>
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-template #noPrmoPrice>
+              <div>{{rp.Price | currency}} ({{rp.UOM}})</div>
+            </ng-template>
+
+            <button class="btn btn-primary btn-xs position-relative" (click)="addToCart(rp)">
+              <ngx-ui-loader [loaderId]="'loader-' + rp.PartID" [fgsSize]="15" [hasProgressBar]="false" [text]="''"
+                [logoSize]="10"></ngx-ui-loader>
+              <span>Add to Cart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

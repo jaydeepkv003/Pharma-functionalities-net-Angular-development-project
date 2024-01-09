@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="">
+    <div class="col-md-12">
+      <div class="title">Crawler for swiftype </div>
+      <form [formGroup]="crawlForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group col-md-8">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-select class="form-control form-control-lg" formControlName="Environment" placeholder="Environment*"
+                [ngClass]="{ 'is-invalid': submitted && f.Environment.errors }" (selectionChange)="onEnvChange()">
+                <mat-option *ngFor="let env of environments" [value]="env">
+                  {{env}}
+                </mat-option>
+              </mat-select>
+              <div *ngIf="submitted && f.Environment.errors" class="invalid-feedback">
+                <div *ngIf="f.Environment.errors.required">Environment is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-12">
+          <input type="text" class="form-control form-control-lg" formControlName="SwiftypeApi"
+            placeholder="Swiftype API*" [ngClass]="{ 'is-invalid': submitted && f.SwiftypeApi.errors }">
+          <div *ngIf="submitted && f.SwiftypeApi.errors" class="invalid-feedback">
+            <div *ngIf="f.SwiftypeApi.errors.required">Swiftype Api is required</div>
+          </div>
+        </div>
+
+        <div class="row m-0">
+          <div class="form-group col-md-6">
+            <input type="text" class="form-control form-control-lg" formControlName="DomainId" placeholder="Domain Id*"
+              [ngClass]="{ 'is-invalid': submitted && f.DomainId.errors }">
+            <div *ngIf="submitted && f.DomainId.errors" class="invalid-feedback">
+              <div *ngIf="f.DomainId.errors.required">Domain Id is required</div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <input type="text" class="form-control form-control-lg" formControlName="APIKey" placeholder="APIKey*"
+              [ngClass]="{ 'is-invalid': submitted && f.APIKey.errors }">
+            <div *ngIf="submitted && f.APIKey.errors" class="invalid-feedback">
+              <div *ngIf="f.APIKey.errors.required">API Key is required</div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <input type="text" class="form-control form-control-lg" formControlName="EngineSlug"
+              placeholder="Engine Slug*" [ngClass]="{ 'is-invalid': submitted && f.EngineSlug.errors }">
+            <div *ngIf="submitted && f.EngineSlug.errors" class="invalid-feedback">
+              <div *ngIf="f.EngineSlug.errors.required">Engine Slug is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-12">
+          <input type="text" class="form-control form-control-lg" formControlName="BaseUrl" placeholder="BaseUrl*"
+            [ngClass]="{ 'is-invalid': submitted && f.BaseUrl.errors }">
+          <div *ngIf="submitted && f.BaseUrl.errors" class="invalid-feedback">
+            <div *ngIf="f.BaseUrl.errors.required">Swiftype Api is required</div>
+          </div>
+        </div>
+
+        <div class="row m-0">
+          <div class="form-group col-md-6">
+            <mat-select class="form-control form-control-lg" formControlName="Type" placeholder="Type*"
+              [ngClass]="{ 'is-invalid': submitted && f.Type.errors }">
+              <mat-option *ngFor="let env of Types" [value]="env.url">
+                {{env.name}}
+              </mat-option>
+            </mat-select>
+            <div *ngIf="submitted && f.Type.errors" class="invalid-feedback">
+              <div *ngIf="f.Type.errors.required">Type is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-12">
+          <textarea class="form-control form-control-lg" formControlName="Urls" placeholder="Urls*"
+            [ngClass]="{ 'is-invalid': submitted && f.Urls.errors }">
+            </textarea>
+
+          <div *ngIf="submitted && f.Urls.errors" class="invalid-feedback">
+            <div *ngIf="f.Urls.errors.required">Company Address is required</div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-8">
+          <button type="submit" class="btn btn-primary">Crawl</button>
+          <button type="button" class="btn btn-primary" (click)="search()">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

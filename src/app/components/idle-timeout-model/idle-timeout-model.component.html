@@ -1,0 +1,30 @@
+<ng-container *ngIf="isTimer">
+  <div class="modal-body">
+    <div class="title p-0 mb-2">Are you still there?</div>
+    <p>
+      Due to inactivity, your session will expire in
+      <b>{{ counter | timeformat }}</b> If additional time is required, please click "Continue Session".
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-blue btn-sm" (click)="refreshToken()">
+      CONTINUE SESSION
+    </button>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!isTimer">
+  <button type="button" class="float-right btn btn-close" aria-label="Close" (click)="activeModal.dismiss('close')">
+    <i class="material-icons material-icons-outlined">close</i>
+  </button>
+  <div class="modal-body">
+    <div class="title p-0 mb-2">We've signed you out of your account</div>
+    <p>
+      Your account has been logged out for inactivity. <br />
+      Log back in by clicking the button below.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-blue btn-sm" (click)="login()">LOG IN</button>
+  </div>
+</ng-container>

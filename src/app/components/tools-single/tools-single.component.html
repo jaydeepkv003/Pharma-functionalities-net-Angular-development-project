@@ -1,0 +1,11 @@
+<div class="container">
+  <h2 class="title pt-90" *ngIf="!isTab">
+    <span>Tools</span>
+  </h2>
+  <div class="row">
+    <div class="col">
+      <p *ngIf="isTab"><a href="/tools">Back to Web Tools</a></p>
+      <iframe id="iframeComponent" [src]="link | safe" width="1080" height="1200" frameborder="0"></iframe>
+    </div>
+  </div>
+</div>

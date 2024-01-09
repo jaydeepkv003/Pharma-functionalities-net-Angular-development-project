@@ -1,0 +1,81 @@
+<div class="d-none">
+  <div data-elastic-name="page_type" data-swiftype-name="PAGE_TYPE"  data-swiftype-type="string">{{PAGE_TYPE.WEBINAR}}</div>
+  <ng-container *ngIf="contextFields?.pageTitle?.value">
+    <div *scText="contextFields.pageTitle" data-elastic-name="page_title" data-swiftype-name="page_title"  data-swiftype-type="string"></div>
+  </ng-container>
+  <ng-container *ngIf="!contextFields?.pageTitle?.value">
+    <div *scText="webinar.webinartitle" data-elastic-name="page_title" data-swiftype-name="page_title"  data-swiftype-type="string"></div>
+  </ng-container>
+  <ng-container *ngIf="contextFields?.pageDescription?.value">
+    <div *scRichText="contextFields.pageDescription" data-elastic-name="description" data-swiftype-name="description"  data-swiftype-type="text"></div>
+  </ng-container>
+  <ng-container *ngIf="!contextFields?.pageDescription?.value">
+    <div *scRichText="webinar.summary" data-elastic-name="description" data-swiftype-name="description"  data-swiftype-type="text"></div>
+  </ng-container>
+</div>
+<div class="container container-fluid p-3 document-detail">
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="title" *scText="webinar.webinartitle" data-elastic-name="page_title" data-swiftype-name="page_title"  data-swiftype-type="string"></div>
+      <div class="doc-desc" *scRichText="webinar.summary" data-elastic-name="description" data-swiftype-name="description"  data-swiftype-type="text"></div>
+      <br>
+      <div class="row">
+        <div class="col-md-7">
+          <img class="img-fluid img-center" alt="fullyPorous" [src]="webinar?.coverphoto?.src">
+        </div>
+        <div class="col-md-5">
+          <div class="col-md-12">
+            <div class="row" *ngIf="webinar?.brandsList?.targetItems?.length>0">
+              <div class="col-md-3 text-right p-0"> Brands:</div>
+              <div class="col-md-9 text-left">
+                <span *ngFor="let brand of webinar.brandsList.targetItems;let i = index">
+                  <a [routerLink]="[brand.url]" data-elastic-name="brand" data-swiftype-name="Brand" 
+                    data-swiftype-type="string">{{brand.heading.value}}</a>
+                  <span *ngIf="i < webinar.brandsList.targetItems.length-1">, </span>
+                </span>
+              </div>
+            </div>
+            <div class="row" *ngIf="webinar?.techniquesList?.targetItems?.length>0">
+              <div class="col-md-3 text-right p-0">Techniques:</div>
+              <div class="col-md-9 text-left">
+                <span *ngFor="let technique of webinar.techniquesList.targetItems;let i = index">
+                  <a [routerLink]="[technique.url]" data-elastic-name="technique" data-swiftype-name="Technique" 
+                    data-swiftype-type="string">{{technique.heading.value}}</a>
+                  <span *ngIf="i < webinar.techniquesList.targetItems.length-1">, </span>
+                </span>
+              </div>
+            </div>
+            <div class="row" *ngIf="webinar?.industryList?.targetItems?.length>0">
+              <div class="col-md-3 text-right p-0">Industries:</div>
+              <div class="col-md-9 text-left">
+                <span *ngFor="let industry of webinar.industryList.targetItems;let i = index">
+                  <a [routerLink]="[industry.url]" data-elastic-name="industry" data-swiftype-name="Industry" 
+                    data-swiftype-type="string">{{industry.heading.value}}</a>
+                  <span *ngIf="i < webinar.industryList.targetItems.length-1">, </span>
+                </span>
+              </div>
+            </div>
+            <div class="row" *ngIf="webinar?.phaseList?.targetItems?.length>0">
+              <div class="col-md-3 text-right p-0">Phases:</div>
+              <div class="col-md-9 text-left">
+                <span *ngFor="let phase of webinar.phaseList.targetItems;let i = index">
+                  <a [routerLink]="[phase.url]" data-elastic-name="phase" data-swiftype-name="Phase" 
+                    data-swiftype-type="string">{{phase.heading.value}}</a>
+                  <span *ngIf="i < webinar.phaseList.targetItems.length-1">, </span>
+                </span>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <span class="align-bottom pl-5">
+                  <a class="btn btn-blue btn-primary" target="_blank" href="{{webinar?.formLink?.url}}">
+                    VIEW WEBINAR</a><br>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

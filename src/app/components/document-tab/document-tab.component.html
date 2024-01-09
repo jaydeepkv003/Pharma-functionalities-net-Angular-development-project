@@ -1,0 +1,88 @@
+<div class="container">
+  <h2 class="title pt-90">
+    <div class="row">
+      <div class="col-md-9">
+        <span>{{heading}} Documents</span>
+      </div>
+      <div class="col-md-3">
+        <div class="sub-title float-right">
+          <a [routerLink]="['/documents/library']">
+            <i class="material-icons search-all-icon">search</i>
+            Search All Documents
+          </a>
+        </div>
+      </div>
+    </div>
+  </h2>
+
+  <div class="row pdf-thumb-container" *ngIf="featuredDocuments.length > 0">
+    <div *ngFor="let listItem of featuredDocuments; let i = index" class="col-md-4 text-center pointer"
+      [routerLink]="listItem.url">
+      <div *ngIf="i < 3" class="border pt-3 pdf-thumb h-100">
+        <div class="offset-md-2 col-md-8">
+          <div class="pdf-height">
+            <pdf-viewer [page]="1" [src]="listItem.doclink" [autoresize]="true" [original-size]='true'
+              [fit-to-page]='true' [show-all]="false" [original-size]="false" style="display: block;">
+            </pdf-viewer>
+          </div>
+        </div>
+        <div class="font-bold font-lg"> {{listItem.title}} </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <mat-form-field appearance="fill">
+      <mat-label>Document Type</mat-label>
+      <mat-select [(ngModel)]="selectedDocType" placeholder="Document Type" (selectionChange)="filterTable()" [disabled]="filteredDocumentTypes.length === 0">
+        <mat-option *ngFor="let listItem of filteredDocumentTypes | orderBy:'title.value'" [value]="listItem.id.toLowerCase()">
+          {{listItem.title.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3 clearfix" *ngIf="documents.length > 0">
+    <a class="clear-filter" href="javascript:void(0);" (click)="clearFilter()">
+      <div class="with-icon">
+        <i class="material-icons material-icons-outlined">backspace</i>
+        Clear Filter
+      </div>
+    </a>
+    <div class="float-right">Showing 1-{{pageSize >= documents.length ? documents.length : pageSize}} of
+      {{documents.length}} results</div>
+  </div>
+
+  <div class="pb-1 gray-table">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th width="30%">Type
+            <app-table-sort [sortArray]="documents" [isreload]="isTypeReload"
+              [field]="'item.documentTypeList.targetItems.0.displayName'" (click)="ChangeIcon('Type')"></app-table-sort>
+          </th>
+          <th width="70%">Document Title
+            <app-table-sort [sortArray]="documents" [isreload]="isTitleReload" [field]="'item.title.value'"
+              (click)="ChangeIcon('')"></app-table-sort>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let listItem of documents | slice:0:pageSize ">
+          <td>{{listItem.item.documentTypeList.targetItems | arrayToString:'displayName' }}</td>
+          <td><a [routerLink]="listItem.item.url">{{listItem.item.title.value}}</a></td>
+        </tr>
+        <tr *ngIf="documents.length === 0 && !isLoading">
+          <td colspan="2" class="text-center">No Data</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center my-4" *ngIf="documents.length > pageSize">
+      <a href="javascript:void(0);" (click)="showMore()"
+        class="d-flex align-content-center justify-content-center text-decoration-none">
+        <span>Show More</span>
+        <i class="material-icons material-icons-rounded font-20">keyboard_arrow_down</i>
+      </a>
+    </div>
+  </div>
+</div>

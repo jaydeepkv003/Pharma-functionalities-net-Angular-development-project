@@ -1,0 +1,22 @@
+@import "../../../style-variables";
+
+.array-container {
+    .array-item {
+        .img-label {
+            font: 19px;
+        }
+        .border {
+            border-color: transparent !important;
+        }
+        &:hover {
+            .border {
+                border-color: $color-highlight !important;
+                background-color: #ffffff !important;
+                box-shadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.16);
+            }
+            .img-label {
+                color: $color-highlight !important;
+            }
+        }
+    }
+}

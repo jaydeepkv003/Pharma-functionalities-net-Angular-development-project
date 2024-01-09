@@ -1,0 +1,193 @@
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.side-nav {
+    height: 100%;
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            width: 100%;
+            padding: 10px 0;
+            outline: none;
+            color: #707070;
+            .clear-filter {
+                cursor: pointer;
+                font-size: 12px;
+                padding: 5px 0;
+                font-weight: 400;
+            }
+            &.side-nav-header {
+                background-color: #fff;
+                margin-top: 5px;
+                padding: 5px;
+                height: 32px;
+                font-weight: 600;
+                border-bottom: 1px solid #f4f6fa;
+                &:hover {
+                    background-color: #f4f6fa;
+                    border-radius: 6px;
+                    cursor: pointer;
+                }
+            }
+            &.sub-nav {
+                font-weight: normal;
+                padding: 4px;
+                font-size: 12px;
+                text-transform: capitalize;
+                cursor: pointer;
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.3);
+                    border-radius: 12px;
+                }
+                &.active {
+                    background-color: #587dff4d;
+                    border-color: #587dff4d;
+                    border-left-color: #587dff4d;
+                    color: #57585a;
+                    border-radius: 12px;
+                }
+                a {
+                    display: block;
+                    color: #57585a;
+                    padding-left: 5px;
+                    text-decoration: none;
+                }
+                .badge {
+                    font-size: 100%;
+                    color: #909090;
+                    border-radius: 9px;
+                    font-weight: 400;
+                    background-color: #efefef;
+                }
+                .w-93 {
+                    width: 93%;
+                }
+            }
+        }
+    }
+    .sub-level-filter {
+        &.expanded {
+            .side-nav-header {
+                border-bottom: 1px solid #b0b2b7;
+            }
+        }
+        .badge {
+            position: absolute;
+            top: 3px;
+            right: 0px;
+        }
+    }
+}
+
+.filterTitle {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.chip-container {
+    margin-bottom: 10px;
+    .chip {
+        font-size: 12px;
+        background-color: #ffffff;
+        border: 2px solid #a0a0a0;
+        border-radius: 20px;
+        float: left;
+        padding: 0 2px 0 5px;
+        color: #a0a0a0;
+        margin: 2px;
+        &:hover {
+            border-color: #587dff;
+        }
+        .material-icons {
+            &:hover {
+                color: #888;
+            }
+        }
+    }
+}
+
+.result-section {
+    border: 1px solid transparent;
+    .description {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+    }
+    .description-2-line {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        /* autoprefixer: off */
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        width: 100%;
+        line-height: 1.2;
+        font-size: 14px;
+    }
+    &:hover {
+        border: 1px solid #587dff;
+        box-shadow: 0 0.2rem 0.75rem rgba(0, 0, 0, 0.15);
+    }
+    a.clear-filter {
+        text-decoration: none !important;
+    }
+}
+
+.order-btn {
+  min-width: 45px;
+}
+
+@media (max-width: 1140px){
+  ::ng-deep #body {
+    padding-bottom: 340px;
+  }
+}
+@media (max-width: 991px) {
+  ::ng-deep #body {
+    padding-bottom: 408px;
+  }
+}
+@media (max-width: 720px){
+  ::ng-deep #body {
+    padding-bottom: 806px;
+  }
+}
+@media (max-width: 540px){
+  ::ng-deep #body {
+      padding-bottom: 845px;
+  }
+}
+@media (max-width: 420px){
+  ::ng-deep #body {
+      padding-bottom: 880px;
+  }
+}
+@media (max-width: 320px){
+  ::ng-deep #body {
+      padding-bottom: 920px;
+  }
+}

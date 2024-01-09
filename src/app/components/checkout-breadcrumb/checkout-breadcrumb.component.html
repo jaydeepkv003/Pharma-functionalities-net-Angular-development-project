@@ -1,0 +1,13 @@
+<div class="container-lg progress-bar-wrapper">
+  <div class="row bs-wizard">
+    <ng-container *ngFor="let item of navigations">
+      <div class="col-xs-4 bs-wizard-step justify-content-start" [class.active]="isRouteActive(item)">
+        <div class="progress">
+          <div class="progress-bar"></div>
+        </div>
+        <a href="javascript:void(0)" class="bs-wizard-dot" (click)="navigateTo(item)"> </a>
+        <div class="bs-wizard-info text-center">{{item.title}}</div>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="wrapper min-height">
+  <ngx-ui-loader [loaderId]="'loader-menu'" [hasProgressBar]="false"></ngx-ui-loader>
+  <div class="container">
+    <div class="title pt-20">Search</div>
+    <div class="search-container searchBoxSize input-group">
+      <input type="text" class="form-control pl-3 w-300" [(ngModel)]="quickorderService.searchKeyword"
+        (keyup.enter)="quickorderService.onSearch()" placeholder="Part Number, Brand, or Description">
+      <span class="input-group-addon">
+        <i class="material-icons material-icons-outlined icon-font-lg">search</i>
+      </span>
+    </div>
+    <ng-container *ngIf="quickorderService.records && quickorderService.records.length">
+      <div class="title p-0">
+        {{quickorderService.Pagination.TotalRecords}} Search Results
+        <span *ngIf="quickorderService.searchString">for
+          "{{quickorderService.searchString}}"</span>
+      </div>
+      <div class="product-card" *ngFor="let res of quickorderService.records">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center left-section">
+            <img class="item-img" src="{{res?.partDetail?.Attributes | cartImg}}" alt="No image">
+            <div class="d-flex flex-column">
+              <div class="text-gray font-sm" *ngIf="res?.part_number?.raw">Part: {{res?.part_number?.raw}}</div>
+              <div class="d-flex">
+                <a *ngIf="res?.phase_navigation_url?.raw" [href]="res?.phase_navigation_url?.raw"
+                  class="nounderline with-icon font-bold">
+                  <span [innerHtml]="res?.page_title?.raw"></span>
+                </a>
+                <a *ngIf="!res?.phase_navigation_url?.raw" [href]="res?.url?.raw"
+                  class="nounderline with-icon font-bold">
+                  <span [innerHtml]="res?.page_title?.raw"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="d-flex align-items-center qty clearfix mr-3">
+              <div class="font-bold">
+                <span class="mr-1"
+                  [class.strike-through]="sharedService.feature.Promotions && res?.partDetail?.PromotionalPricing?.DiscountedPrice">
+                  {{res?.partDetail?.Price | currency : 'USD'}}
+                  <span
+                    *ngIf="!sharedService.feature.Promotions || !res?.partDetail?.PromotionalPricing?.DiscountedPrice">
+                    ({{res?.partDetail?.UOM}})
+                  </span>
+                </span>
+              </div>
+              <div *ngIf="sharedService.feature.Promotions && res?.partDetail?.PromotionalPricing"
+                class="d-flex btn-link">
+                <span class="with-icon" placement="top" triggers="mouseenter:mouseleave" [ngbPopover]="popContent">
+                  <img class="promotion-icon" src="/-/jssmedia/phrjss/data/media/images/promotion/offer_icon" />
+                </span>
+                <ng-template #popContent>
+                  <div class="clearfix">
+                    <div class="text-left">
+                      <ng-container *ngIf="res.partDetail.PromotionalPricing.RequiresQualification; else elseTemplate">
+                        <div>Add item to cart to see promotional discount</div>
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        <div>{{res.partDetail.PromotionalPricing.Promotion.Description}}</div>
+                        <div *ngIf="res.partDetail.PromotionalPricing.Promotion.MaxQuantity">Limit
+                          {{res.partDetail.PromotionalPricing.Promotion.MaxQuantity}}</div>
+                        <div *ngIf="res.partDetail.PromotionalPricing.Promotion.EndDate">Expires:
+                          {{res.partDetail.PromotionalPricing.Promotion.EndDate | date: 'MMM dd, yyyy'}}
+                        </div>
+                      </ng-template>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+
+              <a href="javascript:void(0);" class="text-decoration-none"
+                *ngIf="sharedService.feature.Promotions && res?.partDetail?.PromotionalPricing?.DiscountedPrice">
+                {{res?.partDetail?.PromotionalPricing?.DiscountedPrice | currency : 'USD'}}
+                ({{res?.partDetail?.UOM}})
+              </a>
+              <input type="text" maxLen="4" isNumericOnly="true" (blur)="onChangeQty(res)"
+                class="form-control pull-right ml-2" [(ngModel)]="res.qty">
+            </div>
+            <button class="btn btn-blue mr-3" (click)="partAddToCart(res)"> Add To Cart </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="nodata-container mb-0" *ngIf="!quickorderService.searchString && quickorderService.records.length === 0">
+      <div class="border nodata emptySerch">
+        Search now to see fantastic products here.
+      </div>
+    </div>
+    <div class="nodata-container mb-0"
+      *ngIf="quickorderService.searchString && !quickorderService.isSearching && quickorderService.records.length === 0">
+      <div class="border nodata noReslut">
+        No products found with that search term
+      </div>
+    </div>
+
+    <div class="text-center py-4"
+      *ngIf="quickorderService.records.length !== 0 &&  quickorderService.records.length < quickorderService.Pagination.TotalRecords">
+      <a href="javascript:void(0);" (click)="quickorderService.showMore()" class="text-decoration-none with-icon">
+        <span>Show More</span>
+        <i class="material-icons material-icons-rounded font-20">keyboard_arrow_down</i>
+      </a>
+    </div>
+  </div>
+</div>

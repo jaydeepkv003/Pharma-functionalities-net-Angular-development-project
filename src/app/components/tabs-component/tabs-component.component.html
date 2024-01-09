@@ -1,0 +1,31 @@
+<div data-elastic-exclude class="tabs-control" #tabControl>
+  <div class="tab-wrapper" [ngClass]="tabType">
+    <div class="container">
+      <ul class="tabs-section" *ngIf="!isEditing">
+        <li *ngFor="let tab of tabs">
+          <a [ngClass]="{'nav-link': true, 'active': tab === activeTab }" (click)="onTabChange(tab);" class="pointer">
+            <span> {{getNameFromTab(tab)}} </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab-content-section position-relative tab-min-height">
+    <ngx-ui-loader [loaderId]="'loader-menu'" [hasProgressBar]="false"></ngx-ui-loader>
+    <ng-container *ngIf="isEditing">
+      <!--
+            When experience editor is active we want to render all tabs in a stack,
+            to simplify editing.
+          -->
+      <sc-placeholder name="jss-tabs" [rendering]="rendering"></sc-placeholder>
+    </ng-container>
+    <ng-container *ngIf="!isEditing">
+      <!--
+            We only want to render the _active_ tab when we're not editing.
+            sc-render-component renders a _single_ component given its data,
+            allowing us to partially render the placeholder contents.
+          -->
+      <sc-render-component [rendering]="activeTab"></sc-render-component>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,157 @@
+.tabs-control {
+  overflow: hidden;
+  position: relative;
+  min-height: 400px;
+  .tabs-section {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    // justify-content: center;
+    background-color: #ffffff;
+    font-weight: 500;
+    font-style: normal;
+
+    li {
+      padding: 5px 10px 0;
+      cursor: pointer;
+      text-align: center;
+      max-width: 140px;
+      display: table;
+      a {
+        border-bottom: 4px solid transparent;
+        padding: 0 5px;
+        font-size: 13px;
+        font-weight: 400;
+        display: table-cell;
+        vertical-align: bottom;
+      }
+
+      &:hover {
+        a {
+          border-bottom: 4px solid #c7c9cb;
+        }
+      }
+      &.active {
+        a {
+          color: #587dff;
+          border-bottom: 4px solid #587dff;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .tab-content-section {
+    min-height: 100px;
+    padding-bottom: 20px;
+    position: absolute;
+    -webkit-transition: all 0.6s ease-out;
+    -moz-transition: all 0.6s ease-out;
+    -o-transition: all 0.6s ease-out;
+    transition: all 0.6s ease-out;
+    width: 100%;
+
+    &.active {
+      left: 0%;
+    }
+    &.left {
+      left: -100%;
+    }
+    &.right {
+      left: 100%;
+    }
+
+    .line-v1 {
+      line-height: 2 !important;
+
+      hr {
+        margin: 0px;
+      }
+
+      .highlight-section {
+        margin: 10px 15px 10px 15px;
+        line-height: 1.5;
+      }
+
+      .document-section {
+        .header {
+          font-size: 15px;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        p {
+          margin-bottom: 6px !important;
+        }
+
+        padding: 10px 15px 10px 15px;
+        line-height: 1;
+      }
+    }
+
+    .section-container {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+
+      &:hover {
+        box-shadow: 2px 2px 5px 0px #707070;
+      }
+
+      .section-header {
+        padding: 0px 20px;
+        background: #eef1ff;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 65px;
+        height: 60px;
+
+        .text-label {
+          line-height: 1.2;
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+
+      .section-content {
+        line-height: 65px;
+        min-height: 70px;
+
+        ul {
+          margin: 0;
+          padding: 0;
+          line-height: 1.2;
+          display: inline-block;
+          vertical-align: middle;
+          width: 100%;
+
+          li {
+            list-style-type: none;
+            padding: 8px 22px;
+            color: #587dff;
+            cursor: pointer;
+
+            &:hover {
+              background-color: rgba(0, 0, 0, 0.06);
+
+              a {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.card-group-header {
+  padding: 0px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 35px;
+  height: 30px;
+}

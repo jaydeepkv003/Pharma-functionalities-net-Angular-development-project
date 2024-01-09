@@ -1,0 +1,44 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.app-list {
+  width: 100%;
+  padding: 10px 0px 0px 15px;
+}
+
+.filters-mat mat-form-field {
+  width: 360px !important;
+  margin-right: 5px;
+}
+
+.example-form mat-form-field {
+  width: 775px !important;
+}
+
+.clear-ctrl {
+  font-family: proxima-nova, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #587dff;
+  text-align: right;
+}
+
+.clear-ctrl:hover {
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.example-form mat-form-field {
+  width: 775px !important;
+  height: 52px;
+  padding: 0 10px;
+}
+ .mat-option {
+  height: 52px !important;
+}

@@ -1,0 +1,100 @@
+Module 1: Introduction
+In this module, we will learn what typescript and angular is and what the benefits of typescript areover
+other scripting languages. We can also 'earn how to install and set up the environment and how we can
+create our first example using typescript.
+	- What is Typescript?
+	- Benefits of Typescript
+	- Setup the Environment
+	- First Angular example
+	- Running angular application
+
+Module 2: Data Types, Functions and Varia bles
+In this module, we will learn whet the datatypes that are used in typescript are, and wewill introduce into a
+new data type let.
+	- Basic Data Types (string, number. boolean)
+	- Arrays
+	- Enum
+	- Any and void
+	- null and undefined
+	- Type Inference
+	- Type Casting
+	- Difference between let, var and const
+	- Optional and Default Parameters
+	- Rest Parameters
+	- Function Overloading
+  - Function Types
+  - Exporting and Importing of Modules
+  - Re-Export of Modules
+  - Default Exports
+  - Arrow function
+
+Module 3: Destructuring & Spread
+In this module, we will learn how to extract the data from objects and arrays in a convenient wav using
+destructuring and we can learn how to break arrays and objectsinto components using spreads.
+  - Array Destructuring
+  - Object Destructuring
+  - Mixed Destructurine
+  - Property renaming
+  - Default Values
+  - Spread operator
+
+Module 4: Angular Architecture
+In this module. you will learn how angular and angular work and flow of the angularapplication in depth.
+  - Basic Building Blocks of Angular Applications
+  - Angular commands to Create
+    - Application
+    - Module
+    - Component
+    - Service
+    - Directive
+    - Pipe
+    - Interceptor
+
+Module 5: Directives, Pipes and Templates
+In this module, you will learn about directives, directives are the classes that can change the behavior or
+appearance of the components by using CSS Classes, CSS Styles and events Here vou will find how to use directives
+in our application.
+  + Adding Properties to Cornponents and Interpolation
+  + Creating a class for data (Model object)
+  + Template Expressions
+  + Working with Arrays and Build-in Directives
+  + Repeating Directive (NgFor) o Conditional Directives (Ng", NgSwitch)
+  + •vs <template>
+  + External HTML Template File
+  + Pure and Impure pipes
+
+Module 6: Data Binding
+In this module. you will learn how many kinds of databinding and we will discuss each ofthem in this chapter
+  + Binding properties and Interpolation
+  + One-way Binding / Property Binding
+  + Event Binding
+  + Two-way Binding
+  + Two-way binding with NgModel
+  + Attribute Binding
+  + Banana Syntax
+
+Module 7: Styles Binding In Components
+In this module, Angular applications are styled with regular CSS. That means we can apply everything we
+know about CSS stylesheets, selectors, rules, and media queriesto our Angular applications directly. this
+module will help you to how to apply css to our page.
++ Style and Class Bindings
++ Built-ln Directives - NgStyle & NgC1ass
++ Using Component Styles
++ Special selectors
++ Loading Styles into Components
+Module 8: Advanced Components Features
+In this module we will learn one of the major concept in angular4 i.e., components and wecan learn how to
+create dynamic component using ngComponentOutlet.
++ What are Components?
++ understanding Components life cycle hooks
++ Creating and using components
++ Dynamic components using ngComponentOutlet
+Module 9: Template Driven Forms
+In this module. vou will learn in most of the frontend applications we use HTML forms for grouping HTML
+elements and we provide validations using HTMLS attributes like required, minlength, maxlength, pattern etc.
+Two-wav data binding with ngModel
+Add Custom CSS for Visual Feedback.
+Show and Hide Validation Error messages
+Resetting the form.
+Resetting form state
+Submit the form with ngSubmit

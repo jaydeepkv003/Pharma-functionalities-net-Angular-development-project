@@ -1,0 +1,112 @@
+<div class="cart-menu" [class.open]="showCartMenu" #scrollTarget>
+  <div class="cart-detail-container">
+    <div class="menu-group row" *ngFor="let c of cartDetail?.Parts">
+      <div class="col-md-3 text-center p-0">
+        <img class="w-100" src="{{c?.Part?.Attributes | cartImg}}">
+      </div>
+      <div class="col-md-9 p-0 pl-2">
+        <div class="mb-1 text-light-gray">Part No.: {{c?.Part?.PartNumber}}</div>
+        <div class="mb-1 font-medium">{{c?.Part?.Description}}</div>
+        <div class="mb-1">
+          {{c?.Part?.Price | currency}} ({{c?.Part?.UOM}})
+        </div>
+        <!-- <span class="each-price"
+          [ngClass]="{'strike-through': sharedService.feature.Promotions && c.DiscountedPrice}">
+          {{c?.Part?.Price | currency}} ({{c?.Part?.UOM}})
+        </span> -->
+
+        <!-- <ng-container *ngIf="sharedService.feature.Promotions">
+          <span class="each-price" *ngIf="c.DiscountedPrice">
+            <span class="text-primary">
+              <img class="promotion-icon align-text-top"
+                src="/-/jssmedia/phrjss/data/media/images/promotion/offer_icon" />
+              {{c.DiscountedPrice | currency}} ({{c?.Part?.UOM}})
+            </span>
+          </span>
+        </ng-container> -->
+        <div>
+          Qty: {{c.Quantity}}
+          <span class="pull-right font-bold">{{c?.SubtotalAmount | currency}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-group py-1 bg-cyan rounded-lg" [class.mt-3]="cartDetail?.Parts?.length === 0"
+      *ngFor="let quote of cartDetail?.Quotes">
+      <div class="row m-2">
+        <div class="col-md-6">
+          <span class="font-bold">Quote ID: </span>{{ quote?.QuoteHeader?.QuoteNumber }}
+        </div>
+        <div class="col-md-6 text-right">
+          Total: <span class="font-bold">{{ quote?.QuoteHeader?.SubtotalAmount | currency }}</span>
+        </div>
+      </div>
+
+      <div class="menu-group row" *ngFor="let c of quote?.QuoteHeader?.Details">
+        <div class="col-md-3 text-center p-0">
+          <img class="w-100" src="{{c?.Part?.Attributes | cartImg}}">
+        </div>
+        <div class="col-md-9 p-0 pl-2">
+          <div class="mb-1 text-light-gray">{{c?.Part?.PartNumber}}</div>
+          <div class="mb-1 font-medium">{{c?.Part?.Description}}</div>
+          <div class="mb-1"> {{c?.Part?.Price | currency}} ({{c?.Part?.UOM}})</div>
+          <div>
+            Qty: {{c.Quantity}}
+            <span class="pull-right">{{c?.SubtotalAmount | currency}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-group sub-total row" *ngIf="cartDetail && cartItemCount > 0">
+    <div class="col-md-12 p-0">
+      <div class="clearfix mb-1 font-bold">
+        <div class="font-lg">
+          <span *ngIf="!cartDetail.TotalDiscountAmount || !sharedService.feature.Promotions">Subtotal:</span>
+          <div class="float-right"
+            [ngClass]="{'strike-through': cartDetail.TotalDiscountAmount && sharedService.feature.Promotions}">
+            {{cartDetail.SubtotalAmount | currency}}
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="sharedService.feature.Promotions">
+        <ng-template #popContent *ngIf="activePromo">
+          <div class="text-left">
+            <div class="font-semibold">{{activePromo.Name}}</div>
+            <div *ngIf="activePromo.MaxQuantity">Limit: {{activePromo.MaxQuantity}}</div>
+            <div>Expires: {{activePromo.EndDate | date}}</div>
+          </div>
+        </ng-template>
+
+        <div class="clearfix mb-1 font-bold font-lg" *ngIf="cartDetail.TotalDiscountAmount">
+          <span>Subtotal:</span>
+          <div class="float-right" placement="top" [ngbPopover]="popContent" triggers="mouseenter:mouseleave">
+            <span class="text-primary">
+              <img class="promotion-icon align-text-top"
+                src="/-/jssmedia/phrjss/data/media/images/promotion/offer_icon" />
+              {{cartDetail.SubtotalAmount - cartDetail.TotalDiscountAmount | currency}}
+            </span>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- <div class="text-center text-dangertext-center text-danger font-bold font-lg py-2" *ngIf="activePromo">
+        {{activePromo.Name}}
+      </div> -->
+    </div>
+    <div class="mt-1 mb-2 w-100">
+      <button class="btn btn-blue w-100" routerLink="/cart">GO TO CART</button>
+    </div>
+
+  </div>
+
+  <div class="menu-group row mb-2" *ngIf="cartItemCount === 0">
+    <div class="col-md-12 col-12 p-0">
+      <div>Your cart is empty</div>
+      <div>Continue shopping or <a class="text-primary" routerLink="/quick-order">Quick Order</a></div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,53 @@
+// Brand Info
+.brand {
+  .top-banner {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+  }
+  .brand-logo-container {
+    padding: 25px 50px;
+    max-height: 150px;
+  }
+  .product-photo-container {
+    margin-bottom: 50px;
+    .product-photo {
+      max-height: 150px;
+      width: auto;
+    }
+  }
+  .wrapper {
+    position: absolute;
+    top: 40%;
+    text-align: left;
+    right: 0;
+    left: 0;
+  }
+  .title-left {
+    font-size: 40px;
+    line-height: 42px;
+    color: #fff;
+    font-weight: 300;
+    text-align: left;
+    display: inline-block;
+    padding: 0 15px 8px 0;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    border-top: 0;
+    border-image-slice: 1;
+  }
+  .heading {
+    .title {
+      display: inline-block;
+
+      font-weight: 500;
+      font-style: normal;
+      font-size: 36px;
+      color: #57585a;
+      padding-top: 10px;
+    }
+  }
+  .pt-55 {
+    padding-top: 55px;
+  }
+}

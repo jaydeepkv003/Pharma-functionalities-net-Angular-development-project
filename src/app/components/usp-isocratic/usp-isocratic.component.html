@@ -1,0 +1,203 @@
+<div class="wrapper mt-5">
+  <div class="container">
+    <div>
+      <h3>USP &lt;621&gt; Allowable Adjustments of Chromatographic Conditions – Isocratic Elution</h3>
+
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th width="25%">Component</th>
+            <th width="17%">As per USP</th>
+            <th width="17%">Adjustable from</th>
+            <th width="16%">Adjustable to</th>
+            <th width="25%">Limit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mobile Phase Minor Component (&lt;50%)</td>
+            <td>
+              <input class="input-num class2" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="mobilePhaseMinorA">
+              <span style="color: #f00;">{{mobilePhaseMinorAV()}}</span>
+            </td>
+            <td>{{getDecimalValue(mobilePhaseMinorAF().toFixed(2))}}</td>
+            <td>{{getDecimalValue(mobilePhaseMinorAT().toFixed(2))}}</td>
+            <td>±30% relative; cannot exceed ±10% absolute adjustment; <br> Cannot be reduced to zero</td>
+          </tr>
+          <tr>
+            <td>Mobile Phase pH</td>
+            <td>
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="mobilePhasePhA">
+              <span style="color: #f00;">{{mobilePhasePhAV()}}</span>
+            </td>
+            <td>{{getDecimalValue(mobilePhasePhAF().toFixed(2))}}</td>
+            <td>{{getDecimalValue(mobilePhasePhAT().toFixed(2))}}</td>
+            <td>±0.2 units</td>
+          </tr>
+          <tr>
+            <td>Buffer Concentration (mM)</td>
+            <td>
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="bufferConcentrationA">
+              <span style="color: #f00;">{{bufferConcentrationAV()}}</span>
+            </td>
+            <td>{{getDecimalValue(bufferConcentrationAF().toFixed(2))}}</td>
+            <td>{{getDecimalValue(bufferConcentrationAT().toFixed(2))}}</td>
+            <td>±10%</td>
+          </tr>
+          <tr>
+            <td>Column Temperature (°C)</td>
+            <td><input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="columnTempA">
+              <span style="color: #f00;">{{columnTempAV()}}</span>
+            </td>
+            <td>{{getDecimalValue(columnTempAF().toFixed(2))}}</td>
+            <td>{{getDecimalValue(columnTempAT().toFixed(2))}}</td>
+            <td>±10°C</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle;">Flow Rate (mL/min)</td>
+            <td>
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="flowRateA">
+              <span style="color: #f00;">{{flowRateAV()}}</span>
+            </td>
+            <td>{{getDecimalValue(flowRateAF().toFixed(2))}}</td>
+            <td>{{getDecimalValue(flowRateAT().toFixed(2))}}</td>
+            <td>±50% (at same ID)</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-striped table-bordered">
+        <tbody>
+          <tr>
+            <td width="25%"></td>
+            <td width="17%"><b>As per USP</b></td>
+            <td width="17%"><b>Desired column dimensions</b></td>
+            <td width="41%" colspan="2"></td>
+          </tr>
+          <tr>
+            <td width="25%">Column Length (mm)</td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="columnLengthAF"
+                (ngModelChange)="checkDesiredDimension()">
+              <span style="color: #f00;">{{columnLengthAFV()}}</span>
+            </td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="columnLengthAT"
+                (ngModelChange)="checkDesiredDimension()">
+              <span style="color: #f00;">{{columnLengthATV()}}</span>
+            </td>
+            <td width="41%" colspan="2"></td>
+          </tr>
+          <tr>
+            <td width="25%">Column Diameter (mm)</td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="columnDiameterAF">
+              <span style="color: #f00;">{{columnDiameterAFV()}}</span>
+            </td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="columnDiameterAT">
+              <span style="color: #f00;">{{columnDiameterATV()}}</span>
+            </td>
+            <td width="41%" colspan="2"></td>
+          </tr>
+          <tr>
+            <td width="25%">Particle Size (µm)</td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="particleSizeAF"
+                (ngModelChange)="checkDesiredDimension()">
+              <span style="color: #f00;">{{particleSizeAFV()}}</span>
+            </td>
+            <td width="17%">
+              <input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="particleSizeAT"
+                (ngModelChange)="checkDesiredDimension()">
+              <span style="color: #f00;">{{particleSizeATV()}}</span>
+            </td>
+            <td width="41%" colspan="2">*Alternatively (as for the application of particle size adjustment to
+              superficially porous particles), other L/dp combinations can be used provided that the number of
+              theoretical plates (N) is within -25% to +50%</td>
+
+          </tr>
+          <tr>
+            <td width="25%">L/Dp</td>
+            <td width="17%">{{ldpAF().toFixed(2)}}</td>
+            <td width="17%">{{ldpAT().toFixed(2)}}</td>
+            <td width="16%">% deviated</td>
+            <td width="25%"></td>
+          </tr>
+
+          <tr>
+            <td width="42%" colspan="2">The column with desired dimension</td>
+
+            <td width="17%" id="tdDesiredDiamesionAF" style="color: green; font-weight: bold;">Can be used.</td>
+            <td width="16%" id="tdDesiredDiamesionAT">0.00%</td>
+            <td width="25%"></td>
+          </tr>
+          <tr>
+            <td width="25%">Relative Flow Rate Suggestion</td>
+            <td width="17%">{{getDecimalValue(relativeFlowRateAF().toFixed(2))}}</td>
+            <td width="16%">{{getDecimalValue(relativeFlowRateAT().toFixed(2))}}</td>
+            <td width="42%"></td>
+          </tr>
+          <tr>
+            <td width="25%">Injection Volume (µL)</td>
+            <td width="17%"><input class="input-num" type="text" min="0" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? this.value : null" [(ngModel)]="injectionVolumeA">
+              <span style="color: #f00;">{{injectionVolumeAV()}}</span>
+            </td>
+            <td>{{injectionVolumeAF()}}</td>
+            <td width="41%" colspan="2">
+              <p style="text-align:center; background-color: gold">This is just a recommendation<br></p>
+              <p>Can be adjusted as much as needed; must be consistent with linearity, precision, and detection
+                requirements</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="25%" style="vertical-align: middle;">Stationary Phase</td>
+            <td width="75%" colspan="4">
+              <p class="event_desc" align="center">No changes of the identity of the substituent recommended.</p>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <table class="table table-striped table-bordered">
+        <tbody>
+          <tr>
+            <td colspan="5">
+              <p class="event_desc" align="center"><b>Choose pharma columns for your analysis</b></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="15%">Choose USP column listing</td>
+            <td width="20%">
+              <mat-select class="form-control" [(ngModel)]="recomended" style="width:90%">
+                <mat-option value="">Choose...</mat-option>
+                <mat-option *ngFor="let item of uspTools" [value]="item">{{item.Classification}}</mat-option>
+              </mat-select>
+            </td>
+            <td width="40%">{{recomended?.Description}}</td>
+            <td width="35%" colspan="2">
+              <ul *ngIf="recomended?.Recommendation">
+                <li *ngFor="let key of objectkeys(recomended?.Recommendation)">
+                  <a [href]="recomended.Recommendation[key]" target="_blank">{{key}}</a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

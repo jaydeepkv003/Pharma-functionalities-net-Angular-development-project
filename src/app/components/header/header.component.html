@@ -1,0 +1,169 @@
+<!-- Top Nav  -->
+<div data-elastic-exclude class="top-nav">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 p-0">
+        <div class="full-block left px-3">
+          <a routerLink="/">
+            <img class="main-logo" *scImage="rendering.fields.headerLogo">
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6 header-search" [ngClass]="sharedService.isCheckoutPage? 'd-none': 'd-block'">
+        <div class="full-block right">
+          <app-header-search-modal></app-header-search-modal>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <ul class="float-right" [ngClass]="sharedService.isCheckoutPage? 'd-none': 'd-block'">
+          <li class="pt-3 mr-3" *ngIf="!isAuthenticated">
+            <a href="javascript:void(0)" (click)="login()">Sign in</a> /
+            <a routerLink="/Registration">Register</a>
+          </li>
+          <li class="mr-1 pointer" *ngIf="isAuthenticated && username" (mouseleave)="closeAccountMenu()"
+            (mouseenter)="toggleMenu(-1, accountMenus, null)">
+            <div class="account-menu-container">
+              <button class="btn btn-link with-icon">
+                <span>Welcome {{username}}</span>
+                <i class="material-icons material-icons-rounded">account_circle</i>
+              </button>
+
+              <!-- account menu -->
+              <div class="account-menu" [class.open]="showAccountMenu">
+                <div class="menu-group" *ngFor="let menu of accountMenu">
+                  <div class="menu-item label">{{menu.title}}</div>
+                  <ng-container *ngFor="let subMenu of menu.children">
+                    <div class="menu-item link" *ngIf="!subMenu.disabled">
+                      <span (click)="menuNavigate(subMenu)">{{subMenu.title}}</span>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div ngbDropdown class="d-inline-block language-dropdown" container="body">
+              <div class="language" id="dropdown-lang" ngbDropdownToggle>{{selectedLang.name}}</div>
+              <div ngbDropdownMenu aria-labelledby="dropdown-lang">
+                <button ngbDropdownItem *ngFor="let lang of LANGUAGE_LIST" (click)="onLanguageChange(lang)">
+                  {{lang.displayName}}
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mid Nav -->
+<div data-elastic-exclude class="mid-nav justify-content-between" [ngClass]="sharedService.isCheckoutPage? 'd-none': 'd-block'">
+  <div class="container">
+    <div class="row" style="position: relative;">
+      <div class="col-md-10" (mouseleave)="closeMenu()" style="position: initial;">
+        <!-- Top Menu level 0 -->
+        <div class="nav">
+          <ul class="justify-content-between">
+            <li *ngFor="let topMenu of topMenus; let i = index" (click)="menuNavigate(topMenu)"
+              [class.open]="topMenu?.title?.value === level1Menu?.title?.value"
+              (mouseenter)="toggleMenu(0, topMenu, topMenus)" [class.first-menu]="i === 0" class="menu-link">
+
+              <a *scText="topMenu.title"></a>
+
+              <!-- 1st level menu other than product and industry -->
+              <div class="mega-menu-container" [class.open]="showlevel1Menu">
+                <ng-container
+                  *ngIf="topMenu?.title?.value === level1Menu?.title?.value && level1Menu?.children?.length > 0">
+                  <div class="menu-space">
+                    <ng-container *ngFor="let menu of level1Menu.children; let i = index">
+                      <ng-container
+                        [ngTemplateOutlet]="menu.targetlink.url ? (menu.targetlink.linkType === 'external' ? externalLink : internalLink) : noRouting "
+                        [ngTemplateOutletContext]="{data: {level: 1, menu: menu, children: level1Menu?.children, subMenu: level2Menu}}">
+                      </ng-container>
+                    </ng-container>
+                  </div>
+
+                  <div class="menu-space border-left" *ngIf="level2Menu?.children?.length">
+                    <ng-container *ngFor="let menu of level2Menu.children; let i = index">
+                      <ng-container
+                        [ngTemplateOutlet]="menu.targetlink.url ? (menu.targetlink.linkType === 'external' ? externalLink : internalLink) : noRouting "
+                        [ngTemplateOutletContext]="{data: {level: 2, menu: menu, children: level2Menu?.children, subMenu: null}}">
+                      </ng-container>
+                    </ng-container>
+                  </div>
+
+                  <ng-template #noRouting let-data='data'>
+                    <a class="menu-item text-decoration-none" [class.hover-highlight]="isLinkConfigured(data.menu)"
+                      [class.active]="data.subMenu?.children?.length && data.subMenu?.title?.value === data.menu.title.value"
+                      [class.no-hover]="isNoHover(data.menu?.title?.value)"
+                      (mouseenter)="toggleMenu(data.level, data.menu, data.children)">
+                      <div class="item" *scRichText="data.menu.title"></div>
+                      <i class="material-icons material-icons-rounded menu-arrow"
+                        *ngIf="data.subMenu?.children?.length && data.subMenu?.title?.value === data.menu.title.value">keyboard_arrow_right</i>
+                    </a>
+                  </ng-template>
+                  <ng-template #internalLink let-data='data'>
+                    <a class="menu-item text-decoration-none" [routerLink]="data.menu.targetlink.url"
+                      [class.hover-highlight]="isLinkConfigured(data.menu)"
+                      [class.active]="data.subMenu?.children?.length && data.subMenu?.title?.value === data.menu.title.value"
+                      [class.no-hover]="isNoHover(data.menu?.title?.value)"
+                      (mouseenter)="toggleMenu(data.level, data.menu, data.children)" (click)="closeMenu()">
+                      <div class="item" *scRichText="data.menu.title"></div>
+                      <i class="material-icons material-icons-rounded menu-arrow"
+                        *ngIf="data.subMenu?.children?.length && data.subMenu?.title?.value === data.menu.title.value">keyboard_arrow_right</i>
+                    </a>
+                  </ng-template>
+                  <ng-template #externalLink let-data='data'>
+                    <a class="menu-item text-decoration-none" [href]="data.menu.targetlink.url"
+                      [target]="data.menu.targetlink.target" [class.hover-highlight]="isLinkConfigured(data.menu)"
+                      [class.active]="data.subMenu?.children?.length && data.subMenu?.title?.value === data.menu.title.value"
+                      [class.no-hover]="isNoHover(data.menu?.title?.value)"
+                      (mouseenter)="toggleMenu(data.level, data.menu, data.children)" (click)="closeMenu()">
+                      <div class="item" *scRichText="data.menu.title"></div>
+                      <i class="material-icons material-icons-rounded menu-arrow"
+                        *ngIf="data.subMenu?.children?.length && data.subMenu?.title?.value === data.menu.title.value">keyboard_arrow_right</i>
+                    </a>
+                  </ng-template>
+
+                </ng-container>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-2 pl-0">
+        <div class="float-right">
+          <div class="float-left p-2" *ngIf="sharedService?.feature?.QuickOrder">
+            <a class="nounderline font-sm" routerLink="/quick-order">Quick Order</a>
+          </div>
+          <div class="float-left py-1 cart-menu-container" [class.open]="showCartMenu" (mouseleave)="closeCartMenu()">
+            <button class="btn btn-xs-icon btn-link m-0 with-icon" *ngIf="isAuthenticated"
+              (mouseenter)="toggleMenu(-2, cartDetails, null)" routerLink="/cart">
+              <i class="material-icons material-icons-rounded pt-1 cart-icon">shopping_cart</i>
+              <span class="font-sm pt-1 cart-count" *ngIf="cartItemCount">{{cartItemCount}}</span>
+            </button>
+            <button class="btn btn-xs-icon btn-link m-0 with-icon text-secondary" *ngIf="!isAuthenticated"
+              (click)="showAuthPopup()">
+              <i class="material-icons material-icons-rounded pt-1">shopping_cart</i>
+            </button>
+            <app-header-cart-menu *ngIf="cartDetails" [showCartMenu]="showCartMenu" [cartDetail]="cartDetails" [cartItemCount]="cartItemCount"></app-header-cart-menu>
+          </div>
+        </div>
+
+        <!-- backdrop -->
+        <div class="backdrop"
+          *ngIf="cartDetail || accountMenu || level1Menu?.children?.length > 0 || level2Menu?.children?.length > 0">
+        </div>
+      </div>
+
+
+    </div>
+    <div>
+      <app-beta-message-popup [bgColor]="rendering.fields.bannerColor['value']"
+        [bannerMessage]="rendering.fields.bannerText" *ngIf="rendering.fields && rendering.fields.bannerText['value']">
+      </app-beta-message-popup>
+    </div>
+  </div>

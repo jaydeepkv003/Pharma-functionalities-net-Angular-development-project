@@ -1,0 +1,184 @@
+<div class="search-container pt-3">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-3 side-nav">
+
+        <div class="clearfix chip-container d-none">
+          <ng-container *ngFor="let topFilter of selectedTopFilter | keyvalue">
+            <div class="chip with-icon">
+              {{topFilter.value}} <i class="material-icons material-icons-rounded m-0 icon-font-md ml-1 pointer"
+                (click)="removeFilter()">cancel</i>
+            </div>
+          </ng-container>
+          <ng-container *ngFor="let facet of facets">
+            <ng-container *ngFor="let item of facet.values">
+              <div class="chip with-icon" *ngIf="item.selected">
+                {{item.label}} <i class="material-icons material-icons-rounded m-0 icon-font-md ml-1 pointer"
+                  (click)="item.selected = false;onFilterClick();">cancel</i>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="side-nav">
+          <ul>
+            <li class="with-icon">
+              <div class="filterTitle">Filter by:</div>
+              <div class="btn-link clear-filter with-icon"
+                *ngIf="selectedTopFilter.Parts  || selectedTopFilter.PAGE_TYPE || isSubFilterApplied"
+                (click)="removeFilter()">
+                <i class="material-icons">backspace</i>
+                Clear Filter
+              </div>
+            </li>
+          </ul>
+
+          <!-- Top level filter -->
+          <ul class="" *ngFor="let facet of topLevelFacets">
+            <ng-container *ngIf="facet.type === 'PAGE_TYPE'">
+              <li class="sub-nav" *ngFor="let item of sortBy(facet.values, facet.orderByColumn); let i = index"
+                (click)="onTopFilterClick(facet.type, item.label)"
+                [class.active]="item.label === selectedTopFilter['PAGE_TYPE']">
+                <a href="javascript:void(0)">
+                  <span>{{item.label}}</span>
+                  <span class="float-right badge badge-light">{{item.count}}</span>
+                </a>
+              </li>
+            </ng-container>
+          </ul>
+
+          <!-- Sub filter -->
+          <ul *ngIf="facets.length > 0">
+            <li class="with-icon">
+              <span class="filterTitle">Refine Search</span>
+            </li>
+          </ul>
+          <ul class="sub-level-filter" *ngFor="let facet of facets; let e = index">
+            <ng-container *ngIf="facet.type !== 'PAGE_TYPE'">
+              <li class="side-nav-header with-icon" (click)="facet.collapsed = !facet.collapsed">
+                <span>{{getLabel(facet.type)}}</span>
+                <div class="float-right font-20" href="javascript:void(0)">
+                  <i class="material-icons material-icons-outlined text-blue" *ngIf="!facet.collapsed ">expand_less</i>
+                  <i class="material-icons material-icons-outlined" *ngIf="facet.collapsed ">expand_more</i>
+                </div>
+                <!-- <i class="material-icons material-icons-outlined" (click)="toggleOrdering(facet)">unfold_more</i></a> -->
+              </li>
+              <div class="" style="max-height: 200px;overflow-y: auto;padding: 5px 0;" [hidden]="facet.collapsed">
+                <li class="sub-nav" *ngFor="let item of sortBy(facet.values, facet.orderByColumn); let j = index">
+                  <mat-checkbox [(ngModel)]="item.selected" (change)="onFilterClick()">
+                    <div class="position-relative">
+                      <span>{{item.label}}</span>
+                      <span class="badge badge-light">{{item.count}}</span>
+                    </div>
+                  </mat-checkbox>
+                </li>
+              </div>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-9 bg-cyan">
+        <div class="container">
+          <div class="title">
+            <span class="font-27">{{paginatorConfig?.totalRecords}} Results for "{{paginatorConfig?.searchTerm}}"</span>
+            <a href="javascript:void(0)" class="float-right nounderline" [autoClose]="'outside'" (click)="shareLink()"
+              #p="ngbPopover" [ngbPopover]="popContent" placement="bottom-right" popoverClass="box-shadow">
+              <span class="material-icons pointer">share</span>
+            </a>
+            <ng-template #popContent>
+              <div class="clearfix">
+                <a href="javascript:void(0)" class="float-right mt-2 ml-2" title="copy link"
+                  (click)="copyMessage(linkToShare);p.close()">
+                  <i class="material-icons material-icons-outlined font-md">copy</i>
+                </a>
+                <div class="float-left">
+                  <input type="text" class="form-control form-control-sm" readonly value="{{linkToShare}}">
+                </div>
+              </div>
+            </ng-template>
+          </div>
+          <div class="py-2 px-3 mb-3 bg-white rounded-lg result-section" *ngFor="let res of records">
+            <!-- Part Number -->
+            <div class="row" *ngIf="res?.PAGE_TYPE === PAGE_TYPE.PART_NUMBER">
+              <div class="col-md-10 col-10">
+                <div class="text-gray with-icon-end font-sm">
+                  <i class="material-icons material-icons-outlined mr-1 icon-font-lg">widgets</i>
+                  <span>Part: {{res?.partNumber}}</span>
+                </div>
+                <a *ngIf="res?.phaseNavigationURL" [href]="res?.phaseNavigationURL"
+                  class="nounderline with-icon font-bold">
+                  <span [innerHtml]="res?.page_title"></span>
+                </a>
+                <a *ngIf="!res?.phaseNavigationURL" [href]="res?.url" class="nounderline with-icon font-bold">
+                  <span [innerHtml]="res?.page_title"></span>
+                </a>
+              </div>
+              <div class="col-md-2 col-2 py-2">
+                <button (click)="goTo(res?.url)" class="btn btn-blue float-right order-btn w-100">
+                  <i class="material-icons material-icons-rounded d-block d-lg-none d-xl-none">shopping_cart</i>
+                  <span class="d-none d-lg-block">ORDER</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="res?.PAGE_TYPE !== PAGE_TYPE.PART_NUMBER">
+              <div class="col-md-12 col-12">
+                <div class="text-gray with-icon-end font-sm">
+                  <i class="material-icons material-icons-outlined mr-1 icon-font-lg"
+                    *ngIf="res?.PAGE_TYPE === PAGE_TYPE.APPLICATION">assessment</i>
+                  <i class="material-icons material-icons-outlined mr-1 icon-font-lg"
+                    *ngIf="res?.PAGE_TYPE === PAGE_TYPE.DOCUMENT">description</i>
+                  <i class="material-icons material-icons-outlined mr-1 icon-font-lg"
+                    *ngIf="res?.PAGE_TYPE === PAGE_TYPE.CMS_PAGES">web</i>
+                  <i class="material-icons material-icons-outlined mr-1 icon-font-lg"
+                    *ngIf="res?.PAGE_TYPE === PAGE_TYPE.WEBINAR">desktop_mac</i>
+
+                  <span *ngIf="res?.PAGE_TYPE === PAGE_TYPE.DOCUMENT">{{res['Document Type']}}</span>
+                  <span *ngIf="res?.PAGE_TYPE === PAGE_TYPE.APPLICATION">Application</span>
+                  <span *ngIf="res?.PAGE_TYPE === PAGE_TYPE.CMS_PAGES">Product Information: {{res?.absUrl}}</span>
+                  <span *ngIf="res?.PAGE_TYPE === PAGE_TYPE.WEBINAR">Webinar</span>
+                </div>
+                <a [href]="res?.url" class="nounderline with-icon font-bold">
+                  <span [innerHtml]="res?.page_title"></span>
+                </a>
+                <!-- <a [href]="res?.url" class="nounderline with-icon pull-left" target="_blank">
+                  <span class="ml-1 font-22 material-icons pointer mt-1">open_in_new</span>
+                </a> -->
+
+                <div *ngIf="res?.PAGE_TYPE === PAGE_TYPE.CMS_PAGES" class="description-2-line">
+                  <span [innerHtml]="res?.description"></span>
+                </div>
+                <div *ngIf="res?.PAGE_TYPE !== PAGE_TYPE.CMS_PAGES" class="description">
+                  <span [innerHtml]="res?.description"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="records.length !== 0 &&  records.length < paginatorConfig.totalRecords" class="m-4 font-sm">
+            <a href="javascript:void(0);" (click)="search()"
+              class="d-flex align-content-center justify-content-center text-decoration-none">
+              <span>Show More</span>
+              <i class="material-icons material-icons-rounded font-20">keyboard_arrow_down</i>
+            </a>
+          </div>
+
+          <div class="nodata-container" *ngIf="!isLoading && records.length === 0">
+            <div class="border nodata">
+              No Data
+            </div>
+          </div>
+
+          <div class="nodata-container" *ngIf="isLoading">
+            <div class="border nodata">
+              Fetching Result
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

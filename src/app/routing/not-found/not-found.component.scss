@@ -1,0 +1,99 @@
+body {
+    color: #57585a;
+    font-family: proxima-nova, sans-serif;
+    font-size: 16px;
+}
+.login-link {
+    font-size: 20px;
+    font-weight: 600;
+}
+.title {
+    font-size: 80px;
+    color: #57585a;
+    opacity: 35%;
+    line-height: 0.9;
+    margin-top: 70px;
+    font-weight: 500;
+}
+.intro {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+.intro-sm {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.top-nav {
+    z-index: 99;
+    background-color: #0060a8;
+}
+.top-nav .full-block {
+    width: 100%;
+    height: 50px;
+}
+.top-nav .full-block.right {
+    padding-top: 10px;
+}
+
+.top-nav .v-center {
+    margin: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: absolute;
+    right: 15px;
+}
+
+.top-nav .main-logo {
+    height: 50px;
+    width: auto;
+    position: absolute;
+    z-index: 1;
+    left: -230%;
+}
+
+.mid-nav {
+    background-color: #002948;
+    height: 40px;
+}
+
+@media screen and (max-width: 768px) {
+    .thankyou-title {
+        font-size: 60px;
+    }
+}
+
+.not-found {
+    img {
+      vertical-align: top;
+      @media screen and (max-width: 768px) {
+        width: 80%;
+      }
+    }
+    .error-title {
+      font-size: 80px;
+      color: #57585a;
+      opacity: 35%;
+      @media screen and (max-width: 768px) {
+        font-size: 60px;
+      }
+    }
+    .error-label {
+      font-size: 25px;
+      @media screen and (max-width: 768px) {
+        font-size: 22px;
+      }
+    }
+    @media screen and (max-width: 768px) {
+      .mt-5 {
+        margin-top: 25px !important;
+      }
+      p {
+        margin-bottom: 5px;
+      }
+    }
+  }
+  

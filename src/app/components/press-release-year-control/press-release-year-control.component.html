@@ -1,0 +1,16 @@
+<div class="dates-wrapper">
+  <div class="container">
+    <div class="dates">
+        <ul>
+          <li
+            *ngFor="let listItem of yearsCollection; index as i"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <!-- <a routerLink = "/about-us/News/Press-Release/{{listItem.name}}">{{listItem.name}}</a> -->
+            <a href = "/about-us/News/Press-Release/{{listItem.name}}">{{listItem.name}}</a>
+          </li>
+        </ul>
+      </div>
+  </div>
+</div>
+

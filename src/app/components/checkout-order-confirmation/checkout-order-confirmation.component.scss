@@ -1,0 +1,124 @@
+.border {
+  border-color: #969696 !important;
+  &-bottom {
+    border-color: #7f7f7f !important;
+  }
+}
+
+
+@page {
+  margin: 20mm;
+}
+
+@media print {
+  thead {
+    display: table-header-group;
+  }
+  tfoot {
+    display: table-footer-group;
+  }
+  .page-header,
+  .page-header-space {
+    height: 80px;
+  }
+
+  .page-footer,
+  .page-footer-space {
+    height: 110px;
+  }
+  .page {
+    page-break-after: always;
+    line-height: 2;
+  }
+  .page-header {
+    position: fixed;
+    top: 0mm;
+    width: 100%;
+    background: #fff;
+    margin: 0 auto 0 auto;
+    text-align: center;
+  }
+  .page-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    margin: 0 auto 0 auto;
+    text-align: center;
+  }
+  .page-header,
+  .page-header-space {
+    margin-bottom: 10px;
+  }
+  body {
+    margin: 0;
+  }
+  .right-reserve {
+    font-size: 10px;
+  }
+  .web-text {
+    color: #587DFF;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .footer-text{
+    font-size: 12px;
+  }
+  .order-text {
+    font-size: 15px;
+    color: #A4A5A8;
+    text-align: end;
+  }
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #587dff;
+    margin: 1em 0;
+    padding: 0;
+  }
+  .col-md-9-print {
+    width: 75%;
+  }
+  .col-md-3-print {
+    width: 25%;
+  }
+  .col-md-10-print {
+    width: 84%;
+  }
+  .col-md-2-print {
+    width: 16%;
+  }
+  .col-md-7-print {
+    width: 58%;
+  }
+  .col-md-4-print {
+    width: 30%;
+  }
+  .col-md-8-print {
+    width: 60%;
+  }
+  .col-md-12-print {
+    width: 100%;
+  }
+  .img-center-container-print {
+    align-items: center !important;
+  }
+  a{
+    text-decoration: none;
+    color: #587DFF !important;
+  } 
+ a:link{
+    text-decoration: none!important;
+    color: #587DFF !important;
+
+  }
+  .main-logo {
+    height: 50px;
+    width: auto;
+  }
+  .print-img {
+    height: 110px;
+    width: 1025px;
+  }
+}

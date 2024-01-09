@@ -1,0 +1,174 @@
+<app-checkout-breadcrumb></app-checkout-breadcrumb>
+
+<div class="container cart-content">
+  <h1 class="title mb-1">Review Order
+    <span class="sub-title">
+      <a href="javascript:void(0)" class="btn btn-back" routerLink="/checkout/orderdetails">
+        <span class="with-icon">
+          <i class="material-icons material-icons-outlined m-0 font-20">chevron_left</i>
+          BACK TO BILLING AND SHIPPING
+        </span>
+      </a>
+    </span>
+  </h1>
+  <a href="javascript:void(0)" class="btn btn-link mb-3" routerLink="/Cart">
+    <div class="with-icon">
+      <i class="material-icons material-icons-outlined m-0 font-20">chevron_left</i>
+      EDIT ORDER
+    </div>
+  </a>
+
+  <div class="row">
+    <div class="col-md-9">
+      <app-checkout-review-cart *ngIf="cartContent" [cartContent]="cartContent"></app-checkout-review-cart>
+    </div>
+
+    <div class="col-md-3">
+      <div class="mb-3" *ngIf="cartContent">
+        <div class="clearfix mb-1 font-bold">
+          <div class="float-left">Subtotal: </div>
+          <div class="float-right"
+            [ngClass]="{'strike-through': cartContent.TotalDiscountAmount && sharedService.feature.Promotions}">
+            {{cartContent.SubtotalAmount | currency}} </div>
+        </div>
+
+        <ng-container *ngIf="sharedService.feature.Promotions">
+          <ng-template #popContent>
+            <div class="text-left" *ngIf="activePromo">
+              <div class="font-semibold">{{activePromo.Name}}</div>
+              <div>Limit: {{activePromo.MaxQuantity}}</div>
+              <div>Expires: {{activePromo.EndDate | date}}</div>
+            </div>
+          </ng-template>
+
+          <div class="clearfix mb-1 font-bold" *ngIf="cartContent.TotalDiscountAmount">
+            <div class="float-right" placement="top" [ngbPopover]="popContent" triggers="mouseenter:mouseleave">
+              <a href="javascript:void(0)" class="d-flex align-items-center font-bold btn-link">
+                <img class="promotion-icon" src="/-/jssmedia/phrjss/data/media/images/promotion/offer_icon" />
+                {{cartContent.SubtotalAmount - cartContent.TotalDiscountAmount | currency}}
+              </a>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="clearfix mb-1 font-bold">
+          <div class="float-left">Shipping: </div>
+          <div class="float-right">TBD </div>
+        </div>
+        <div class="clearfix mb-1 font-bold border-bottom">
+          <div class="float-left">Tax: </div>
+          <div class="float-right">TBD </div>
+        </div>
+        <div class="clearfix mb-1 font-bold font-lg">
+          <div class="float-left">Total</div>
+          <div class="float-right">{{cartContent?.TotalAmount | currency }}</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="border-bottom font-bold py-1">Billing Address
+
+          <button type="button" class="btn btn-back float-right mtn-6" (click)="onEditAddress('Billing',checkoutForm.BillTo)">
+            <div class="with-icon">
+              <i class="material-icons material-icons-outlined">create</i>
+              EDIT
+            </div>
+          </button>
+        </div>
+        <div class="clearfix py-1">
+          <!-- <div>{{checkoutForm?.BillTo?.Attention}}</div> -->
+          <div>{{checkoutForm?.BillTo?.Company}}</div>
+          <div>{{checkoutForm?.BillTo?.Address1}}</div>
+          <div>{{checkoutForm?.BillTo?.Address2}}</div>
+          <div>{{checkoutForm?.BillTo?.City}} {{checkoutForm?.BillTo?.State}}</div>
+          <div>{{checkoutForm?.BillTo?.Country?.Name}} {{checkoutForm?.BillTo?.Zip}}</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="border-bottom font-bold py-1">Shipping Address
+          <button type="button" class="btn btn-back float-right mtn-6" (click)="onEditAddress('Shipping',checkoutForm.ShipTo)">
+            <div class="with-icon">
+              <i class="material-icons material-icons-outlined">create</i>
+              EDIT
+            </div>
+          </button>
+        </div>
+        <div class="clearfix py-1">
+          <div>{{checkoutForm?.ShipTo?.Attention}}</div>
+          <div>{{checkoutForm?.ShipTo?.Company}}</div>
+          <div>{{checkoutForm?.ShipTo?.Address1}}</div>
+          <div>{{checkoutForm?.ShipTo?.Address2}}</div>
+          <div>{{checkoutForm?.ShipTo?.City}} {{checkoutForm?.ShipTo?.State}}</div>
+          <div>{{checkoutForm?.ShipTo?.Country?.Name}} {{checkoutForm?.ShipTo?.Zip}}</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="border-bottom font-bold py-1">Your Contact Information
+          <button type="button" class="btn btn-back float-right mtn-6" (click)="onEditContact()">
+            <div class="with-icon">
+              <i class="material-icons material-icons-outlined">create</i>
+              EDIT
+            </div>
+          </button>
+        </div>
+        <div class="py-1">
+          <div class="mb-1" *ngFor="let email of checkoutForm?.ContactEmails">
+            Email: {{email}}
+          </div>
+          <div class="mb-1">
+            Billing Phone: {{checkoutForm?.BillTo?.Phone}}
+          </div>
+          <div class="mb-1">
+            Shipping Phone: {{checkoutForm?.ShipTo?.Phone}}
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="border-bottom font-bold py-1">Delivery Time</div>
+        <div class="py-1">
+          {{checkoutForm?.DeliveryTimeViewModel?.Name}}
+        </div>
+      </div>
+
+      <div class="mb-3" *ngIf="checkoutForm?.CarrierNumber">
+        <div class="border-bottom font-bold py-1">Carrier Number</div>
+        <div class="py-1">
+          {{checkoutForm?.CarrierNumber}}
+        </div>
+      </div>
+
+      <div class="mb-3" *ngIf="checkoutForm?.ShippingInstructions">
+        <div class="border-bottom font-bold py-1">Shipping Instructions</div>
+        <div class="py-1">
+          {{checkoutForm?.ShippingInstructions}}
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="border-bottom font-bold py-1">Payment Method</div>
+        <div class="py-1">
+          <div class="mb-1" *ngIf="checkoutForm?.PaymentInfo?.CreditCardID">
+            Credit Card
+          </div>
+          <div class="mb-1" *ngIf="checkoutForm?.PaymentInfo?.PONumber">
+            P.O. {{checkoutForm?.PaymentInfo?.PONumber}}
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <button class="btn btn-blue" (click)="placeOrder()">Place Order</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="my-4">
+    <span class="mr-1">Need Help with your order?</span>
+    <a href="https://discover.pharma.com/chat" target="_blank">Chat with us</a>
+  </div>
+
+</div>

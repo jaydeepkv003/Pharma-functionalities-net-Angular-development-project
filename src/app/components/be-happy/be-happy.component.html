@@ -1,0 +1,24 @@
+<div class="container container-fluid p-4">
+  <h3 class='line'>
+    <div>
+      <span *scText="rendering.fields.title"></span>
+    </div>
+  </h3>
+
+  <div class="row mt-3">
+    <div class="col-md-12 bg-gray col-sm-12 py-1 mb-3">
+      <div class="font-md font-bold" *scText="rendering.fields.heading"></div>
+    </div>
+    <div class="col-md-9 col-sm-12">
+      <div *scRichText="rendering.fields.content">
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <div class="text-center">
+        <img *scImage="rendering.fields.beHappyImage" class="be-happy-img" width="100%">
+      </div>
+
+    </div>
+
+  </div>
+</div>

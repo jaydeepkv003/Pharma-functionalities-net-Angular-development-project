@@ -1,0 +1,60 @@
+<!-- Brand Info -->
+<div class="container">
+    <div class="title" *scText="rendering.fields.heading"></div>
+    <div class="row">
+        <div class="col-md-8">
+          <div class="body-text">
+            <div class="header" *scRichText="rendering.fields.subheading1">
+            </div>
+            <div class="text" *scRichText="rendering.fields.paragraph1">
+            </div>
+            <ul>
+              <li *scRichText="rendering.fields.list1"></li>
+            </ul>
+            <div class="header" *scRichText="rendering.fields.subheading2">
+            </div>
+            <div class="text" *scRichText="rendering.fields.paragraph">
+            </div>
+            <ul>
+              <li *scRichText="rendering.fields.list2"></li>
+            </ul>
+          </div>
+          <button class="explore-btn" *scRichText="rendering.fields.buttontext"></button>
+        </div>
+        <div class="col-md-4">
+            <img *scImage="rendering.fields.sideimage" class="lunalogo img-fluid" />
+        </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <img class="lunabanner img-fluid" *scImage="rendering.fields.bannerimage">
+      </div>
+    </div>
+    <!-- Column Search -->
+    <div class="search">
+        <div class="filterOne">
+
+        </div>
+    </div>
+
+    <div>
+            <br><br>
+            <sc-placeholder name="jss-brand-phase" [rendering]="rendering"></sc-placeholder>
+    </div>
+
+    <div>
+            <br><br>
+            <sc-placeholder name="jss-brand-application" [rendering]="rendering"></sc-placeholder>
+    </div>
+
+    <div>
+            <br><br>
+            <sc-placeholder name="jss-brand-question" [rendering]="rendering"></sc-placeholder>
+    </div>
+
+    <div>
+            <br><br>
+            <sc-placeholder name="jss-document-tab" [rendering]="rendering"></sc-placeholder>
+            <br><br>
+    </div>
+</div>

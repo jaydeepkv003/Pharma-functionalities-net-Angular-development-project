@@ -1,0 +1,45 @@
+<!-- full screen nav-->
+<div class="phen-big-nav">
+
+  <!-- close-->
+  <div class="close-container"  (click)="phrHamMenuCloseFunction()">
+    <div class="cross-bar cross-one"></div>
+    <div class="cross-bar cross-two"></div>
+    <!--end cross bar-->
+  </div>
+
+  <!--listing-->
+   <ul class="phen-big-nav-list">
+    <!-- <li> <a [routerLink]="['/about-us']">About Us</a></li>
+    <li><a [routerLink]="['/about-us/Our-Humanity']">Our Humanity</a></li>
+    <li><a [routerLink]="['/about-us/Our-People']">Our People</a></li>
+    <li><a [routerLink]="['/about-us/Our-Science']">Our Science</a></li>
+    <li><a [routerLink]="['/about-us/news/press-release/2019']">News</a></li>
+    <li><a [routerLink]="['/products/aeris']">Products</a></li> -->
+
+    <li> <a href="/about-us">About Us</a></li>
+    <li><a href="/about-us/Our-Humanity">Our Humanity</a></li>
+    <li><a href="/about-us/Our-People">Our People</a></li>
+    <li><a href="/about-us/Our-Science">Our Science</a></li>
+    <li><a href="/about-us/news/press-release/2019">News</a></li>
+    <li><a href="/products/aeris">Products</a></li>
+
+   </ul>
+
+  <!--end  phen-big-nav-->
+</div>
+
+<!--end fullscreen nav-->
+
+
+<!--nav-->
+<nav class="navbar fixed-top navbar-light phen-nav">
+  <a class="navbar-brand " href="about-us-two"><img class="phen-logo" src="https://www.pharma.com/webimage/pharma_white.png"/></a>
+  <!--hambuger-->
+  <div (click)="phrHamMenuExpandFunction()" class="phen-menu-container">
+    <div class="phen-menu-bar"></div>
+    <div class="phen-menu-bar"></div>
+    <div class="phen-menu-bar"></div>
+    <!--end menu container-->
+  </div>
+</nav>

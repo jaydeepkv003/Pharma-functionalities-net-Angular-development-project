@@ -1,0 +1,11 @@
+<div [hidden]="!isVisible">
+  <div class="massageBox" [style.background-color]="bgColor" [@hideBanner]="animate">
+    <div class="container pl-4">
+      <div *scRichText="bannerMessage">
+      </div>
+    </div>
+    <button type="button" class="close" (click)="messageToggle()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>

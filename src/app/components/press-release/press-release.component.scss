@@ -1,0 +1,154 @@
+.title{
+  
+  font-weight: 400;
+  font-style: normal;
+  font-size:36px;
+  color:#57585A;
+  padding-top: 10px;
+  border-image: linear-gradient(to left, #fff, #707070);
+  border-image-slice: 1;
+  border-bottom: 1px solid #333;
+  // margin: 40px 0 20px;
+}
+
+//Navigation Tabs
+.tabs{
+  padding-top: 25px;
+  
+  font-weight: 500;
+  font-style: normal;
+  font-size:18px;
+  color:#ABABAB;
+  margin: 0 ;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin:0;
+    display: inline-block;
+  }
+
+  li {
+    float: left;
+    margin: 0 10px 0 10px;
+    border-bottom: 3px solid transparent;
+    display: block;
+  }
+  li:hover {
+    color:#587DFF;
+    border-bottom:3px solid #587DFF;
+  }
+  .active{
+    color:#587DFF;
+    border-bottom:3px solid #587DFF;
+  }
+}
+
+//Dates Navigation
+.dates-wrapper{
+  background-color:#F2F2F2;
+  border-top: 1px solid #A0A0A0;
+  border-bottom: 1px solid #A0A0A0;
+}
+.dates{
+  
+  font-weight: 500;
+  font-style: normal;
+  font-size:16px;
+  color:#57585A;
+  margin:10px 0 10px 0;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    display: inline-block;
+    margin:0;
+  }
+
+  li {
+    float: left;
+    margin: 0 10px 0 10px;
+    border-bottom: 3px solid transparent;
+    display: block;
+  }
+  li:hover {
+    color:#587DFF;
+    border-bottom:3px solid #587DFF;
+  }
+  .active{
+    color:#587DFF;
+    border-bottom:3px solid #587DFF;
+  }
+}
+//
+.wrapper{
+  background-color:#F5F5F5;
+}
+.load-btn{
+  padding: 5px 36px;
+  border: 1px solid #587DFF;
+  margin: 0 auto 10px auto;
+  display: block;
+  background-color: whitesmoke;
+  font-family: roboto, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  color: #587DFF;
+}
+.press-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-row-gap: 25px;
+  grid-column-gap: 25px;
+  padding: 25px 0 25px 0;
+  @media screen and (max-width: 768px) {
+    grid-template-columns:1fr;
+  }
+
+  .item{
+    background-color:#FFFFFF;
+    align-self: center;
+    &__content{
+      display:grid;
+      grid-template-columns:1fr 5fr;
+      grid-column-gap: 10px;
+      padding: 20px;
+
+      img{
+        padding: 10px;
+        border: 0.3px solid black;
+      }
+      .text{
+        p{
+          margin:0;
+        }
+        .date{
+          
+          font-weight: 400;
+          font-style: normal;
+          font-size:16px;
+          margin-bottom: 5px;
+        }
+        .press-title{
+          
+          font-weight: 500;
+          font-style: normal;
+          font-size:22px;
+          line-height: 1.2;
+        }
+      }
+    }
+  }
+}
+
+
+//Links at bottom of page
+.link{
+  border-bottom: 1px solid #D0D1D3;
+}
+.link-title{
+  
+  font-weight: 500;
+  font-style: normal;
+  font-size: 40px;
+  padding: 40px 0;
+}
