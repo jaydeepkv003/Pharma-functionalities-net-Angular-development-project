@@ -1,0 +1,1 @@
+# Pharma-functionalities-net-Angular-development-project
